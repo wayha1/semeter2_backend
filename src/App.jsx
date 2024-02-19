@@ -11,14 +11,13 @@ import ContactUs from "./Components/Contact/ContactUs";
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<div><Navbar /><HomePage /></div>} />
         <Route path="/loginPage" element={<SignIn />} />
         <Route path="/signUpPage" element={<SIgnUp />} />
-        <Route path="/shop" element={<Shop />}/>
-        <Route path="/about" element={<AboutUs />}/>
-        <Route path="/contact" element={<ContactUs />}/>
+        <Route path="/shop" element={<div><Navbar /><Shop /></div>}/>
+        <Route path="/about" element={<div><Navbar /><AboutUs /></div>}/>
+        <Route path="/contact" element={<div><Navbar /><ContactUs /></div>}/>
       </Routes>
     </Router>
   );
