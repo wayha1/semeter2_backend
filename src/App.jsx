@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import AboutUs from "./Components/About/AboutUs";
+import Shop from "./Components/Cart/Shop";
+import ContactUs from "./Components/Contact/ContactUs";
+import HomePage from "./Components/Home/HomePage";
+import Navbar from "./Components/Share/Navibar";
 import { SignIn } from "./Components/SignIn/SignIn";
 import SIgnUp from "./Components/SignUp/SIgnUp";
-import HomePage from "./Components/Home/HomePage";
-import Navbar from "./Navbar/Navbar";
-import Shop from "./Components/Cart/Shop";
-import AboutUs from "./Components/About/AboutUs";
-import ContactUs from "./Components/Contact/ContactUs";
 
 function App() {
   return (
