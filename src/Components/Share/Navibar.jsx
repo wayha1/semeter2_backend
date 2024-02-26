@@ -1,5 +1,5 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../asset/img.jpg";
@@ -65,7 +65,7 @@ function Navbar() {
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
                         type="button"
-                        className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View Cart</span>
@@ -75,7 +75,7 @@ function Navbar() {
                       </button>
                       <button
                         type="button"
-                        className="relative ml-3 rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="relative ml-3 rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Favorites</span>
@@ -87,7 +87,7 @@ function Navbar() {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-pink-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
                             <img className="h-8 w-8 rounded-full" src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png" alt="" />
@@ -110,8 +110,8 @@ function Navbar() {
                                   <a
                                     href={item.href}
                                     className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
+                                      active ? 'bg-pink-100' : '',
+                                      'block px-4 py-2 text-sm text-pink-700'
                                     )}
                                   >
                                     {item.name}
@@ -132,7 +132,7 @@ function Navbar() {
           {({ open }) => (
             <Fragment>
               {/* Mobile menu button */}
-              <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-pink-500 p-2 text-pink-400 hover:bg-pink-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open main menu</span>
                 {open ? (
@@ -150,7 +150,7 @@ function Navbar() {
                       key={item.name}
                       to={item.path}
                       className={classNames(
-                        activeItem === index ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        activeItem === index ? 'bg-pink-600 text-white' : 'text-pink-300 hover:bg-pink-400 hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
                       )}
                       aria-current={item.current ? 'page' : undefined}
@@ -159,30 +159,13 @@ function Navbar() {
                     </Link>
                   ))}
                 </div>
-                <div className="border-t border-gray-700 pb-3 pt-4">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
+                <div className="border-t border-pink-400 pb-3 pt-4">
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
                       <Link
                         key={item.name}
                         to={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-pink-400 hover:bg-pink-700 hover:text-white"
                       >
                         {item.name}
                       </Link>
