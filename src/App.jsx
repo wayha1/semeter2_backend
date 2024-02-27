@@ -6,6 +6,7 @@ import HomePage from "./Components/Home/HomePage";
 import Navbar from "./Components/Share/Navibar";
 import { SignIn } from "./Components/SignIn/SignIn";
 import SIgnUp from "./Components/SignUp/SIgnUp";
+import Footer from "./Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <div>
               <Navbar />
               <HomePage />
+              <Footer/>
             </div>
           }
         />
@@ -28,6 +30,7 @@ function App() {
             <div>
               <Navbar />
               <Shop />
+              <Footer/>
             </div>
           }
         />
@@ -37,6 +40,7 @@ function App() {
             <div>
               <Navbar />
               <AboutUs />
+              <Footer/>
             </div>
           }
         />
@@ -46,6 +50,7 @@ function App() {
             <div>
               <Navbar />
               <ContactUs />
+              <Footer/>
             </div>
           }
         />
