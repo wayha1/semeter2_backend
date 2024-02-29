@@ -3,10 +3,13 @@ import AboutUs from "./Components/About/AboutUs";
 import Shop from "./Components/Cart/Shop";
 import ContactUs from "./Components/Contact/ContactUs";
 import HomePage from "./Components/Home/HomePage";
-import Navbar from "./Components/Share/Navibar";
+import Setting from "./Components/Profile/Setting";
+import Navbar from "./Components/Shared/Navibar";
 import { SignIn } from "./Components/SignIn/SignIn";
 import SIgnUp from "./Components/SignUp/SIgnUp";
-
+import Billing from "./Pages/Account/Billing";
+import Order from "./Pages/Account/Order";
+import Profile from "./Pages/Account/Profile";
 function App() {
   return (
     <Router>
@@ -46,6 +49,42 @@ function App() {
             <div>
               <Navbar />
               <ContactUs />
+            </div>
+          }
+        />
+        <Route
+          path="/setting"
+          element={
+            <div>
+              <Navbar />
+              <Setting />
+            </div>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <div>
+              <Navbar />
+              <Profile />
+            </div>
+          }
+        />
+        <Route
+          path="/billing"
+          element={
+            <div>
+              <Navbar />
+              <Billing />
+            </div>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <div>
+              <Navbar />
+              <Order />
             </div>
           }
         />
