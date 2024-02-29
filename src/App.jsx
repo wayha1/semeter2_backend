@@ -10,6 +10,8 @@ import SIgnUp from "./Components/SignUp/SIgnUp";
 import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
+import Footer from "./Components/Shared/Footer";
+
 function App() {
   return (
     <Router>
@@ -20,6 +22,7 @@ function App() {
             <div>
               <Navbar />
               <HomePage />
+              <Footer/>
             </div>
           }
         />
@@ -31,6 +34,7 @@ function App() {
             <div>
               <Navbar />
               <Shop />
+              <Footer/>
             </div>
           }
         />
@@ -40,6 +44,7 @@ function App() {
             <div>
               <Navbar />
               <AboutUs />
+              <Footer/>
             </div>
           }
         />
@@ -49,6 +54,7 @@ function App() {
             <div>
               <Navbar />
               <ContactUs />
+              <Footer/>
             </div>
           }
         />
