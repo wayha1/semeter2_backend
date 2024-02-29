@@ -117,7 +117,7 @@ export default function Footer() {
             </p>
           </div>
           {/* <!-- Useful links section --> */}
-          <div className="">
+          <div className="pl-10">
             <h6
               className="mb-4 flex justify-center text-pink-500
               uppercase md:justify-start text-xl font-bold"
@@ -144,7 +144,7 @@ export default function Footer() {
             </p>
           </div>
           {/* <!-- Contact section --> */}
-          <div>
+          <div className="pl-10">
             <h6
               className="mb-4 flex justify-center text-pink-500
               uppercase md:justify-start text-xl font-bold "
