@@ -8,7 +8,7 @@ const navigation = [
   { name: "Home", path: "/", current: true },
   { name: "Shop", path: "/shop", current: false },
   { name: "About", path: "/about", current: false },
-  { name: "Contact Us", path: "/contact", current: false },
+  { name: "Contact", path: "/contact", current: false },
 ];
 
 const userNavigation = [
@@ -48,9 +48,9 @@ function Navbar() {
               onClick={() => handleClick(index)}
               className={classNames(
                 activeItem === index
-                  ? "border p-1 w-[100px] text-center bg-pink-400 text-white"
+                  ? "w-[100px] text-center text-pink-400"
                   : "",
-                "rounded-md px-3 py-2 text-sm font-medium"
+                "px-3 py-2 text-lg font-medium hover:text-pink-400"
               )}
               aria-current={item.current ? "page" : undefined}
             >
@@ -155,50 +155,59 @@ function Navbar() {
         <Disclosure as="nav" className="bg-white">
           {({ open }) => (
             <Fragment>
-              {/* Mobile menu button */}
-              <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-pink-500 p-2 text-pink-400 hover:bg-pink-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
-                <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open main menu</span>
-                {open ? (
-                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </Disclosure.Button>
-
-              {/* Mobile Menu Content */}
-              <Disclosure.Panel className="md:hidden">
-                <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item, index) => (
-                    <Link
-                      key={item.name}
-                      to={item.path}
-                      className={classNames(
-                        activeItem === index
-                          ? "bg-pink-600 text-white"
-                          : "text-pink-300 hover:bg-pink-400 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium"
+              {/* Mobile Menu Content dropdown */}
+              <Menu as="div" className="relative ml-3">
+                <div>
+                  {/* Mobile menu button */}
+                  <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-grey-800">
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-pink-500 p-2 text-pink-400 hover:bg-pink-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
+                      <span className="absolute -inset-0.5" />
+                      <span className="sr-only">Open main menu</span>
+                      {open ? (
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        <Bars3Icon
+                          className="block h-6 w-6"
+                          aria-hidden="false"
+                        />
                       )}
-                      aria-current={item.current ? "page" : undefined}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                    </Disclosure.Button>
+                  </Menu.Button>
                 </div>
-                <div className="border-t border-pink-400 pb-3 pt-4">
-                  <div className="mt-3 space-y-1 px-2">
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {userNavigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-pink-400 hover:bg-pink-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Link>
+                      <Menu.Item key={item.name}>
+                        {({ active }) => (
+                          <a
+                            href={item.href}
+                            className={classNames(
+                              active ? "bg-pink-100" : "",
+                              "block px-4 py-2 text-sm text-pink-700"
+                            )}
+                          >
+                            {item.name}
+                          </a>
+                        )}
+                      </Menu.Item>
                     ))}
-                  </div>
-                </div>
-              </Disclosure.Panel>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
             </Fragment>
           )}
         </Disclosure>
