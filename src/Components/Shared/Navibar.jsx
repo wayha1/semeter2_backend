@@ -32,11 +32,7 @@ function Navbar() {
     <nav className="bg-white sticky top-0 p-4 flex items-center justify-between z-50">
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
-        <img
-          className="w-[100px] h-[40px] mt-2 mr-8"
-          src={Logo}
-          alt="Skin.me"
-        />
+        <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
       </div>
       <div className="hidden md:block">
         <div className="flex space-x-8">
@@ -47,10 +43,8 @@ function Navbar() {
               to={item.path}
               onClick={() => handleClick(index)}
               className={classNames(
-                activeItem === index
-                  ? "w-[100px] text-center text-pink-400"
-                  : "",
-                "px-3 py-2 text-lg font-medium hover:text-pink-400"
+                activeItem === index ? "w-[90px] text-center text-pink-500" : "",
+                "px-3 py-2 text-lg font-medium hover:text-pink-600"
               )}
               aria-current={item.current ? "page" : undefined}
             >
@@ -166,15 +160,9 @@ function Navbar() {
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon
-                          className="block h-6 w-6"
-                          aria-hidden="false"
-                        />
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="false" />
                       )}
                     </Disclosure.Button>
                   </Menu.Button>
