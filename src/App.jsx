@@ -11,6 +11,7 @@ import Navbar from "./Navbar/Navbar";
 import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
+import { Cart } from "./Components/Cart/Cart";
 
 function App() {
   return (
@@ -95,11 +96,11 @@ function App() {
           }
         />
         <Route
-          path="/shop"
+          path="/cart"
           element={
             <div>
               <Navbar />
-              <Shop />
+              <Cart />
             </div>
           }
         />

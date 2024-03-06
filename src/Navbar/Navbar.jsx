@@ -33,11 +33,7 @@ function Navbar() {
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
         <NavLink to="/">
-          <img
-            className="w-[120px] h-[40px] mt-2 mr-8"
-            src={Logo}
-            alt="Skin.me"
-          />
+          <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
         </NavLink>
       </div>
       <div className="hidden md:block">
@@ -49,9 +45,7 @@ function Navbar() {
               to={item.path}
               onClick={() => handleClick(index)}
               className={classNames(
-                activeItem === index
-                  ? "w-[90px] text-center text-pink-500"
-                  : "",
+                activeItem === index ? "w-[90px] text-center text-pink-500" : "",
                 "px-3 py-2 text-lg font-medium hover:text-pink-600"
               )}
               aria-current={item.current ? "page" : undefined}
@@ -67,22 +61,24 @@ function Navbar() {
             type="button"
             className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
           >
-            <span className="absolute -inset-1.5" />
-            <span className="sr-only">View Cart</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-              />
-            </svg>
+            <NavLink to='/cart' >
+              <span className="absolute -inset-1.5" />
+              {/* <span className="sr-only">View Cart</span> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 25 25"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+            </NavLink>
           </button>
           <button
             type="button"
@@ -168,15 +164,9 @@ function Navbar() {
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon
-                          className="block h-6 w-6"
-                          aria-hidden="true"
-                        />
+                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
-                        <Bars3Icon
-                          className="block h-6 w-6"
-                          aria-hidden="false"
-                        />
+                        <Bars3Icon className="block h-6 w-6" aria-hidden="false" />
                       )}
                     </Disclosure.Button>
                   </Menu.Button>
