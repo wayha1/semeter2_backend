@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
-import Shop from "./Components/Cart/Shop";
+import Shop from "./Components/Shop/Shop";
 import ContactUs from "./Components/Contact/ContactUs";
 import HomePage from "./Components/Home/HomePage";
 import Setting from "./Components/Profile/Setting";
@@ -93,6 +93,15 @@ function App() {
               <Order />
             </div>
           }
+        />
+        <Route 
+        path="/shop"
+        element={
+          <div>
+            <Navbar />
+            <Shop />
+          </div>
+        }
         />
       </Routes>
     </Router>

@@ -1,7 +1,7 @@
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../../asset/img.jpg";
 
 const navigation = [
@@ -32,13 +32,15 @@ function Navbar() {
     <nav className="bg-white sticky top-0 p-4 flex items-center justify-between z-50">
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
-        <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
+        <NavLink to="/">
+          <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
+        </NavLink>
       </div>
       <div className="hidden md:block">
         <div className="flex space-x-8">
           {/* Mapping over menuItems array to display each item */}
           {navigation.map((item, index) => (
-            <Link
+            <NavLink
               key={index}
               to={item.path}
               onClick={() => handleClick(index)}
@@ -49,7 +51,7 @@ function Navbar() {
               aria-current={item.current ? "page" : undefined}
             >
               {item.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>
