@@ -1,16 +1,16 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
-import Shop from "./Components/Shop/Shop";
 import ContactUs from "./Components/Contact/ContactUs";
 import HomePage from "./Components/Home/HomePage";
 import Setting from "./Components/Profile/Setting";
-import Navbar from "./Components/Shared/Navibar";
+import Shop from "./Components/Shop/Shop";
 import { SignIn } from "./Components/SignIn/SignIn";
 import SIgnUp from "./Components/SignUp/SIgnUp";
+import Footer from "./Footer/Footer";
+import Navbar from "./Navbar/Navbar";
 import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
-import Footer from "./Components/Shared/Footer";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <div>
               <Navbar />
               <HomePage />
-              <Footer/>
+              <Footer />
             </div>
           }
         />
@@ -34,7 +34,7 @@ function App() {
             <div>
               <Navbar />
               <Shop />
-              <Footer/>
+              <Footer />
             </div>
           }
         />
@@ -44,7 +44,7 @@ function App() {
             <div>
               <Navbar />
               <AboutUs />
-              <Footer/>
+              <Footer />
             </div>
           }
         />
@@ -54,7 +54,7 @@ function App() {
             <div>
               <Navbar />
               <ContactUs />
-              <Footer/>
+              <Footer />
             </div>
           }
         />
@@ -94,14 +94,14 @@ function App() {
             </div>
           }
         />
-        <Route 
-        path="/shop"
-        element={
-          <div>
-            <Navbar />
-            <Shop />
-          </div>
-        }
+        <Route
+          path="/shop"
+          element={
+            <div>
+              <Navbar />
+              <Shop />
+            </div>
+          }
         />
       </Routes>
     </Router>
