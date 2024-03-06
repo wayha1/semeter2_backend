@@ -45,8 +45,8 @@ function Navbar() {
               to={item.path}
               onClick={() => handleClick(index)}
               className={classNames(
-                activeItem === index ? "w-[90px] text-center text-pink-500" : "",
-                "px-3 py-2 text-lg font-medium hover:text-pink-600"
+                activeItem === index ? "w-[90px] text-center text-pink-400" : "",
+                "px-3 py-2 text-lg font-medium hover:text-pink-500"
               )}
               aria-current={item.current ? "page" : undefined}
             >

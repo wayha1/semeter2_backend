@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
+import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
-import HomePage from "./Components/Home/HomePage";
 import Setting from "./Components/Profile/Setting";
 import Shop from "./Components/Shop/Shop";
 import { SignIn } from "./Components/SignIn/SignIn";
@@ -11,7 +11,7 @@ import Navbar from "./Navbar/Navbar";
 import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
-import { Cart } from "./Components/Cart/Cart";
+import HomePage from "./Pages/Homepage";
 
 function App() {
   return (

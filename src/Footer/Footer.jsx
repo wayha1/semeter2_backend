@@ -78,11 +78,13 @@ export default function Footer() {
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* <!-- TW Elements section --> */}
           <div className="pl-10">
-            <img
-              className="w-[100px] h-[40px] mt-2 mr-8"
-              src={Logo}
-              alt="Skin.me"
-            />
+            <div className="flex justify-center md:flex md:justify-normal">
+              <img
+                className="w-[100px] h-[40px] mt-2 mr-8"
+                src={Logo}
+                alt="Skin.me"
+              />
+            </div>
             <p className="pt-5">
               For Our Website, you can view the ingredient depend on province
               you want to look for and in our Website also have a hotel and cafe
