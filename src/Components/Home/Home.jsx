@@ -3,20 +3,21 @@ import baekhyun2 from "../../asset/beakhyun.png";
 function HomePage() {
   return (
     <>
-      <div className="flex h-screen items-center justify-center bg-pink-100">
-        <div className="grid md:grid-cols-2 items-center gap-10 md:px-10">
+      <div className="flex items-center justify-center w-full h-5/6 bg-pink-100">
+        <div className="flex justify-between items-center md:px-10 md:space-x-36">
           <div>
-            <h1 className="pl-20 pb-7 text-7xl font-bold text-gray-300">
+            <h1 className="font-bold text-gray-300 text-4xl text-center pt-10 md:text-left md:pl-20 md:pb-7 md:text-7xl">
               <span className="text-pink-400">Discover the Power</span> of
               <br />
               Clean Skincare
             </h1>
-            <p className="pl-20 pr-15 pb-10 text-gray-600">
+            <p className="text-sm flex text-center px-10 py-5 md:pl-20 md:pr-15 md:pb-10 text-gray-600">
               We believe that true beauty starts from within. That's why we
-              encourage you to not only nourish your skin from the outside, but
-              also prioritize a healthy lifestyle for optimal results.
+              encourage you to not only nourish your skin from <br />
+              the outside, but also prioritize a healthy lifestyle for optimal
+              results.
             </p>
-            <div className=" pl-20">
+            <div className="flex justify-center md:pl-20">
               <button className="flex rounded-2xl bg-pink-400 p-3 font-semibold text-white hover:bg-pink-500">
                 Shop Now
                 <div className="pl-2">
@@ -38,11 +39,11 @@ function HomePage() {
               </button>
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="">
             <img
               src={baekhyun2}
               alt="baekhyun photos"
-              className="lg:h-screen"
+              className="hidden md:flex md:h-5/6 md:pt-10 "
             />
           </div>
         </div>
