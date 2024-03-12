@@ -1,11 +1,12 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
-import { Cart } from "./Components/Cart/Cart";
-import ContactUs from "./Components/Contact/ContactUs";
-import Setting from "./Components/Profile/Setting";
-import Shop from "./Components/Shop/Shop";
 import { SignIn } from "./Components/Auth/SignIn/SignIn";
 import SIgnUp from "./Components/Auth/SignUp/SIgnUp";
+import { Cart } from "./Components/Cart/Cart";
+import ContactUs from "./Components/Contact/ContactUs";
+import Favorite from "./Components/Favorite/Favorite";
+import Setting from "./Components/Profile/Setting";
+import Shop from "./Components/Shop/Shop";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 import Billing from "./Pages/Account/Billing";
@@ -101,6 +102,15 @@ function App() {
             <div>
               <Navbar />
               <Cart />
+            </div>
+          }
+        />
+        <Route
+          path="/favorite"
+          element={
+            <div>
+              <Navbar />
+              <Favorite />
             </div>
           }
         />
