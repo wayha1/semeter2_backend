@@ -11,13 +11,13 @@ function HomePage() {
               <br />
               Clean Skincare
             </h1>
-            <p className="text-sm flex text-center px-10 py-5 md:pl-20 md:pr-15 md:pb-10 text-gray-600">
+            <p className="text-sm flex text-center px-10 py-5 md:text-left md:pl-20 text-gray-600">
               We believe that true beauty starts from within. That's why we
               encourage you to not only nourish your skin from <br />
               the outside, but also prioritize a healthy lifestyle for optimal
               results.
             </p>
-            <div className="flex justify-center md:pl-20">
+            <div className="flex justify-center md:justify-start md:pl-20 md:pt-10">
               <button className="flex rounded-2xl bg-pink-400 p-3 font-semibold text-white hover:bg-pink-500">
                 Shop Now
                 <div className="pl-2">

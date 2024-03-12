@@ -33,7 +33,11 @@ function Navbar() {
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
         <NavLink to="/">
-          <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
+          <img
+            className="w-[120px] h-[40px] mt-2 mr-8"
+            src={Logo}
+            alt="Skin.me"
+          />
         </NavLink>
       </div>
       <div className="hidden md:block">
@@ -45,7 +49,9 @@ function Navbar() {
               to={item.path}
               onClick={() => handleClick(index)}
               className={classNames(
-                activeItem === index ? "w-[90px] text-center text-pink-400" : "",
+                activeItem === index
+                  ? "w-[90px] text-center text-pink-400"
+                  : "",
                 "px-3 py-2 text-lg font-medium hover:text-pink-500"
               )}
               aria-current={item.current ? "page" : undefined}
@@ -61,7 +67,7 @@ function Navbar() {
             type="button"
             className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
           >
-            <NavLink to='/cart' >
+            <NavLink to="/cart">
               <span className="absolute -inset-1.5" />
               {/* <span className="sr-only">View Cart</span> */}
               <svg
@@ -84,22 +90,24 @@ function Navbar() {
             type="button"
             className="relative ml-3 rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
           >
-            <span className="absolute -inset-1.5" />
-            <span className="sr-only">Favorites</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-              />
-            </svg>
+            <NavLink to="/favorite">
+              <span className="absolute -inset-1.5" />
+              <span className="sr-only">Favorites</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                />
+              </svg>
+            </NavLink>
           </button>
 
           {/* Profile dropdown */}
@@ -164,9 +172,15 @@ function Navbar() {
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="false" />
+                        <Bars3Icon
+                          className="block h-6 w-6"
+                          aria-hidden="false"
+                        />
                       )}
                     </Disclosure.Button>
                   </Menu.Button>
