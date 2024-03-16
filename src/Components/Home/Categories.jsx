@@ -15,7 +15,7 @@ function Categories() {
           <div className="text-center pt-10 ">
             <h1 className="font-bold text-4xl pb-4">Categories</h1>
           </div>
-          <div className="grid grid-cols-4 sm:grid-cols-7 gap-16 sm:gap-8 pt-10 sm:pt-12">
+          <div className="grid grid-cols-4 sm:grid-cols-7 gap-16 sm:gap-8 pt-10 sm:pt-12 p-10">
             <div className="text-center">
               <div className="relative w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto left-2">
                 <div className="z-10 relative w-full h-full bg-white rounded-full border border-gray-300 shadow flex items-center justify-center">

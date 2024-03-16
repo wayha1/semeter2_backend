@@ -3,38 +3,40 @@ import Categories from "../Home/Categories";
 import Product from "./Product";
 function Shop() {
   return (
-    <div classNameName="min-h-screen bg-[#F7EFF2] w-full">
-      <div class="bg-gray-900 text-white py-20">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col gap-8 lg:flex-row items-center">
-            <div class="lg:w-1/2">
-              <h1 class="text-4xl font-bold leading-tight mb-4">
-                Welcome to the Beauty Wonderland!
-              </h1>
-              <p class="text-xl mb-8">
-                Explore our Beauty Haven and Shop Now for an Instant Upgrade to
-                Gorgeousness!
-              </p>
-            </div>
-            <div class="lg:w-1/2 lg:ml-12">
-              <img
-                src="https://imgcdn.femaledaily.com/2020/07/7-BINTANG-DRAMA-KOREA-YANG-JADI-BRAND-AMBASSADOR-PRODUK-KECANTIKAN.jpg"
-                alt="Tailwind CSS"
-                class="rounded-lg shadow-lg hover:shadow-xl transition duration-200"
-              />
+    <>
+      <div className=" bg-pink-100 w-full">
+        <div className=" text-pink-400 py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-8 lg:flex-row items-center">
+              <div className="lg:w-1/2 text-center lg:text-left">
+                <h1 className="text-4xl font-bold leading-tight mb-4 md:text-pink-400">
+                  Welcome to the Beauty Wonderland!
+                </h1>
+                <p className="text-xl mb-8 text-gray-600">
+                  Explore our Beauty Haven and Shop Now for an Instant Upgrade
+                  to Gorgeousness!
+                </p>
+              </div>
+              <div className="lg:w-1/2 lg:ml-12">
+                <img
+                  src="https://imgcdn.femaledaily.com/2020/07/7-BINTANG-DRAMA-KOREA-YANG-JADI-BRAND-AMBASSADOR-PRODUK-KECANTIKAN.jpg"
+                  alt="Tailwind CSS"
+                  className="rounded-lg shadow-lg hover:shadow-xl transition duration-200"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
       <Categories />
       <Product />
-    </div>
+    </>
   );
 }
 
 export default Shop;
 {
-  /* <div className="container mx-auto p-10 pt-0 md:py-20 px-0 md:pt-0 md:pb-10 md:px-0">
+  /* <div classNameName="container mx-auto p-10 pt-0 md:py-20 px-0 md:pt-0 md:pb-10 md:px-0">
         <div className="transform ">
           <img
             className="lg:max-w-lg w-full"

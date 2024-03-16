@@ -4,11 +4,11 @@ import cerave from "../../asset/ceravegreen.png";
 function Product() {
   return (
     <>
-      <div className="text-center pt-10 ">
+      <div className="text-center pt-10  bg-pink-100">
         <h1 className="font-bold text-4xl pb-4">Choose Your Product Here</h1>
       </div>
-      <div className="grid md:grid-cols-4 gap-8 px-10 pt-10">
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-10 pt-10 bg-pink-100 py-20">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -31,7 +31,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -54,7 +54,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -77,7 +77,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -100,7 +100,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -123,7 +123,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -146,7 +146,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -169,7 +169,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -192,7 +192,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -215,7 +215,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -238,7 +238,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
@@ -261,7 +261,7 @@ function Product() {
             </div>
           </div>
         </div>
-        <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg ">
+        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
           <div className="relative">
             <img className="w-full" src={cerave} alt="cerave photo" />
             <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">

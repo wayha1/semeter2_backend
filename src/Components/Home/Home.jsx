@@ -3,7 +3,7 @@ import baekhyun2 from "../../asset/beakhyun.png";
 function HomePage() {
   return (
     <>
-      <div className="flex items-center justify-center w-full h-5/6 bg-pink-100">
+      <div className="flex items-center justify-center w-full h-[90vh] bg-pink-100">
         <div className="flex justify-between items-center md:px-10 md:space-x-36">
           <div>
             <h1 className="font-bold text-gray-300 text-4xl text-center pt-10 md:text-left md:pl-20 md:pb-7 md:text-7xl">
