@@ -1,290 +1,213 @@
 import React from "react";
-import cerave from "../../asset/ceravegreen.png";
 
-function Product() {
+const ProductCard = ({ product }) => {
+  // const { image, brand, title, price, oldPrice } = product;
+  const products = [
+    {
+      id: 1,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 2,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaNl1gBkibx27s26ZEkC8B6hPz8R11zV563Q&usqp=CAU",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SOLD",
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 3,
+      image:
+        "https://sokoskins.shop/cdn/shop/files/thumb-02_405x405_c83d7242-a942-4488-8c8e-fd1560acff91_405x.jpg?v=1682600891",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SOLD",
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 4,
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ149u_PSE1HoSDXR-GV9YDyblzMwfI7_H69w&usqp=CAU",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 5,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 6,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 7,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 8,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 9,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 10,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 11,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+    {
+      id: 12,
+      image:
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
+      brand: "Mary&May",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
+      title: "Product Title 1",
+      status: "SALE",
+
+      price: 30,
+      oldPrice: 45,
+    },
+
+  ];
+
   return (
     <>
-      <div className="text-center pt-10  bg-pink-100">
-        <h1 className="font-bold text-4xl pb-4">Choose Your Product Here</h1>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-10 pt-10 bg-pink-100 py-20">
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
+      <div className="pt-10 bg-pink-100 pb-10">
+        <h1 className="font-bold text-4xl mb-4 text-center pb-10">
+          Best Selling Products
+        </h1>
+        <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="w-72 bg-white  rounded-xl duration-500 "
+            >
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt="Product"
+                  className="h-100 w-80 object-cover rounded-t-xl"
+                />
+                <div className="px-4 py-3 w-72">
+                  {/* Conditional rendering of status */}
+                  {product.status === "SALE" && (
+                    <div className="absolute top-0 left-0 bg-green-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                      {product.status}
+                    </div>
+                  )}
+                  {product.status === "SOLD" && (
+                    <div className="absolute top-0 left-0 bg-red-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                      {product.status}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-medium mb-2">{product.brand}</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  {product.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-lg"> ${product.price}</span>
+                  <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded" >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md hover:shadow-lg ">
-          <div className="relative">
-            <img className="w-full" src={cerave} alt="cerave photo" />
-            <div className="absolute top-0 right-0 bg-red-400 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-              SALE
-            </div>
-          </div>
-          <div className="p-4">
-            <h3 className="text-lg font-medium mb-2">
-              Hydrating Facial Cleanser
-            </h3>
-            <p className="text-gray-600 text-sm mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              vitae ante vel eros fermentum faucibus sit amet euismod lorem.
-            </p>
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-lg">$19.99</span>
-              <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                Buy Now
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
+
       {/* Pagination */}
 
       <ul className="flex justify-center text-xs font-medium space-x-1 py-10">
@@ -361,6 +284,6 @@ function Product() {
       </ul>
     </>
   );
-}
+};
 
-export default Product;
+export default ProductCard;
