@@ -2,7 +2,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Logo from "../asset/img.jpg";
+import Logo from "../asset/img.png";
 
 const navigation = [
   { name: "Home", path: "/", current: true },
@@ -196,7 +196,7 @@ function Navbar() {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {userNavigation.map((item) => (
+                    {navigation.map((item) => (
                       <Menu.Item key={item.name}>
                         {({ active }) => (
                           <a
