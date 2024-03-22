@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "../Components/Home/Categories";
+import Branding from "../Components/Home/Branding";
 import Home from "../Components/Home/Home";
 import Products from "../Components/Home/Products";
 function Homepage() {
@@ -7,7 +7,8 @@ function Homepage() {
     <>
       <Home />
       {/* <Search /> */}
-      <Categories />
+      {/* <Categories /> */}
+      <Branding />
       <Products />
     </>
   );

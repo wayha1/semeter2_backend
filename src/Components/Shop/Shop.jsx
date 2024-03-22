@@ -1,6 +1,5 @@
 import React from "react";
-import Categories from "../Home/Categories";
-import Product from "./Product";
+// import Categories from "../Home/Categories";
 function Shop() {
   return (
     <>
@@ -28,8 +27,6 @@ function Shop() {
           </div>
         </div>
       </div>
-      <Categories />
-      <Product />
     </>
   );
 }

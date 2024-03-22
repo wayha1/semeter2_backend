@@ -6,13 +6,13 @@ import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
 import Setting from "./Components/Profile/Setting";
-import Shop from "./Components/Shop/Shop";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
 import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
+import Shop from "./Pages/Shoppage";
 
 function App() {
   return (
