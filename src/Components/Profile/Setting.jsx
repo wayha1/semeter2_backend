@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function Setting() {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Assuming you store your token in localStorage
+        const response = await axios.get("http://127.0.0.1:8000/api/user", {
+          headers: {
+            Authorization: `Bearer ${"3|uJQdRhFBAlyhysgjTFlVYQpB9h2wsGJpbBjsmQqH29ff840d"}`,
+          },
+        });
+        setUserData(response.data);
+        console.log(userData);
+      } catch (error) {
+        setError("Error fetching user data");
+        console.error("Fetch User Data Error:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <>
       <div className="bg-[#F7EFF2] h-auto w-full">
@@ -16,20 +40,21 @@ function Setting() {
                   <h1 className="text-xl font-bold">Mateo</h1>
                   <p className="text-gray-700">General User</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <a
-                      href="#"
-                      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-                    >
+                    <a href="#" className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
                       Sign Out
                     </a>
-                    <a
-                      href="#"
-                      className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
-                    >
+                    <a href="#" className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">
                       Edit Profile
                     </a>
                   </div>
                 </div>
+                {error && <p>Error: {error}</p>}
+                {userData && (
+                  <div className="bg-[#F7EFF2] h-auto w-full">
+                    {/* Your existing JSX code here */}
+                    {/* You can use `userData` to render user information */}
+                  </div>
+                )}
                 <hr className="my-6" />
                 <div className="flex flex-col">
                   <span className="text-gray-800 uppercase font-bold tracking-wider mb-2 text-center hover:text-pink-400">
@@ -49,12 +74,10 @@ function Setting() {
               <div className="px-4 py-10 sm:px-6"></div>
               <div className="pb-5">
                 {/* Column Box */}
-                <h1 className=" pt-5 text-4xl font-bold text-gray-900">
-                  Profile Information
-                </h1>
+                <h1 className=" pt-5 text-4xl font-bold text-gray-900">Profile Information</h1>
                 <p className="pt-5 text-md text-gray-500">
-                  Manage Your personal information, including phone numbers and
-                  email address where you can be contacted
+                  Manage Your personal information, including phone numbers and email address where you can be
+                  contacted
                 </p>
                 <div className="grid gap-4 md:grid-cols-2 lg:gap-6 pt-10 ">
                   <a
@@ -63,9 +86,7 @@ function Setting() {
                   >
                     <div>
                       <div className="flex justify-between items-center   ">
-                        <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Name
-                        </div>
+                        <div className="pb-5 text-xl font-bold lg:text-2xl">Name</div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
                             <svg
@@ -94,9 +115,7 @@ function Setting() {
                   >
                     <div>
                       <div className="flex justify-between items-center   ">
-                        <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Date of Birth
-                        </div>
+                        <div className="pb-5 text-xl font-bold lg:text-2xl">Date of Birth</div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
                             <svg
@@ -125,9 +144,7 @@ function Setting() {
                   >
                     <div>
                       <div className="flex justify-between items-center   ">
-                        <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Country Region
-                        </div>
+                        <div className="pb-5 text-xl font-bold lg:text-2xl">Country Region</div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
                             <svg
@@ -156,9 +173,7 @@ function Setting() {
                   >
                     <div>
                       <div className="flex justify-between items-center   ">
-                        <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Location
-                        </div>
+                        <div className="pb-5 text-xl font-bold lg:text-2xl">Location</div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
                             <svg
@@ -192,9 +207,7 @@ function Setting() {
                   >
                     <div>
                       <div className="flex justify-between items-center   ">
-                        <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Contact Number
-                        </div>
+                        <div className="pb-5 text-xl font-bold lg:text-2xl">Contact Number</div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
                             <svg
