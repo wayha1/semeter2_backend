@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../Api/axios";
+import axios from "axios";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -11,11 +11,20 @@ export const SignIn = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/api/login', { email, password });
-      if (response.data.success) {
+      const response = await axios.post(
+        'http://127.0.0.1:8000/api/login',
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+        }
+      );
+      if (response.data.token) {
         setEmail("");
         setPassword("");
-        navigate("/");
+        navigate("/", { replace: true });
       } else {
         setError("Invalid email or password. Please try again.");
       }
@@ -52,7 +61,7 @@ export const SignIn = () => {
                   placeholder="Password"
                   className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                 />
-                <button className="w-full px-4 py-2 m-2 mb-4 bg-[#F47099] text-white rounded-lg focus:outline-none focus:border-blue-500">
+                <button type="submit" className="w-full px-4 py-2 m-2 mb-4 bg-[#F47099] text-white rounded-lg focus:outline-none focus:border-blue-500">
                   Sign In
                 </button>
               </form>
