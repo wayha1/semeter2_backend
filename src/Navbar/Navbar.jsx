@@ -8,6 +8,7 @@ const navigation = [
   { name: "Shop", path: "/shop", current: false },
   { name: "About", path: "/about", current: false },
   { name: "Contact", path: "/contact", current: false },
+  { name: "Dashboard", path: "/dashboard", current: false },
 ];
 
 const userNavigation = [
@@ -22,6 +23,7 @@ function classNames(...classes) {
 
 function Navbar() {
   const [activeItem, setActiveItem] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleClick = (index) => {
     setActiveItem(index);
@@ -32,15 +34,38 @@ function Navbar() {
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
         <NavLink to="/">
-          <img
-            className="w-[120px] h-[40px] mt-2 mr-8"
-            src={Logo}
-            alt="Skin.me"
-          />
+          <div className="flex justify-between">
+            <img
+              className="w-[120px] h-[40px] mt-2 mr-8"
+              src={Logo}
+              alt="Skin.me"
+            />
+            <button
+              className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
+              onClick={() => setOpen(!open)}
+            >
+              <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
+                <path
+                  style={{ display: !open ? "flex flex-col" : "none" }}
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                ></path>
+                <path
+                  style={{ display: open ? "block" : "none" }}
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
         </NavLink>
       </div>
-      <div className="hidden md:block">
-        <div className="flex space-x-8">
+      <div className="md:block space-x-8">
+        <div
+          className={`${open ? "block" : "hidden"} flex  md:block space-x-8 `}
+        >
           {/* Mapping over menuItems array to display each item */}
           {navigation.map((item, index) => (
             <NavLink
