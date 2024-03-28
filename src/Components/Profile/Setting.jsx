@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../Auth/api/axios.js";
 
 function Setting() {
   const [userData, setUserData] = useState(null);
@@ -8,10 +8,9 @@ function Setting() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token"); // Assuming you store your token in localStorage
-        const response = await axios.get("http://127.0.0.1:8000/api/user", {
+        const response = await axios.get("/api/category", {
           headers: {
-            Authorization: `Bearer ${"3|uJQdRhFBAlyhysgjTFlVYQpB9h2wsGJpbBjsmQqH29ff840d"}`,
+            Authorization: `Bearer ${"4|JLs14bdtCze4DYW7oQqBhDPZ5pqWzVvNd2rZWnBSc73cd9bb"}`,
           },
         });
         setUserData(response.data);
@@ -23,7 +22,7 @@ function Setting() {
     };
 
     fetchUserData();
-  }, []);
+  });
 
   return (
     <>

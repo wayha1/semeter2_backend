@@ -1,37 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/login",
-        { email, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
-      if (response.data.token) {
-        setEmail("");
-        setPassword("");
-        console.log(email);
-        navigate("/", { replace: true });
-      } else {
-        setError("Invalid email or password. Please try again.");
-      }
-    } catch (e) {
-      setError("Something went wrong. Please try again later.");
-      console.error("Login Error:", e);
+      const response = await axios.post("/login", { email, password });
+      const { data } = response;
+      // Set cookie with the access token
+      Cookies.set("accessToken", data.token, { expires: 7 }); // Expires in 7 days
+      navigate("/");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -47,18 +39,20 @@ export const SignIn = () => {
               Sign In to your Account
             </p>
             <div className="mt-14 flex flex-col items-center w-[350px]">
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSubmit}>
                 <input
                   type="email"
+                  name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleInputChange}
                   placeholder="Email"
                   className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                 />
                 <input
                   type="password"
+                  name="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleInputChange}
                   placeholder="Password"
                   className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                 />
@@ -69,8 +63,6 @@ export const SignIn = () => {
                   Sign In
                 </button>
               </form>
-
-              {error && <p className="text-red-500">{error}</p>}
 
               <p className="mt-10">
                 Don't have an account?
