@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
+
 export default function SIgnUp() {
   return (
     <div className="min-h-screen bg-[#F7EFF2] w-full">

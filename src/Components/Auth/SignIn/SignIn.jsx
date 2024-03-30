@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
+import useAuthContext from "../../context/AuthContext";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const { signin, error } = useAuthContext();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -16,15 +15,7 @@ export const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post("/login", { email, password });
-      const { data } = response;
-      // Set cookie with the access token
-      Cookies.set("accessToken", data.token, { expires: 7 }); // Expires in 7 days
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    signin({ email, password });
   };
 
   return (
@@ -56,6 +47,7 @@ export const SignIn = () => {
                   placeholder="Password"
                   className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                 />
+                {error && <p className="text-red-500">{error}</p>}
                 <button
                   type="submit"
                   className="w-full px-4 py-2 m-2 mb-4 bg-[#F47099] text-white rounded-lg focus:outline-none focus:border-blue-500"

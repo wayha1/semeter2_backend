@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../Auth/api/axios.js";
+import axios from "../api/axios.js";
 
 function Setting() {
   const [userData, setUserData] = useState(null);
