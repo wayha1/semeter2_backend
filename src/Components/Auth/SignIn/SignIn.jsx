@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../context/AuthContext";
+import logoGoogle from "../../../asset/google1.png";
+import logoPhone from "../../../asset/p1.png";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +19,11 @@ export const SignIn = () => {
     event.preventDefault();
     signin({ email, password });
   };
+
+  // const handleGoogleSignIn = async () => {
+  //   // Redirect user to Laravel backend for Google authentication
+  //   window.location.href = "/auth/google/redirect";
+  // };
 
   return (
     <section>
@@ -54,6 +61,39 @@ export const SignIn = () => {
                 >
                   Sign In
                 </button>
+
+                <div className="flex items-center justify-center mt-10
+                rounded-3xl bg-[#82165C]">
+                  <img 
+                    className="w-[40px] h-[40px]"
+                    src={logoGoogle}
+                    alt="Google Logo"
+                  />
+                  <a
+                    type="button"
+                    href="auth/google"
+                    className="px-2 py-2 m-1 text-white"
+                  >
+                    Sign In with Google
+                  </a>
+                </div>
+
+                <div className="flex items-center justify-center mt-10
+                rounded-3xl bg-[#82165C]">
+                  <img 
+                    className="w-[40px] h-[40px]"
+                    src={logoPhone}
+                    alt="Google Logo"
+                  />
+                  <a
+                    type="button"
+                    href="auth/google"
+                    className="px-2 py-2 m-1 text-white"
+                  >
+                    Sign In with No.
+                  </a>
+                </div>
+
               </form>
 
               <p className="mt-10">
