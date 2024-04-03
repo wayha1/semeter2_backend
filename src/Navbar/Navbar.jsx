@@ -1,24 +1,24 @@
-import { Menu, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
-import { NavLink } from "react-router-dom";
-import Logo from "../asset/img.png";
+import { Menu, Transition } from '@headlessui/react';
+import React, { Fragment, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Logo from '../asset/img.png';
 
 const navigation = [
-  { name: "Home", path: "/", current: true },
-  { name: "Shop", path: "/shop", current: false },
-  { name: "About", path: "/about", current: false },
-  { name: "Contact", path: "/contact", current: false },
-  { name: "Dashboard", path: "/dashboard", current: false },
+  { name: 'Home', path: '/', current: true },
+  { name: 'Shop', path: '/shop', current: false },
+  { name: 'About', path: '/about', current: false },
+  { name: 'Contact', path: '/contact', current: false },
+  { name: 'Dashboard', path: '/dashboard', current: false },
 ];
 
 const userNavigation = [
-  { name: "Your Profile", href: "/setting" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: 'Your Profile', href: '/setting' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '#' },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 function Navbar() {
@@ -30,6 +30,7 @@ function Navbar() {
   };
 
   return (
+    <>
     <nav className="bg-white sticky top-0 p-4 flex items-center justify-between z-50">
       {/* Regular Desktop Menu */}
       <div className=" items-center space-x-4 mr-6">
@@ -46,13 +47,13 @@ function Navbar() {
             >
               <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
                 <path
-                  style={{ display: !open ? "flex flex-col" : "none" }}
+                  style={{ display: !open ? 'flex flex-col' : 'none' }}
                   fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
                   clipRule="evenodd"
                 ></path>
                 <path
-                  style={{ display: open ? "block" : "none" }}
+                  style={{ display: open ? 'block' : 'none' }}
                   fillRule="evenodd"
                   d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                   clipRule="evenodd"
@@ -63,9 +64,9 @@ function Navbar() {
         </NavLink>
       </div>
       <div className="md:block space-x-8">
-        <div
-          className={`${open ? "block" : "hidden"} flex  md:block space-x-8 `}
-        >
+        {/* <div
+          className={${open ? 'block' : 'hidden'} flex  md:block space-x-8 }
+        > */}
           {/* Mapping over menuItems array to display each item */}
           {navigation.map((item, index) => (
             <NavLink
@@ -74,110 +75,145 @@ function Navbar() {
               onClick={() => handleClick(index)}
               className={classNames(
                 activeItem === index
-                  ? "w-[90px] text-center text-pink-400"
-                  : "",
-                "px-3 py-2 text-lg font-medium hover:text-pink-500"
+                  ? 'w-[90px] text-center text-pink-400'
+                  : '',
+                'px-3 py-2 text-lg font-medium hover:text-pink-500'
               )}
-              aria-current={item.current ? "page" : undefined}
+              aria-current={item.current ? 'page' : undefined}
             >
               {item.name}
             </NavLink>
           ))}
         </div>
-      </div>
-      <div className="hidden md:block">
-        <div className="ml-4 flex items-center md:ml-6">
-          <button
-            type="button"
-            className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
+      {/* </div> */}
+      {!localStorage.getItem('token') ? (
+        <div className="sign_in_up">
+          <NavLink
+            to="/login"
+            className="text-center text-lg font-medium hover:text-pink-500"
           >
-            <NavLink to="/cart">
-              <span className="absolute -inset-1.5" />
-              {/* <span className="sr-only">View Cart</span> */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 25 25"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                />
-              </svg>
-            </NavLink>
-          </button>
-          <button
-            type="button"
-            className="relative ml-3 rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
-          >
-            <NavLink to="/favorite">
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">Favorites</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                />
-              </svg>
-            </NavLink>
-          </button>
-
-          {/* Profile dropdown */}
-          <Menu as="div" className="relative ml-3">
-            <div>
-              <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-pink-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
-                <span className="absolute -inset-1.5" />
-                <span className="sr-only">Open user menu</span>
-                <img
-                  className="h-8 w-8 rounded-full"
-                  src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"
-                  alt="UserProfile"
-                />
-              </Menu.Button>
-            </div>
-
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                {userNavigation.map((item) => (
-                  <Menu.Item key={item.name}>
-                    {({ active }) => (
-                      <a
-                        href={item.href}
-                        className={classNames(
-                          active ? "bg-pink-100" : "",
-                          "block px-4 py-2 text-sm text-pink-700"
-                        )}
-                      >
-                        {item.name}
-                      </a>
-                    )}
-                  </Menu.Item>
-                ))}
-              </Menu.Items>
-            </Transition>
-          </Menu>
+            Sign In / Up
+          </NavLink>
         </div>
-      </div>
+      ) : (
+        <div className="hidden md:block">
+          <div className="ml-4 flex items-center md:ml-6">
+            <button
+              type="button"
+              className="relative rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
+            >
+              <NavLink to="/cart">
+                <span className="absolute -inset-1.5" />
+                {/* <span className="sr-only">View Cart</span> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 25 25"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  />
+                </svg>
+              </NavLink>
+            </button>
+            <button
+              type="button"
+              className="relative ml-3 rounded-full bg-pink-400 p-1 text-white hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
+            >
+              <NavLink to="/favorite">
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">Favorites</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                  />
+                </svg>
+              </NavLink>
+            </button>
+
+            {/* Profile dropdown */}
+            <Menu as="div" className="relative ml-3">
+              <div>
+                <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-pink-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800">
+                  <span className="absolute -inset-1.5" />
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="h-8 w-8 rounded-full"
+                    src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"
+                    alt="UserProfile"
+                  />
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  {userNavigation.map((item) => (
+                    <Menu.Item key={item.name}>
+                      {({ active }) =>
+                        item.name === 'Sign out' ? (
+                          <button
+                            onClick={() => {
+                              localStorage.removeItem('token');
+                              window.location.href = '/';
+                            }}
+                            className={classNames(
+                              active ? 'bg-pink-100' : '',
+                              'block px-4 py-2 text-sm text-pink-700'
+                            )}
+                          >
+                            {item.name}
+                          </button>
+                        ) : (
+                          <a
+                            href={item.href}
+                            className={classNames(
+                              active ? 'bg-pink-100' : '',
+                              'block px-4 py-2 text-sm text-pink-700'
+                            )}
+                          >
+                            {item.name}
+                          </a>
+                        )
+                        // <a
+                        //   href={item.href}
+                        //   className={classNames(
+                        //     active ? 'bg-pink-100' : '',
+                        //     'block px-4 py-2 text-sm text-pink-700'
+                        //   )}
+                        // >
+                        //   {item.name}
+                        // </a>
+                      }
+                    </Menu.Item>
+                  ))}
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
+        </div>
+      )}
+
       {/* </div> */}
 
       {/* <div className="lg:hidden">
@@ -208,7 +244,6 @@ function Navbar() {
                     </Disclosure.Button>
                   </Menu.Button>
                 </div>
-
                 <Transition
                   as={Fragment}
                   enter="transition ease-out duration-100"
@@ -242,6 +277,7 @@ function Navbar() {
         </Disclosure>
       </div> */}
     </nav>
+    </>
   );
 }
 
