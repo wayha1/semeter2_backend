@@ -18,7 +18,7 @@ import Shop from "./Pages/Shoppage";
 
 function App() {
   return (
-    <Router>
+  
       <Routes>
         <Route
           path="/"
@@ -30,7 +30,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/login" element={<SignIn />} />
+    <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SIgnUp />} />
         <Route
           path="/shop"
@@ -133,7 +133,7 @@ function App() {
           }
         />
       </Routes>
-    </Router>
+    
   );
 }
 
