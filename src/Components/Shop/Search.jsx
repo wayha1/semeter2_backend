@@ -4,14 +4,14 @@ function Search() {
   return (
     <>
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="relative isolate overflow-hidden bg-white px-6 py-20 text-center sm:px-16 sm:shadow-sm">
+        <div className="relative isolate overflow-hidden bg-white px-6 py-20 text-center sm:px-16">
           <p className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-pink-500 sm:text-4xl">
             Didn't find product you were looking for?
           </p>
 
           <form action="/search">
             <label
-              className="mx-auto mt-8 relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-pink-300"
+              className="mx-auto mt-8 relative bg-white min-w-sm max-w-2xl flex flex-col md:flex-row items-center justify-center py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-pink-300"
               for="search-bar"
             >
               <input
@@ -23,7 +23,7 @@ function Search() {
               />
               <button
                 type="submit"
-                className="w-full md:w-auto px-6 py-3 bg-pink-500  text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all"
+                className="w-full md:w-auto px-6 py-3 bg-pink-500  text-white fill-white active:scale-95 duration-100 will-change-transform overflow-hidden relative rounded-xl transition-all"
               >
                 <div className="flex items-center transition-all opacity-1">
                   <span className="text-sm font-semibold whitespace-nowrap truncate mx-auto">
