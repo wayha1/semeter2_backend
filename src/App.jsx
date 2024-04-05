@@ -15,6 +15,7 @@ import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
+import User from "./Dashboard/User";
 
 function App() {
   return (
@@ -67,6 +68,14 @@ function App() {
           element={
             <div>
               <Contact />
+            </div>
+          }
+        />
+        <Route
+          path="/dashboard/users"
+          element={
+            <div>
+              <User/>
             </div>
           }
         />
