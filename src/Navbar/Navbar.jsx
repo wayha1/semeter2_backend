@@ -91,28 +91,28 @@ function Navbar() {
           </NavLink>
         </div>
         <div className="md:block space-x-8">
-          {/* <div
-          className={${open ? 'block' : 'hidden'} flex  md:block space-x-8 }
-        > */}
-          {/* Mapping over menuItems array to display each item */}
-          {navigation.map((item, index) => (
-            <NavLink
-              key={index}
-              to={item.path}
-              onClick={() => handleClick(index)}
-              className={classNames(
-                activeItem === index
-                  ? "w-[90px] text-center text-pink-400"
-                  : "",
-                "px-3 py-2 text-lg font-medium hover:text-pink-500"
-              )}
-              aria-current={item.current ? "page" : undefined}
-            >
-              {item.name}
-            </NavLink>
-          ))}
+          <div
+            className={`${open ? "block" : "hidden"} flex md:block space-x-8`}
+          >
+            {/* Mapping over menuItems array to display each item */}
+            {navigation.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.path}
+                onClick={() => handleClick(index)}
+                className={classNames(
+                  activeItem === index
+                    ? "w-[90px] text-center text-pink-400"
+                    : "",
+                  "px-3 py-2 text-lg font-medium hover:text-pink-500"
+                )}
+                aria-current={item.current ? "page" : undefined}
+              >
+                {item.name}
+              </NavLink>
+            ))}
+          </div>
         </div>
-        {/* </div> */}
         {!localStorage.getItem("token") ? (
           <div className="sign_in_up">
             <NavLink
