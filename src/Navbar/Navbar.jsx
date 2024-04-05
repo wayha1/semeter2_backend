@@ -1,5 +1,5 @@
 import { Menu, Transition } from "@headlessui/react";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "../Components/api/axios";
 import Logo from "../asset/img.png";
@@ -32,8 +32,7 @@ function Navbar() {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/profile", {
-          headers: {
-          },
+          headers: {},
         });
         setData(response.data);
       } catch (error) {
@@ -46,7 +45,7 @@ function Navbar() {
     };
 
     fetchData();
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   const handleClick = (index) => {
@@ -60,12 +59,20 @@ function Navbar() {
         <div className=" items-center space-x-4 mr-6">
           <NavLink to="/">
             <div className="flex justify-between">
-              <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
+              <img
+                className="w-[120px] h-[40px] mt-2 mr-8"
+                src={Logo}
+                alt="Skin.me"
+              />
               <button
                 className="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
                 onClick={() => setOpen(!open)}
               >
-                <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  className="w-6 h-6"
+                >
                   <path
                     style={{ display: !open ? "flex flex-col" : "none" }}
                     fillRule="evenodd"
@@ -94,7 +101,9 @@ function Navbar() {
               to={item.path}
               onClick={() => handleClick(index)}
               className={classNames(
-                activeItem === index ? "w-[90px] text-center text-pink-400" : "",
+                activeItem === index
+                  ? "w-[90px] text-center text-pink-400"
+                  : "",
                 "px-3 py-2 text-lg font-medium hover:text-pink-500"
               )}
               aria-current={item.current ? "page" : undefined}
@@ -106,7 +115,10 @@ function Navbar() {
         {/* </div> */}
         {!localStorage.getItem("token") ? (
           <div className="sign_in_up">
-            <NavLink to="/login" className="text-center text-lg font-medium hover:text-pink-500">
+            <NavLink
+              to="/login"
+              className="text-center text-lg font-medium hover:text-pink-500"
+            >
               Sign In / Up
             </NavLink>
           </div>

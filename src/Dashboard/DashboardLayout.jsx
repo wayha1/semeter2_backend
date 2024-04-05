@@ -155,7 +155,7 @@ const DashboardLayout = ({ children, title }) => {
                 onClick={() => setDropdown(!dropdown)}
                 className="flex justify-between w-full items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600  dark-mode:text-white hover:text-white hover:bg-pink-500  focus:outline-none focus:shadow-outline"
               >
-                <span>Management</span>
+                <span>Orders</span>
                 <svg
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -181,19 +181,19 @@ const DashboardLayout = ({ children, title }) => {
                     className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white hover:text-white dark-mode:text-gray-200 md:mt-0  focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
                     to={"/dashboard/posts"}
                   >
-                    Post
+                    Products
                   </NavLink>
                   <NavLink
                     className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white  dark-mode:text-gray-200 md:mt-0 hover:text-white focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
                     to={"/dashboard/applies"}
                   >
-                    Apply
+                    Categories
                   </NavLink>
                   <NavLink
                     className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white  dark-mode:text-gray-200 md:mt-0 hover:text-white focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
                     to={"/dashboard/inspirations"}
                   >
-                    Inspiration
+                    Order History
                   </NavLink>
                 </div>
               </div>
