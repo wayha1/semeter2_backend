@@ -23,7 +23,9 @@ function UserTable() {
       });
       setUserData(response.data.data);
     } catch (error) {
+      if (error.response && error.response.status === 422) {
       console.error('There was a problem fetching the data:', error);
+      }
     }
   };
 
