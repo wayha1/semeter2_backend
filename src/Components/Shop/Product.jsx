@@ -1,6 +1,6 @@
 import React from "react";
 import Filter from "./FilterSearch";
-
+import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
   // const { image, brand, title, price, oldPrice } = product;
   const products = [
@@ -13,7 +13,6 @@ const ProductCard = ({ product }) => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
       price: 30,
       oldPrice: 45,
     },
@@ -127,7 +126,6 @@ const ProductCard = ({ product }) => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
       price: 30,
       oldPrice: 45,
     },
@@ -140,7 +138,6 @@ const ProductCard = ({ product }) => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
       price: 30,
       oldPrice: 45,
     },
@@ -153,7 +150,6 @@ const ProductCard = ({ product }) => {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
       price: 30,
       oldPrice: 45,
     },
@@ -201,9 +197,12 @@ const ProductCard = ({ product }) => {
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-lg"> ${product.price}</span>
+                  <Link to={`/details/${product.id}`}>
                   <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
                     Buy Now
                   </button>
+                  </Link>
+                  
                 </div>
               </div>
             </div>
