@@ -1,6 +1,6 @@
 import React from "react";
-import Filter from "./FilterSearch";
 import { Link } from "react-router-dom";
+import Filter from "./FilterSearch";
 const ProductCard = ({ product }) => {
   // const { image, brand, title, price, oldPrice } = product;
   const products = [
@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     {
       id: 2,
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaNl1gBkibx27s26ZEkC8B6hPz8R11zV563Q&usqp=CAU",
+        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
       brand: "Mary&May",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
@@ -162,7 +162,10 @@ const ProductCard = ({ product }) => {
         <h1 className="font-bold text-4xl mb-4 text-center pt-10">
           Best Selling Products
         </h1>
-        <p className="text-center pb-10">Find your perfect skincare match by exploring options based on your skin type, preferences, and budget. Research ingredients, read reviews, and trust your instincts to discover the ideal product for your routine. </p>
+        <p className="text-center pb-10">
+          Find your perfect skincare match by exploring options based on your
+          skin type, preferences, and budget.{" "}
+        </p>
         <Filter />
         <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
           {products.map((product) => (
@@ -198,11 +201,10 @@ const ProductCard = ({ product }) => {
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-lg"> ${product.price}</span>
                   <Link to={`/details/${product.id}`}>
-                  <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
-                    Buy Now
-                  </button>
+                    <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
+                      Buy Now
+                    </button>
                   </Link>
-                  
                 </div>
               </div>
             </div>
