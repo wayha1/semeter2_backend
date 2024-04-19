@@ -52,8 +52,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = async (data) => {
+    try {
+      await axios.post("/logout", data);
+      getUser();
+      navigate("/login");
+    } catch (error) { 
+      console.log(error)
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, error, getUser, signin, signup }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, error, getUser, signin, signup, logout }}>{children}</AuthContext.Provider>
   );
 };
 
