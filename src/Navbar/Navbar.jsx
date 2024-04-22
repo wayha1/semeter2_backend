@@ -34,6 +34,7 @@ function Navbar() {
   const handleClick = (index) => {
     setActiveItem(index);
   };
+  console.log(user);
 
   const handleLogout = async () => {
     try {
@@ -74,16 +75,8 @@ function Navbar() {
             ))}
           </div>
         </div>
-        {/* {!localStorage.getItem("token") ? (
-          <div className="sign_in_up">
-            <NavLink
-              to="/login"
-              className="text-center text-lg font-medium hover:text-pink-500"
-            >
-              Sign In / Up
-            </NavLink>
-          </div>
-        ) : ( */}
+       {/* Conditional Rendering based on user login status */}
+      {user ? (
         <div className="hidden md:block">
           <div className="ml-4 flex items-center md:ml-6">
             <button
@@ -197,6 +190,16 @@ function Navbar() {
             </Menu>
           </div>
         </div>
+         ) : (
+          <div className="sign_in_up">
+          <NavLink
+            to="/login"
+            className="text-center text-lg font-medium hover:text-pink-500"
+          >
+            Sign In / Up
+          </NavLink>
+        </div>
+      )}
         {/* )} */}
 
         {/* </div> */}

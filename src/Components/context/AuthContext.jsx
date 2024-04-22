@@ -7,75 +7,114 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
-
-  // const csrf = () => axios.get("sanctum/csrf-cookie");
-
   const navigate = useNavigate();
 
   const getUser = async () => {
     try {
-      const { data } = await axios.get("/user");
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token available");
+      }
+
+      const { data } = await axios.get("/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       setUser(data);
     } catch (error) {
-      if (error.response && error.response.status === 422) {
-        setError(error.response.data.error);
-      } else {
-        setError("Email or password incorrect! Please try again.");
-      }
-      setUser(null);
+      handleAuthError(error);
     }
   };
 
   const signin = async (data) => {
-    // await csrf();
     try {
-      await axios.post("/login", data);
-      getUser();
-      navigate("/");
-    } catch (error) {
-      if (error.response.status === 422) {
-        setError(error.response.data.error);
+      const response = await axios.post("/login", data);
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        await getUser();
+        navigate("/");
       } else {
-        setError("Email or password incorrect! Please try again.");
+        setError("Unexpected error occurred during login.");
       }
+    } catch (error) {
+      handleAuthError(error);
     }
   };
 
   const signup = async (data) => {
     try {
-      await axios.post("/register", data);
-      getUser();
-      navigate("/");
-    } catch (error) {
-      if (error.response && error.response.status === 422) {
-        setError(error.response.data.error);
+      const response = await axios.post("/register", data);
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        await getUser();
+        navigate("/");
       } else {
-        setError("Error signing up! Please try again.");
+        setError("Unexpected error occurred during signup.");
       }
+    } catch (error) {
+      handleAuthError(error);
     }
   };
 
   const logout = async () => {
     try {
-      await axios.post("/logout");
+      const token = localStorage.getItem("token");
+      if (!token) {
+        // No token available, assume the user is already logged out
+        setUser(null);
+        navigate("/login");
+        return;
+      }
+  
+      await axios.post(
+        "/logout",
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // Logout successful, remove token from localStorage and reset user state
+      localStorage.removeItem("token");
       setUser(null);
       navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        // User is not authenticated, so we treat it as a successful logout
+        // Unauthorized, assume the user is already logged out
         setUser(null);
         navigate("/login");
-      } else if (error.response && error.response.status === 422) {
-        setError(error.response.data.error);
       } else {
+        // Other errors, handle as necessary
+        setError("Error logging out. Please try again.");
         console.error("Error logging out:", error);
       }
     }
   };
-  
+   
+
+  const handleAuthError = (error) => {
+    if (error.response) {
+      if (error.response.status === 401) {
+        setError("Unauthorized access. Please log in again.");
+      } else if (error.response.status === 422) {
+        setError(error.response.data.error);
+      } else {
+        setError("Error occurred. Please try again later.");
+      }
+    } else {
+      setError("Network error occurred. Please try again later.");
+    }
+    setUser(null);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, error, getUser, signin, signup, logout }}>
+    <AuthContext.Provider
+      value={{ user, error, getUser, signin, signup, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
