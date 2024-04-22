@@ -38,7 +38,7 @@ function Filter() {
             </a>
             <a
               href="/"
-              class="bg-pink-200 hover:bg-pink-300 py-1 px-2 rounded-lg text-sm"
+              class="bg-red-500 hover:bg-red-600 py-1 px-2 rounded-lg text-sm"
             >
               Toners
             </a>

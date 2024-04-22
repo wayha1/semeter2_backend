@@ -19,7 +19,7 @@ function Shop() {
               <div className="lg:w-1/2 lg:ml-12">
                 <img
                   src="https://imgcdn.femaledaily.com/2020/07/7-BINTANG-DRAMA-KOREA-YANG-JADI-BRAND-AMBASSADOR-PRODUK-KECANTIKAN.jpg"
-                  alt="Tailwind CSS"
+                  alt="beauty"
                   className="rounded-lg shadow-lg hover:shadow-xl transition duration-200"
                 />
               </div>
