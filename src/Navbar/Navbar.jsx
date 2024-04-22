@@ -3,7 +3,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "../Components/api/axios";
 import Logo from "../asset/img.png";
+import useAuthContext from "../Components/context/AuthContext";
 import MobileMenu from "./MobileMenu";
+
 const navigation = [
   { name: "Home", path: "/", current: true },
   { name: "Shop", path: "/shop", current: false },
@@ -24,32 +26,21 @@ function classNames(...classes) {
 
 function Navbar() {
   const [activeItem, setActiveItem] = useState(null);
-  const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  const [open, setOpen] = useState(false);
+  const { user, logout } = useAuthContext();
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/profile", {
-          headers: {},
-        });
-        setData(response.data);
-      } catch (error) {
-        if (error.response && error.response.status === 422) {
-          setError(error.response.data.error);
-        } else {
-          setError("Error fetching data! Please try again.");
-        }
-      }
-    };
-
-    fetchData();
-    console.log(data);
-  }, [data]);
 
   const handleClick = (index) => {
     setActiveItem(index);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout(); 
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -59,19 +50,13 @@ function Navbar() {
         <div className=" items-center space-x-4 mr-6">
           <NavLink to="/">
             <div className="flex ">
-              <img
-                className="w-[120px] h-[40px] mt-2 mr-8"
-                src={Logo}
-                alt="Skin.me"
-              />
+              <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skin.me" />
               <MobileMenu navigation={navigation} />
             </div>
           </NavLink>
         </div>
         <div className="md:block space-x-8">
-          <div
-            className={`${open ? "block" : "hidden"} flex md:block space-x-8`}
-          >
+          <div className={`${open ? "block" : "hidden"} flex md:block space-x-8`}>
             {/* Mapping over menuItems array to display each item */}
             {navigation.map((item, index) => (
               <NavLink
@@ -79,9 +64,7 @@ function Navbar() {
                 to={item.path}
                 onClick={() => handleClick(index)}
                 className={classNames(
-                  activeItem === index
-                    ? "w-[90px] text-center text-pink-400"
-                    : "",
+                  activeItem === index ? "w-[90px] text-center text-pink-400" : "",
                   "px-3 py-2 text-lg font-medium hover:text-pink-500"
                 )}
                 aria-current={item.current ? "page" : undefined}
@@ -178,10 +161,7 @@ function Navbar() {
                         ({ active }) =>
                           item.name === "Sign out" ? (
                             <button
-                              onClick={() => {
-                                // localStorage.removeItem("token");
-                                // window.location.href = "/";
-                              }}
+                              onClick={handleLogout}
                               className={classNames(
                                 active ? "bg-pink-100" : "",
                                 "block px-4 py-2 text-sm text-pink-700"
