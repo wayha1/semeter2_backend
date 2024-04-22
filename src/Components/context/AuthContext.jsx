@@ -67,6 +67,9 @@ export const AuthProvider = ({ children }) => {
         navigate("/login");
         return;
       }
+      
+      // Remove token from localStorage before making the logout request
+      localStorage.removeItem("token");
   
       await axios.post(
         "/logout",
