@@ -158,7 +158,7 @@ const ProductCard = ({ product }) => {
   return (
     <>
       {/* <div className="pt-10 bg-pink-100 pb-10"> */}
-      <div>
+      <div className="w-full">
         <h1 className="font-bold text-4xl mb-4 text-center pt-10 w-full">
           Listing Product
         </h1>
@@ -167,17 +167,17 @@ const ProductCard = ({ product }) => {
           skin type, preferences, and budget.{" "}
         </p>
         <Filter />
-        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-5 md:grid-cols-4 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-5 md:grid-cols-4 justify-items-center justify-center gap-y-15 gap-x-10 lg:gap-y-20 lg:gap-x-14 mt-10 mb-5">
           {products.map((product) => (
             <div
               key={product.id}
-              className="max-sm:w-32 w-72 bg-white  rounded-xl duration-500 "
+              className="max-sm:w-32 md:w-50 lg:w-50 bg-white  rounded-xl duration-500 "
             >
               <div className="relative">
                 <img
                   src={product.image}
                   alt="Product"
-                  className="h-70 w-60 lg:h-100 lg:w-80 object-cover rounded-t-xl"
+                  className="h-70 w-60 xl:h-100 xl:w-80 object-cover rounded-t-xl"
                 />
                 <div className="px-4 py-3 w-72">
                   {/* Conditional rendering of status */}
