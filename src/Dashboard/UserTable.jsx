@@ -11,12 +11,6 @@ function UserTable() {
   const [deleting, setDeletingUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    if (user && user.token) {
-      fetchData(user.token);
-    }
-  }, [user]);
-
   const fetchData = async (token) => {
     try {
       console.log("Fetching data...");
@@ -27,10 +21,22 @@ function UserTable() {
       });
       console.log("Response:", response.data);
       setUserData(response.data.data);
-    }  catch (error) {
+    } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
+  
+  useEffect(() => {
+    if (user && user.token) {
+      fetchData(user.token);
+    }
+  }, [user]);
+  
+  // Add this useEffect to log userData state
+  useEffect(() => {
+    console.log("userData:", userData);
+  }, [userData]);
+  
 
   const handleEdit = (user) => {
     setEditingUser(user);
