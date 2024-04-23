@@ -12,6 +12,7 @@ function Billing() {
                 <div className="flex flex-col items-center pt-10">
                   <img
                     src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"
+                    alt="profile"
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
                   ></img>
                   <h1 className="text-xl font-bold">Mateo</h1>

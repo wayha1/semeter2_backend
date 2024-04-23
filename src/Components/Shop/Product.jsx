@@ -159,25 +159,25 @@ const ProductCard = ({ product }) => {
     <>
       {/* <div className="pt-10 bg-pink-100 pb-10"> */}
       <div>
-        <h1 className="font-bold text-4xl mb-4 text-center pt-10">
-          Best Selling Products
+        <h1 className="font-bold text-4xl mb-4 text-center pt-10 w-full">
+          Listing Product
         </h1>
-        <p className="text-center pb-10">
+        <p className="text-center pb-10 w-full">
           Find your perfect skincare match by exploring options based on your
           skin type, preferences, and budget.{" "}
         </p>
         <Filter />
-        <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-5 md:grid-cols-4 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
           {products.map((product) => (
             <div
               key={product.id}
-              className="w-72 bg-white  rounded-xl duration-500 "
+              className="max-sm:w-32 w-72 bg-white  rounded-xl duration-500 "
             >
               <div className="relative">
                 <img
                   src={product.image}
                   alt="Product"
-                  className="h-100 w-80 object-cover rounded-t-xl"
+                  className="h-70 w-60 lg:h-100 lg:w-80 object-cover rounded-t-xl"
                 />
                 <div className="px-4 py-3 w-72">
                   {/* Conditional rendering of status */}

@@ -12,6 +12,7 @@ function Order() {
                   <img
                     src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
+                    alt="profile"
                   ></img>
                   <h1 className="text-xl font-bold">Mateo</h1>
                   <p className="text-gray-700">General User</p>
