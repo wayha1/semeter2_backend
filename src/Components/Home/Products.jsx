@@ -127,23 +127,23 @@ const ProductCard = ({ product }) => {
           <h1 className="font-bold text-4xl mb-4 py-10">Best Selling Products</h1>
         </div>
         {/* Product Card */}
-        <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-y-20 gap-x-14 pt-10 pb-5 text-center">
+        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-y-20 gap-x-14 pt-10 pb-5 text-center">
           {products.map((product) => (
             <div
               key={product.id}
-              className="w-72  duration-500 hover:scale-105 hover:shadow-xl"
+              className="max-sm:w-36 max-sm:h-50 lg:w-72  duration-500 hover:scale-105 hover:shadow-xl"
             >
               <a href="#">
                 <img
                   src={product.image}
                   alt="Product"
-                  className="h-80 w-72 object-cover "
+                  className="max-sm:w-30 max-sm:h-50 lg:h-80 lg:w-72 object-cover "
                 />
-                <div className="px-4 py-3 w-72">
-                  <span className="text-gray-400 mr-3 uppercase text-xs">
+                <div className="px-4 py-3 max-sm:w-36 lg:w-72">
+                  <span className="text-gray-400 mr-3 uppercase lg:text-xs">
                     {product.brand}
                   </span>
-                  <p className="text-lg font-bold text-black text-center">
+                  <p className="text-lg font-bold max-sm:text-xs text-black text-center">
                     {product.name}
                   </p>
                   <div className="flex justify-center items-center">

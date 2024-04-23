@@ -13,8 +13,17 @@ function UserTable() {
 
   const fetchData = async (token) => {
     try {
+<<<<<<< HEAD
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token available");
+      }
+      
+      const response = await axios.get("/profile", {
+=======
       console.log("Fetching data...");
       const response = await axios.get("http://127.0.0.1:8000/api/profile", {
+>>>>>>> b97abd1bbe3471398ac9f21cd72f282413896287
         headers: {
           Authorization: `Bearer ${token}`,
         },
