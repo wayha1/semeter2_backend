@@ -16,6 +16,8 @@ import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
+import DashboardCategory from "./Dashboard/DashboardCategory";
+import AddCategory from "./Dashboard/AddCategory";
 // import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
   return (
@@ -65,6 +67,22 @@ function App() {
         }
       />
 
+      <Route
+        path="/dashboard/dashboardCategory"
+        element={
+          <div>
+            <DashboardCategory/>
+          </div>
+        }
+      />
+      <Route
+        path="/dashboard/dashboardCategory/AddCategory"
+        element={
+          <div>
+            <AddCategory/>
+          </div>
+        }
+      />
       <Route
         path="/dashboard/contacts"
         element={

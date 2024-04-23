@@ -11,14 +11,13 @@ function UserTable() {
   const [deleting, setDeletingUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    if (user && user.token) {
-      fetchData(user.token);
-    }
-  }, [user]);
-
   const fetchData = async (token) => {
     try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token available");
+      }
+      
       console.log("Fetching data...");
       const response = await axios.get("http://127.0.0.1:8000/api/profile", {
         headers: {
@@ -27,10 +26,23 @@ function UserTable() {
       });
       console.log("Response:", response.data);
       setUserData(response.data.data);
-    }  catch (error) {
+    } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
+  
+  
+  useEffect(() => {
+    if (user && user.token) {
+      fetchData(user.token);
+    }
+  }, [user]);
+  
+  // Add this useEffect to log userData state
+  useEffect(() => {
+    console.log("userData:", userData);
+  }, [userData]);
+  
 
   const handleEdit = (user) => {
     setEditingUser(user);
