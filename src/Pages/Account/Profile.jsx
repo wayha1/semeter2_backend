@@ -1,6 +1,27 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "../../Components/api/axios";
 function Profile() {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("/api/category", {
+          headers: {
+            Authorization: `Bearer ${"4|JLs14bdtCze4DYW7oQqBhDPZ5pqWzVvNd2rZWnBSc73cd9bb"}`,
+          },
+        });
+        setUserData(response.data);
+        console.log(userData);
+      } catch (error) {
+        setError("Error fetching user data");
+        console.error("Fetch User Data Error:", error);
+      }
+    };
+
+    fetchUserData();
+  });
   return (
     <>
       <div className="bg-[#F7EFF2] h-screen w-full">
@@ -11,25 +32,33 @@ function Profile() {
                 <div className="flex flex-col items-center pt-10">
                   <img
                     src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"
+                    alt="profile"
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
                   ></img>
                   <h1 className="text-xl font-bold">Mateo</h1>
                   <p className="text-gray-700">General User</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
-                      href="#"
+                      href="/login"
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                     >
                       Sign Out
                     </a>
                     <a
-                      href="#"
+                      href="/"
                       className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
                     >
                       Edit Profile
                     </a>
                   </div>
                 </div>
+                {error && <p>Error: {error}</p>}
+                {userData && (
+                  <div className="bg-[/F7EFF2] h-auto w-full">
+                    {/* Your existing JSX code here */}
+                    {/* You can use `userData` to render user information */}
+                  </div>
+                )}
                 <hr className="my-6" />
                 <div className="flex flex-col">
                   <span className="text-gray-800 uppercase font-bold tracking-wider mb-2 text-center hover:text-pink-400">
@@ -58,7 +87,7 @@ function Profile() {
                 </p>
                 <div className="grid gap-4 md:grid-cols-2 lg:gap-6 pt-10 ">
                   <a
-                    href="#"
+                    href="/"
                     className="flex flex-col justify-between bg-white border border-indigo-100 rounded-xl shadow hover:shadow-xl p-5"
                   >
                     <div>
@@ -89,7 +118,7 @@ function Profile() {
                     </div>
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="flex flex-col justify-between bg-white border border-indigo-100 rounded-xl shadow hover:shadow-xl p-5"
                   >
                     <div>
@@ -120,7 +149,7 @@ function Profile() {
                     </div>
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="flex flex-col justify-between bg-white border border-indigo-100 rounded-xl shadow hover:shadow-xl p-5"
                   >
                     <div>
@@ -151,7 +180,7 @@ function Profile() {
                     </div>
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="flex flex-col justify-between bg-white border border-indigo-100 rounded-xl shadow hover:shadow-xl p-5"
                   >
                     <div>
@@ -187,7 +216,7 @@ function Profile() {
                     </div>
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="flex flex-col justify-between bg-white border border-indigo-100 rounded-xl shadow hover:shadow-xl p-5"
                   >
                     <div>

@@ -18,13 +18,13 @@ function Billing() {
                   <p className="text-gray-700">General User</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
-                      href="#"
+                      href="/login"
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                     >
                       Sign Out
                     </a>
                     <a
-                      href="#"
+                      href="/"
                       className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
                     >
                       Edit Profile

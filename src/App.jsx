@@ -5,7 +5,6 @@ import SIgnUp from "./Components/Auth/SignUp/SIgnUp";
 import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
-import Setting from "./Components/Profile/Setting";
 import ProductDetails from "./Components/Shop/ProductDetails";
 import Contact from "./Dashboard/Contact";
 import Dashboard from "./Dashboard/DashboardLayout";
@@ -65,6 +64,7 @@ function App() {
           </div>
         }
       />
+
       <Route
         path="/dashboard/contacts"
         element={
@@ -86,15 +86,6 @@ function App() {
         element={
           <div>
             <Dashboard />
-          </div>
-        }
-      />
-      <Route
-        path="/setting"
-        element={
-          <div>
-            <Navbar />
-            <Setting />
           </div>
         }
       />

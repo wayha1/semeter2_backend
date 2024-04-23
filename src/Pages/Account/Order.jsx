@@ -17,13 +17,13 @@ function Order() {
                   <p className="text-gray-700">General User</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a
-                      href="#"
+                      href="/login"
                       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                     >
                       Sign Out
                     </a>
                     <a
-                      href="#"
+                      href="/"
                       className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
                     >
                       Edit Profile
@@ -103,7 +103,7 @@ function Order() {
                         viewBox="0,0,256,256"
                       >
                         <g
-                          fill="#29d800"
+                          fill="/29d800"
                           fill-rule="nonzero"
                           stroke="none"
                           stroke-width="1"
@@ -164,7 +164,7 @@ function Order() {
                         viewBox="0,0,256,256"
                       >
                         <g
-                          fill="#29d800"
+                          fill="/29d800"
                           fill-rule="nonzero"
                           stroke="none"
                           stroke-width="1"
@@ -225,7 +225,7 @@ function Order() {
                         viewBox="0,0,256,256"
                       >
                         <g
-                          fill="#29d800"
+                          fill="/29d800"
                           fill-rule="nonzero"
                           stroke="none"
                           stroke-width="1"
@@ -286,7 +286,7 @@ function Order() {
                         viewBox="0,0,256,256"
                       >
                         <g
-                          fill="#29d800"
+                          fill="/29d800"
                           fill-rule="nonzero"
                           stroke="none"
                           stroke-width="1"
@@ -335,7 +335,7 @@ function Order() {
                 <nav class="inline-flex items-center p-1 rounded bg-white space-x-2">
                   <a
                     class="p-1 rounded border text-black bg-white hover:text-white hover:bg-pink-600 hover:border-pink-600"
-                    href="#"
+                    href="/"
                   >
                     <svg
                       class="w-5 h-5"
@@ -352,7 +352,7 @@ function Order() {
                   <p class="text-gray-500">Page 1 of 10</p>
                   <a
                     class="p-1 rounded border text-black bg-white hover:text-white hover:bg-pink-600 hover:border-pink-600"
-                    href="#"
+                    href="/"
                   >
                     <svg
                       class="w-5 h-5"

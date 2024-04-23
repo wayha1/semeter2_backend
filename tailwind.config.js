@@ -3,6 +3,7 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      
       animation:{
         "loop-scroll": "loop-scroll 10s linear infinite", 
       },
