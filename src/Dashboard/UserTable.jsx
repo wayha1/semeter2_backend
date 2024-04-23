@@ -2,34 +2,42 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ModelEdit from "./ModelEdit";
 import ModalDelete from "./ModalDelete";
+import useAuthContext from "./../Components/context/AuthContext"; // Import the useAuthContext hook
 
 function UserTable() {
+  const { user } = useAuthContext(); 
   const [userData, setUserData] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [deleting, setDeletingUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (user && user.token) {
+      fetchData(user.token);
+    }
+  }, [user]);
 
-  const fetchData = async () => {
+  const fetchData = async (token) => {
     try {
+<<<<<<< HEAD
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token available");
       }
       
       const response = await axios.get("/profile", {
+=======
+      console.log("Fetching data...");
+      const response = await axios.get("http://127.0.0.1:8000/api/profile", {
+>>>>>>> b97abd1bbe3471398ac9f21cd72f282413896287
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("Response:", response.data);
       setUserData(response.data.data);
-    } catch (error) {
-      if (error.response && error.response.status === 422) {
-        console.error("There was a problem fetching the data:", error);
-      }
+    }  catch (error) {
+      console.error("Error fetching user data:", error);
     }
   };
 
@@ -38,7 +46,6 @@ function UserTable() {
     setIsModalOpen(true);
   };
 
-  // Function to handle opening the modal and setting the editing user
   const handleDelete = (user) => {
     setDeletingUser(user);
     setIsModalOpen(true);
@@ -47,6 +54,7 @@ function UserTable() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditingUser(null);
+    setDeletingUser(null);
   };
 
   return (
