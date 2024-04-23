@@ -21,7 +21,6 @@ function ModelEdit({ handleCloseModal }) {
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Edit User</h3>
             <div className="mt-2">
-              {/* Content of the modal */}
             </div>
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
