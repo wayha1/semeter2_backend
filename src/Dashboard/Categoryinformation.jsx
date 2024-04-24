@@ -6,37 +6,50 @@ import ShowCategory from "./ShowCategory";
 function Categoryinformation() {
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [showShowCategory, setShowShowCategory] = useState(false);
+  const [activeButton, setActiveButton] = useState(null);
 
   const toggleAddCategory = () => {
-    setShowAddCategory(!showAddCategory);
+    setShowAddCategory(true); // Always set to true when clicked
     setShowShowCategory(false); // Ensure only one page is shown at a time
+    setActiveButton("add");
   };
 
   const toggleShowCategory = () => {
-    setShowShowCategory(!showShowCategory);
+    setShowShowCategory(true);
     setShowAddCategory(false); // Ensure only one page is shown at a time
+    setActiveButton("show");
   };
 
   return (
-    <div className="m-10 flex justify-center">
-      <div className="mr-5 mb-10" style={{ width: "200px" }}>
-        <Button onClick={toggleAddCategory} className="bg-green-600 w-full">
+    <div className=" flex justify-center bg-white h-[60px] p-2">
+      <div className="mr-5 mb-10" style={{ width: "400px" }}>
+        <Button
+          onClick={toggleAddCategory}
+          className={`w-full ${
+            activeButton === "add" ? "bg-green-600" : "bg-green-400"
+          }`}
+        >
           Add To Category
         </Button>
         {/* Conditionally render the Add Category page */}
         {showAddCategory && (
-          <div className="mt-10">
+          <div className="mt-10" style={{ position: "relative", transform: "translateX(-10%)" }}>
             <AddCategory />
           </div>
         )}
       </div>
-      <div className="mb-10" style={{ width: "200px" }}>
-        <Button onClick={toggleShowCategory} className="bg-red-500 w-full">
+      <div className="mb-10" style={{ width: "400px" }}>
+        <Button
+          onClick={toggleShowCategory}
+          className={`w-full ${
+            activeButton === "show" ? "bg-red-500" : "bg-red-400"
+          }`}
+        >
           Show Category
         </Button>
         {/* Conditionally render the Show Category page */}
         {showShowCategory && (
-          <div className="mt-10">
+          <div className="mt-10" style={{ position: "relative", transform: "translateX(-120%)" }}>
             <ShowCategory />
           </div>
         )}
