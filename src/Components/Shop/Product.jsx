@@ -159,10 +159,10 @@ const ProductCard = ({ product }) => {
     <>
       {/* <div className="pt-10 bg-pink-100 pb-10"> */}
       <div className="w-full">
-        <h1 className="font-bold text-4xl mb-4 text-center pt-10 w-full">
+        <h1 className="font-bold text-4xl mb-4 flex items-center justify-center pt-10 w-full">
           Listing Product
         </h1>
-        <p className="text-center pb-10 w-full">
+        <p className="flex items-center justify-center pb-10 w-full">
           Find your perfect skincare match by exploring options based on your
           skin type, preferences, and budget.{" "}
         </p>
@@ -195,14 +195,14 @@ const ProductCard = ({ product }) => {
                 </div>
               </div>
               <div className="px-4">
-                <h3 className="text-lg max-sm:text-sm font-medium mb-2">
+                <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
                   {product.brand}
                 </h3>
                 <p className="text-gray-600 line-clamp-3 text-xs md:text-sm mb-4">
                   {product.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-lg max-sm:text-sm ">
+                  <span className="font-bold md:text-lg text-xs max-sm:text-sm ">
                     {" "}
                     ${product.price}
                   </span>
@@ -225,7 +225,7 @@ const ProductCard = ({ product }) => {
         <li>
           <a
             href="/?page=1"
-            className="inline-flex items-center justify-center w-10 h-10 border border-gray-100 rounded"
+            className="inline-flex items-center justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -245,20 +245,20 @@ const ProductCard = ({ product }) => {
         <li>
           <a
             href="/?page=1"
-            className="block w-10 h-10 text-center text-lg border border-gray-100 rounded leading-8"
+            className=" w-5 h-5 md:w-10 md:h-10 flex items-center justify-center md:text-lg text-xs border border-gray-100 rounded leading-8"
           >
             1
           </a>
         </li>
 
-        <li className="block w-10 h-10 text-center text-lg text-white bg-pink-400 border-pink-600 rounded leading-8">
+        <li className=" w-5 h-5 md:w-10 md:h-10 flex items-center justify-center md:text-lg text-xs text-white bg-pink-400 border-pink-600 rounded leading-8">
           2
         </li>
 
         <li>
           <a
             href="/?page=3"
-            className="block w-10 h-10 text-center text-lg border border-gray-100 rounded leading-8"
+            className=" w-5 h-5 md:w-10 md:h-10 flex items-center justify-center md:text-lg text-xs border border-gray-100 rounded leading-8"
           >
             3
           </a>
@@ -267,7 +267,7 @@ const ProductCard = ({ product }) => {
         <li>
           <a
             href="/?page=4"
-            className="block w-10 h-10 text-center  text-lg border border-gray-100 rounded leading-8"
+            className=" w-5 h-5 md:w-10 md:h-10 flex items-center justify-center  md:text-lg text-xs border border-gray-100 rounded leading-8"
           >
             4
           </a>
@@ -276,7 +276,7 @@ const ProductCard = ({ product }) => {
         <li>
           <a
             href="/?page=3"
-            className="inline-flex items-center text-lg justify-center w-10 h-10 border border-gray-100 rounded"
+            className="inline-flex items-center md:text-lg text-xs justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

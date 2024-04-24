@@ -62,9 +62,9 @@ function Navbar() {
 
   return (
     <>
-      <nav className="bg-white sticky top-0 lg:flex lg:justify-between lg:items-center ">
+      <nav className="bg-white sticky  lg:flex lg:justify-between lg:items-center ">
         {/* Regular Desktop Menu */}
-        <div className=" items-center space-x-4 p-5">
+        <div className="items-center space-x-4 p-5">
           <NavLink to="/">
             <div className="max-sm:flex max-sm:items-center max-sm:justify-between ">
               <img
