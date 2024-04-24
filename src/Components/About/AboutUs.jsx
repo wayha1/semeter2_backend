@@ -1,8 +1,9 @@
 import React from "react";
+import OurTeam from "./OurTeam";
 
 function AboutUs() {
   return (
-    <div className="min-h-screen bg-[#F7EFF2] w-full">
+    <div className="min-h-screen bg-pink-100 w-full">
       <div class="sm:flex items-center max-w-screen-xl">
         <div class="sm:w-1/2 p-10">
           <div class="image object-center text-center">
@@ -118,6 +119,7 @@ function AboutUs() {
           </div>
         </div>
       </section>
+      <OurTeam/>
     </div>
   );
 }

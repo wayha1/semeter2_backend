@@ -167,41 +167,47 @@ const ProductCard = ({ product }) => {
           skin type, preferences, and budget.{" "}
         </p>
         <Filter />
-        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-5 md:grid-cols-4 justify-items-center justify-center gap-y-15 gap-x-10 lg:gap-y-20 lg:gap-x-14 mt-10 mb-5">
+        {/* Product card */}
+        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 justify-center gap-y-20 gap-x-14 pt-10 pb-5">
           {products.map((product) => (
             <div
               key={product.id}
-              className="max-sm:w-32 md:w-50 lg:w-50 bg-white  rounded-xl duration-500 "
+              className="max-sm:w-36 max-sm:h-50 lg:w-72  duration-500"
             >
               <div className="relative">
                 <img
                   src={product.image}
                   alt="Product"
-                  className="h-70 w-60 xl:h-100 xl:w-80 object-cover rounded-t-xl"
+                  className="max-sm:w-30 max-sm:h-50 lg:h-80 lg:w-72 object-cover rounded-t-xl"
                 />
-                <div className="px-4 py-3 w-72">
+                <div className="px-4 pt-3 w-72">
                   {/* Conditional rendering of status */}
                   {product.status === "SALE" && (
-                    <div className="absolute top-0 left-0 bg-green-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                    <div className="absolute top-0 left-0 bg-green-600 text-white px-2 py-1 m-3 rounded-md text-sm font-medium">
                       {product.status}
                     </div>
                   )}
                   {product.status === "SOLD" && (
-                    <div className="absolute top-0 left-0 bg-red-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                    <div className="absolute top-0 left-0 bg-red-600 text-white px-2 py-1 m-3 rounded-md text-sm font-medium">
                       {product.status}
                     </div>
                   )}
                 </div>
               </div>
-              <div className="p-4">
-                <h3 className="text-lg font-medium mb-2">{product.brand}</h3>
-                <p className="text-gray-600 text-sm mb-4">
+              <div className="px-4">
+                <h3 className="text-lg max-sm:text-sm font-medium mb-2">
+                  {product.brand}
+                </h3>
+                <p className="text-gray-600 line-clamp-3 text-xs md:text-sm mb-4">
                   {product.description}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-lg"> ${product.price}</span>
+                  <span className="font-bold text-lg max-sm:text-sm ">
+                    {" "}
+                    ${product.price}
+                  </span>
                   <Link to={`/details/${product.id}`}>
-                    <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">
+                    <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded">
                       Buy Now
                     </button>
                   </Link>

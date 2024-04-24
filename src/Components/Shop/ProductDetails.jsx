@@ -1,5 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { CgArrowLeftO } from "react-icons/cg";
+import { Link, useParams } from "react-router-dom";
 function ProductDetails() {
   const { id } = useParams();
   console.log(id);
@@ -43,6 +44,8 @@ function ProductDetails() {
       status: "SOLD",
       price: 30,
       oldPrice: 45,
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 4,
@@ -55,6 +58,8 @@ function ProductDetails() {
       status: "SALE",
       price: 30,
       oldPrice: 45,
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 5,
@@ -65,7 +70,8 @@ function ProductDetails() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       price: 30,
       oldPrice: 45,
     },
@@ -91,7 +97,8 @@ function ProductDetails() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       price: 30,
       oldPrice: 45,
     },
@@ -104,7 +111,8 @@ function ProductDetails() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       price: 30,
       oldPrice: 45,
     },
@@ -117,7 +125,8 @@ function ProductDetails() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
       title: "Product Title 1",
       status: "SALE",
-
+      productdescriptions:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       price: 30,
       oldPrice: 45,
     },
@@ -166,7 +175,7 @@ function ProductDetails() {
   ];
   return (
     <>
-      <div className="bg-gray-100 dark:bg-gray-800 py-8">
+      <div className="py-8 bg-pink-100">
         {products.map((detail) => (
           <div
             key={detail.id}
@@ -174,30 +183,34 @@ function ProductDetails() {
           >
             {id == detail.id && (
               <div className="flex flex-col md:flex-row -mx-4">
+                <div>
+                  <Link to="/shop">
+                    <CgArrowLeftO size={32} />
+                  </Link>
+                </div>
                 <div className="md:flex-1 px-4">
-                  <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+                  <div className="h-[460px] px-8 pb-8">
                     <img
                       className="w-full h-full object-cover"
                       src={detail.image}
                       alt=""
                     />
                   </div>
-                  <div className="flex -mx-2 mb-4">
-                    {" "}
-                    <div className="w-1/2 px-2">
-                      <button className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 px-4 rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700">
+                  <div className="flex mb-4">
+                    <div className="w-1/2 pr-2">
+                      <button className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700">
                         Add to Cart
                       </button>
                     </div>
-                    <div className="w-1/2 px-2">
-                      <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">
+                    <div className="w-1/2 ">
+                      <button className="w-full bg-sky-100 dark:bg-gray-700 text-pink-500 dark:text-white py-2  rounded-full font-bold hover:bg-pink-500 hover:text-white dark:hover:bg-gray-600">
                         Add to Favorite
                       </button>
                     </div>
                   </div>
                 </div>
                 <div className="md:flex-1 px-4">
-                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                  <h2 className="text-2xl font-bold  dark:text-white mb-2">
                     {detail.brand}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
@@ -205,20 +218,40 @@ function ProductDetails() {
                   </p>
                   <div className="flex mb-4">
                     <div className="mr-4">
-                      <span className="font-bold text-gray-700 dark:text-gray-300">
+                      <span className="font-bold  dark:text-gray-300">
                         Price:
                       </span>
-                      <span className="text-gray-600 dark:text-gray-300">
+                      <span className=" dark:text-gray-300">
+                        {" "}
                         {detail.price}
                       </span>
                     </div>
-                    <div>
+                    <div className="flex space-x-1">
                       <span className="font-bold text-gray-700 dark:text-gray-300">
                         Availability:
                       </span>
-                      <span className="text-gray-600 dark:text-gray-300">
-                        {detail.status}
+                      <span className="text-green  dark:text-gray-300">
+                        {detail.status === "SALE" && (
+                          <div className="text-green-500 font-bold ">
+                            {detail.status}
+                          </div>
+                        )}
+                        {detail.status === "SOLD" && (
+                          <div className="text-red-500 font-bold ">
+                            {detail.status}
+                          </div>
+                        )}
                       </span>
+                      {/* {product.status === "SALE" && (
+                    <div className="absolute top-0 left-0 bg-green-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                      {product.status}
+                    </div>
+                  )}
+                  {product.status === "SOLD" && (
+                    <div className="absolute top-0 left-0 bg-red-600 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                      {product.status}
+                    </div>
+                  )} */}
                     </div>
                   </div>
                   <div>

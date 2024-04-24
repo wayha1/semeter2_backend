@@ -123,17 +123,23 @@ const ProductCard = ({ product }) => {
   return (
     <>
       <div className="bg-white pb-10">
-        <div className="text-center ">
-          <h1 className="font-bold text-4xl mb-4 py-10">Best Selling Products</h1>
+        <div className="text-center">
+          <h1 className="font-bold text-4xl pt-10">Best Selling Products</h1>
+          <a
+            href="/shop"
+            className="flex justify-end max-sm:pr-8 pt-10 pr-24 text-lg text-gray-600 hover:font-bold hover:text-pink-400 "
+          >
+            See All
+          </a>
         </div>
         {/* Product Card */}
-        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-y-20 gap-x-14 pt-10 pb-5 text-center">
+        <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 items-center justify-center gap-y-20 gap-x-14 pt-5 md:pt-10 pb-5 text-center">
           {products.map((product) => (
             <div
               key={product.id}
               className="max-sm:w-36 max-sm:h-50 lg:w-72  duration-500 hover:scale-105 hover:shadow-xl"
             >
-              <a href="#">
+              <a href="/">
                 <img
                   src={product.image}
                   alt="Product"
@@ -191,45 +197,20 @@ const ProductCard = ({ product }) => {
                       <path d="M239.2 97.4A16.4 16.4.0 00224.6 86l-59.4-4.1-22-55.5A16.4 16.4.0 00128 16h0a16.4 16.4.0 00-15.2 10.4L90.4 82.2 31.4 86A16.5 16.5.0 0016.8 97.4 16.8 16.8.0 0022 115.5l45.4 38.4L53.9 207a18.5 18.5.0 007 19.6 18 18 0 0020.1.6l46.9-29.7h.2l50.5 31.9a16.1 16.1.0 008.7 2.6 16.5 16.5.0 0015.8-20.8l-14.3-58.1L234 115.5A16.8 16.8.0 00239.2 97.4z"></path>
                     </svg>
                   </div>
-                  {/* <div className="ml-auto">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        fill="currentColor"
-                        className="bi bi-bag-plus"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"
-                        />
-                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                      </svg>
-                    </div> */}
                 </div>
               </a>
             </div>
           ))}
         </div>
-        <div class="text-center py-10 px-10">
+        {/* <div class="text-center py-10 px-10">
           <h2 class="font-bold text-2xl md:text-4xl mb-4">
             <a href="#" class="underline text-pink-400 hover:text-pink-500">
               View All Products
             </a>
           </h2>
-        </div>
+        </div> */}
       </div>
     </>
   );
 };
-// const ProductList = () => {
-//   return (
-//     <div className="product-container">
-//       {products.map((product) => (
-//         <ProductCard key={product.id} product={product} />
-//       ))}
-//     </div>
-//   );
-// };
 export default ProductCard;
