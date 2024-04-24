@@ -8,7 +8,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirm] = useState("");
-  const { signup, error } = useAuthContext();
+  const { signup } = useAuthContext();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
