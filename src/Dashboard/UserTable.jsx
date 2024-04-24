@@ -1,71 +1,68 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../Components/api/axios";
 import ModelEdit from "./ModelEdit";
 import ModalDelete from "./ModalDelete";
 import useAuthContext from "./../Components/context/AuthContext"; // Import the useAuthContext hook
 
 function UserTable() {
-  const { user } = useAuthContext(); 
+  // const { user } = useAuthContext();
   const [userData, setUserData] = useState([]);
   const [editingUser, setEditingUser] = useState(null);
   const [deleting, setDeletingUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete modal
 
-  const fetchData = async (token) => {
+  const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token available");
-      }
-      
       console.log("Fetching data...");
-      const response = await axios.get("http://127.0.0.1:8000/api/profile", {
+      const response = await axios.request({
+        url: "/profile",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Response:", response.data);
+      // console.log("Response:", response.data);
       setUserData(response.data.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
+      setUserData([]);
     }
   };
-  
-  
+
+  console.log("userData:", userData);
+
   useEffect(() => {
-    if (user && user.token) {
-      fetchData(user.token);
-    }
-  }, [user]);
-  
-  // Add this useEffect to log userData state
-  useEffect(() => {
-    console.log("userData:", userData);
-  }, [userData]);
-  
+    fetchData();
+  }, []);
 
   const handleEdit = (user) => {
     setEditingUser(user);
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   };
 
   const handleDelete = (user) => {
     setDeletingUser(user);
-    setIsModalOpen(true);
+    setIsDeleteModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
     setEditingUser(null);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
     setDeletingUser(null);
   };
 
   return (
-    <div className="container mx-auto w-full dark:bg-gray-800 dark:border-gray-700">
-      <h1 className="text-xl font-bold mb-4 text-white p-2 text-center">Users Information</h1>
+    <div className="container mx-auto w-full dark:bg-black-900 dark:border-black-700">
+      <h1 className="text-xl font-bold mb-4 text-black p-2 text-center">Users Information</h1>
       <table className="table-auto w-full border-collapse border border-gray-500">
         <thead>
-          <tr className="bg-gray-200">
+          <tr className="bg-blue-300">
             <th className="border border-gray-700 p-2">ID</th>
             <th className="border border-gray-700 p-2">Name</th>
             <th className="border border-gray-700 p-2">Email</th>
@@ -83,31 +80,30 @@ function UserTable() {
           </tr>
         </thead>
         <tbody className="p-2 text-center text-black">
-          {userData.map((user) => (
-            <tr key={user.id}>
-              <td className="border border-gray-500 p-2 ">{user.id}</td>
-              <td className="border border-gray-500 p-2">{user.name}</td>
-              <td className="border border-gray-500 p-2">{user.email}</td>
-              <td className="border border-gray-500 p-2">{user.email_verified_at || "null"}</td>
-              <td className="border border-gray-500 p-2">{user.google_id || "null"}</td>
-              <td className="border border-gray-500 p-2">{user.gender}</td>
-              <td className="border border-gray-500 p-2">{user.is_active}</td>
-              <td className="border border-gray-500 p-2">{user.user_image || "null"}</td>
-              <td className="border border-gray-500 p-2">{user.phone_number || "null"}</td>
-              <td className="border border-gray-500 p-2">{user.user_address || "null"}</td>
-              <td className="border border-gray-500 p-2">{user.status}</td>
-              <td className="border border-gray-500 p-2">{user.created_at}</td>
-              <td className="border border-gray-500 p-2">{user.updated_at}</td>
-              <td className="border border-gray-500 p-2">
+          {userData.map((data) => (
+            <tr key={data.id}>
+              <td className="border border-gray-500 p-2">{data.id}</td>
+              <td className="border border-gray-500 p-2">{data.name}</td>
+              <td className="border border-gray-500 p-2">{data.email}</td>
+              <td className="border border-gray-500 p-2">{data.email_verified_at || "null"}</td>
+              <td className="border border-gray-500 p-2">{data.google_id || "null"}</td>
+              <td className="border border-gray-500 p-2">{data.gender}</td>
+              <td className="border border-gray-500 p-2">{data.is_active}</td>
+              <td className="border border-gray-500 p-2">{data.user_image || "null"}</td>
+              <td className="border border-gray-500 p-2">{data.phone_number || "null"}</td>
+              <td className="border border-gray-500 p-2">{data.user_address || "null"}</td>
+              <td className="border border-gray-500 p-2">{data.status}</td>
+              <td className="border border-gray-500 p-2">{data.created_at}</td>
+              <td className="border border-gray-500 p-2">{data.updated_at}</td>
+              <td className="border border-gray-500 p-2 flex">
                 <button
-                  onClick={() => handleEdit(user)}
+                  onClick={() => handleEdit(data)}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mr-2"
                 >
                   Edit
                 </button>
-                {/* Delete button */}
                 <button
-                  onClick={() => handleDelete(user)}
+                  onClick={() => handleDelete(data)}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded"
                 >
                   Delete
@@ -118,9 +114,10 @@ function UserTable() {
         </tbody>
       </table>
       {/* ModelEdit component */}
-      {isModalOpen && <ModelEdit user={editingUser} handleCloseModal={handleCloseModal} />}
+      {isEditModalOpen && <ModelEdit user={editingUser} handleCloseModal={handleCloseEditModal} />}
 
-      {isModalOpen && <ModalDelete user={deleting} handleCloseModal={handleCloseModal} />}
+      {/* ModalDelete component */}
+      {isDeleteModalOpen && <ModalDelete user={deleting} handleCloseModal={handleCloseDeleteModal} />}
     </div>
   );
 }

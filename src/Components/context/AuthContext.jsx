@@ -98,7 +98,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
    
-
   const handleAuthError = (error) => {
     if (error.response) {
       if (error.response.status === 401) {
