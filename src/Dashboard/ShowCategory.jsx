@@ -28,11 +28,14 @@ function ShowCategory() {
   }, []);
 
   return (
-    <div className="p-10 w-[850px] h-[500px] ">
+    <div className="p-10 w-[850px]">
       <h2 className="text-xl font-bold mb-4">Category Information</h2>
-      <div className="flex flex-col">
+      <div className="overflow-y-auto max-h-[870px]">
         {categoryData.map((category) => (
-          <div key={category.id} className="flex items-center border border-gray-300 bg-white p-10 mb-6">
+          <div
+            key={category.id}
+            className="flex items-center border border-gray-300 bg-white p-10 mb-6 h-[180px]"
+          >
             <div className="mr-10">
               {/* Left side with category_icon */}
               <img
@@ -51,14 +54,10 @@ function ShowCategory() {
               </div>
             </div>
             <div className="flex space-x-4 ml-auto">
-              <button className="bg-blue-500 hover:bg-blue-700 
-              text-white font-bold py-2 px-2 rounded-xl w-[90px]
-              active:bg-blue-400">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-xl w-[90px] active:bg-blue-400">
                 Edit
               </button>
-              <button className="bg-red-500 hover:bg-red-700 
-              text-white font-bold py-2 px-2 rounded-xl w-[90px]
-              active:bg-red-400">
+              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded-xl w-[90px] active:bg-red-400">
                 Delete
               </button>
             </div>

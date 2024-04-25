@@ -65,7 +65,13 @@ const DashboardLayout = ({ children, title }) => {
             } flex-grow md:block px-4 overflow-auto pb-4 md:pb-0 md:overflow-y-auto`}
           >
             <NavLink
-              className="flex justify-between items-center px-4 py-2 mt-4 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              className="flex justify-between items-center px-4 py-2 mt-4 text-lg text-gray-900 font-semibold 
+              hover:text-white bg-transparent rounded-lg 
+              dark-mode:bg-transparent dark-mode:hover:bg-blue-600 
+              dark-mode:focus:bg-blue-600 dark-mode:focus:text-white 
+              dark-mode:hover:text-white dark-mode:text-white 
+              focus:text-white hover:bg-pink-500 z-30
+              focus:bg-pink-500 focus:outline-none focus:shadow-outline"
               to={"/dashboard/dashboardCategory"}
             >
               Dashboard
