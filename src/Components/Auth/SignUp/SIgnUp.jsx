@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Loading from "../../Loading/Loading"; // Import the Loading component
 import useAuthContext from "../../context/AuthContext";
 
 export default function SignUp() {
@@ -8,7 +9,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirm] = useState("");
-  const { signup } = useAuthContext();
+  const { signup, loading } = useAuthContext(); // Get loading state from useAuthContext
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +25,9 @@ export default function SignUp() {
     <div className="min-h-screen bg-[#F7EFF2] w-full">
       <div className="flex flex-col w-full h-screen items-center justify-center">
         <p className="text-7xl text-blue-800 font-bold font-abc">skin.me</p>
-        <p className="text-blue-500 font-abc text-sm">Love Your Skin, Love Yourself</p>
+        <p className="text-blue-500 font-abc text-sm">
+          Love Your Skin, Love Yourself
+        </p>
 
         <div className="flex w-[350px] mt-10 flex-col items-center relative">
           <p className="absolute top-0 left-0 text-2xl font-medium font-dbc text-gray-700">
@@ -87,15 +90,16 @@ export default function SignUp() {
             <button
               onClick={handleSubmit} // Call handleSubmit when the button is clicked
               className="w-full text-xl px-4 py-2
-                    m-2 mb-4 bg-[#F47099] text-white
+                    m-2 mb-4 bg-pink-400 text-white
                     rounded-xl focus:outline-none focus:border-blue-500"
             >
-              Sign Up
+              {loading ? <Loading /> : "Sign Up"}{" "}
+              {/* Show Loading component when loading is true */}
             </button>
 
             <p className="mt-10">
               You already have an account!
-              <button className="ml-2 text-[#F47099] cursor-pointer hover:underline">
+              <button className="ml-2 text-pink-400 cursor-pointer hover:underline">
                 <Link to="/login">
                   <p>Sign In</p>
                 </Link>
