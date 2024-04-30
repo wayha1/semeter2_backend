@@ -18,20 +18,19 @@ import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import DashboardCategory from "./Dashboard/DashboardCategory";
 import AddCategory from "./Dashboard/AddCategory";
-// import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectRoute from "./ProtectRoute";
+
 function App() {
   return (
     <Routes>
       <Route
         path="/"
         element={
-          // <ProtectedRoute>
           <div>
             <Navbar />
             <HomePage />
             <Footer />
           </div>
-          // </ProtectedRoute>
         }
       />
       <Route path="/login" element={<SignIn />} />
@@ -71,7 +70,7 @@ function App() {
         path="/dashboard/dashboardCategory"
         element={
           <div>
-            <DashboardCategory/>
+            <DashboardCategory />
           </div>
         }
       />
@@ -79,7 +78,7 @@ function App() {
         path="/dashboard/dashboardCategory/AddCategory"
         element={
           <div>
-            <AddCategory/>
+            <AddCategory />
           </div>
         }
       />
@@ -100,20 +99,20 @@ function App() {
         }
       />
       <Route
-        path="/dashboard"
+        path="/dashboard/*"
         element={
-          <div>
+          <ProtectRoute>
             <Dashboard />
-          </div>
+          </ProtectRoute>
         }
       />
       <Route
         path="/profile"
         element={
-          <div>
+          <ProtectRoute>
             <Navbar />
             <Profile />
-          </div>
+          </ProtectRoute>
         }
       />
       <Route

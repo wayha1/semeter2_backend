@@ -11,14 +11,8 @@ const navigation = [
   { name: "Shop", path: "/shop", current: false },
   { name: "About", path: "/about", current: false },
   { name: "Contact", path: "/contact", current: false },
-  { name: "Dashboard", path: "/dashboard", current: false },
+  { name: "Dashboard", path: "/dashboard", current: false, adminOnly: true }, // Add adminOnly property
 ];
-
-// const userNavigation = [
-//   { name: "Your Profile", href: "/setting" },
-//   { name: "Settings", href: "#" },
-//   { name: "Sign out", href: "#" },
-// ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,17 +20,13 @@ function classNames(...classes) {
 
 function Navbar() {
   const [activeItem, setActiveItem] = useState(null);
-  const [data, setData] = useState([]);
-  const [open, setOpen] = useState(false);
   const { user, logout } = useAuthContext();
-  const [error, setError] = useState("");
   const [cartColor, setCartColor] = useState("black");
   const [heartColor, setHeartColor] = useState("black");
 
   const handleClick = (index) => {
     setActiveItem(index);
   };
-  console.log(user);
 
   const handleCartClick = () => {
     setCartColor("text-pink-500");
@@ -47,6 +37,7 @@ function Navbar() {
     setHeartColor("text-pink-500");
     setCartColor("black");
   };
+
   const handleNavbarClick = () => {
     setHeartColor("black");
     setCartColor("black");
@@ -59,63 +50,52 @@ function Navbar() {
       console.error("Error logging out:", error);
     }
   };
+  console.log(user);
 
   return (
     <>
-      <nav className="bg-white sticky  lg:flex lg:justify-between lg:items-center ">
+      <nav className="bg-white sticky lg:flex lg:justify-between lg:items-center ">
         {/* Regular Desktop Menu */}
         <div className="items-center space-x-4 p-5">
           <NavLink to="/">
             <div className="max-sm:flex max-sm:items-center max-sm:justify-between ">
-              <img
-                className="w-[120px] h-[40px] mt-2 mr-8"
-                src={Logo}
-                alt="Skinme"
-              />
+              <img className="w-[120px] h-[40px] mt-2 mr-8" src={Logo} alt="Skinme" />
               <MobileMenu navigation={navigation} />
             </div>
           </NavLink>
         </div>
         <div className="md:block space-x-8">
-          <div
-            className={`${open ? "block" : "hidden"} flex md:block space-x-8`}
-          >
+          <div className="flex md:block space-x-8">
             {/* Mapping over menuItems array to display each item */}
-            {navigation.map((item, index) => (
-              <button onClick={handleNavbarClick}>
-                <NavLink
-                  key={index}
-                  to={item.path}
-                  onClick={() => handleClick(index)}
-                  className={classNames(
-                    activeItem === index
-                      ? "w-[90px] text-center text-pink-400"
-                      : "",
-                    "px-3 py-2 text-lg font-medium hover:text-pink-500"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </NavLink>
-              </button>
-            ))}
+            {navigation.map((item, index) =>
+              // Check if the item should be displayed based on user role
+              (item.adminOnly && user && user.role === "admin") || !item.adminOnly ? (
+                <button key={index} onClick={handleNavbarClick}>
+                  <NavLink
+                    to={item.path}
+                    onClick={() => handleClick(index)}
+                    className={classNames(
+                      activeItem === index ? "w-[90px] text-center text-pink-400" : "",
+                      "px-3 py-2 text-lg font-medium hover:text-pink-500"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </NavLink>
+                </button>
+              ) : null
+            )}
           </div>
         </div>
         <div className="hidden lg:block pr-6">
           {/* cart and favorite */}
           <div className="ml-4 flex items-center md:ml-6">
-            <button
-              className={`relative mr-2 ${cartColor}`}
-              onClick={handleCartClick}
-            >
+            <button className={`relative mr-2 ${cartColor}`} onClick={handleCartClick}>
               <NavLink to="/cart">
                 <GrShop size={25} />
               </NavLink>
             </button>
-            <button
-              className={`relative mr-2 ${heartColor}`}
-              onClick={handleHeartClick}
-            >
+            <button className={`relative mr-2 ${heartColor}`} onClick={handleHeartClick}>
               <NavLink to="/favorite">
                 <CgHeart size={28} />
               </NavLink>

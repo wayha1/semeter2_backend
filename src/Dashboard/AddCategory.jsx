@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "../Components/api/axios";
+import Cookies from "js-cookie";
 
 function AddCategory() {
   const [category, setCategory] = useState({
@@ -21,7 +22,7 @@ function AddCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("token");
+    const token = Cookies.getItem("token");
     if (!token) {
       setErrorMessage("Unauthorized access. Please login.");
       return;

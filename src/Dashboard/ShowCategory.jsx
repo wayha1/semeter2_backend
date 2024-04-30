@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "../Components/api/axios";
+import Cookies from "js-cookie";
 
 function ShowCategory() {
   const [categoryData, setCategoryData] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      console.log("Fetching data...");
-      const response = await axios.request({
-        url: "/category",
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("Response:", response.data);
-      setCategoryData(response.data.data);
-    } catch (error) {
-      console.error("Error fetching category data:", error);
-      setCategoryData([]);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = Cookies.get("token");
+        console.log("Fetching data...");
+        const response = await axios.get("/category", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Response:", response.data);
+        setCategoryData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching category data:", error);
+        setCategoryData([]);
+      }
+    };
+
     fetchData();
   }, []);
 
@@ -41,10 +40,10 @@ function ShowCategory() {
               <img
                 src={category.category_icon || "placeholder.png"} // Placeholder image URL
                 alt={category.category_title}
-                className="w-50 h-50 mr-20 border-2 p-10"
+                className="w-32 h-32 mr-6 border-2"
               />
             </div>
-            <div className="flex flex-col mr-20">
+            <div className="flex flex-col">
               {/* Right side with category title, created at, and updated at */}
               <div className="mb-2">
                 <div className="text-sm">Category ID: {category.id}</div>
@@ -52,14 +51,10 @@ function ShowCategory() {
                 <div className="text-sm">Created At: {category.created_at}</div>
                 <div className="text-sm">Updated At: {category.updated_at}</div>
               </div>
-            </div>
-            <div className="flex space-x-4 ml-auto">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded-xl w-[90px] active:bg-blue-400">
-                Edit
-              </button>
-              <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded-xl w-[90px] active:bg-red-400">
-                Delete
-              </button>
+              <div className="flex space-x-4">
+                <button className="btn-blue">Edit</button>
+                <button className="btn-red">Delete</button>
+              </div>
             </div>
           </div>
         ))}

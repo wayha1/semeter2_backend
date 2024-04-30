@@ -2,6 +2,7 @@ import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import AddCategory from "./AddCategory";
 import ShowCategory from "./ShowCategory";
+// import Cookies from "js-cookie";
 
 function Categoryinformation() {
   const [showAddCategory, setShowAddCategory] = useState(false);
@@ -25,9 +26,7 @@ function Categoryinformation() {
       <div className="mr-5 mb-10" style={{ width: "400px" }}>
         <Button
           onClick={toggleAddCategory}
-          className={`w-full ${
-            activeButton === "add" ? "bg-green-600" : "bg-green-400"
-          }`}
+          className={`w-full ${activeButton === "add" ? "bg-green-600" : "bg-green-400"}`}
         >
           Add To Category
         </Button>
@@ -41,9 +40,7 @@ function Categoryinformation() {
       <div className="mb-10" style={{ width: "400px" }}>
         <Button
           onClick={toggleShowCategory}
-          className={`w-full ${
-            activeButton === "show" ? "bg-red-500" : "bg-red-400"
-          }`}
+          className={`w-full ${activeButton === "show" ? "bg-red-500" : "bg-red-400"}`}
         >
           Show Category
         </Button>

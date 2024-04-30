@@ -7,9 +7,9 @@ function Profile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("/api/category", {
+        const response = await axios.get("/category", {
           headers: {
-            Authorization: `Bearer ${"4|JLs14bdtCze4DYW7oQqBhDPZ5pqWzVvNd2rZWnBSc73cd9bb"}`,
+            Authorization: `Bearer ${"9|Oxgo4q50UpWUXultKjwvnis8spS6QdOldedyPCWD20cbe583"}`,
           },
         });
         setUserData(response.data);
@@ -21,7 +21,7 @@ function Profile() {
     };
 
     fetchUserData();
-  });
+  },[]);
   return (
     <>
       <div className="bg-[#F7EFF2] h-screen w-full">

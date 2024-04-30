@@ -1,6 +1,9 @@
-import { createContext, useContext, useState } from "react";
+// AuthProvider.js
+
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext({});
 
@@ -9,9 +12,35 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (token) {
+          // Token exists, fetch user data
+          const { data } = await axios.get("/user", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(data);
+        } else {
+          // No token available
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        setUser(null);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+
   const getUser = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (!token) {
         throw new Error("No token available");
       }
@@ -22,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
 
+      console.log("Fetched user:", data); // Log the fetched user object
       setUser(data);
     } catch (error) {
       handleAuthError(error);
@@ -32,8 +62,16 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post("/login", data);
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
+        // Set token cookie
+        Cookies.set("token", response.data.token, { expires: 7 });
+        
+        // Set user name cookie
+        Cookies.set("username", response.data.user.name, { expires: 7 });
+  
+        // Fetch user data
         await getUser();
+  
+        // Redirect to home page
         navigate("/");
       } else {
         setError("Unexpected error occurred during login.");
@@ -47,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post("/register", data);
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
+        Cookies.set("token", response.data.token, { expires: 7 }); // Set cookie with expiration
         await getUser();
         navigate("/");
       } else {
@@ -60,41 +98,24 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (!token) {
-        // No token available, assume the user is already logged out
         setUser(null);
         navigate("/login");
         return;
       }
-      
-      // Remove token from localStorage before making the logout request
-      localStorage.removeItem("token");
-  
-      await axios.post(
-        "/logout",
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      // Logout successful, remove token from localStorage and reset user state
-      localStorage.removeItem("token");
+
+      Cookies.remove("token");
+      await axios.post("/logout", null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       setUser(null);
       navigate("/login");
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Unauthorized, assume the user is already logged out
-        setUser(null);
-        navigate("/login");
-      } else {
-        // Other errors, handle as necessary
-        setError("Error logging out. Please try again.");
-        console.error("Error logging out:", error);
-      }
+      handleAuthError(error);
     }
   };
    
