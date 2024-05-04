@@ -37,8 +37,9 @@ function ShowCategory() {
           >
             <div className="mr-10">
               {/* Left side with category_icon */}
+              {/* <img src="{{ $category_icon }}" /> */}
               <img
-                src={category.category_icon || "placeholder.png"} // Placeholder image URL
+               src={`http://localhost:8000/${category.category_icon}`}
                 alt={category.category_title}
                 className="w-32 h-32 mr-6 border-2"
               />
