@@ -20,7 +20,7 @@ function classNames(...classes) {
 
 function Navbar() {
   const [activeItem, setActiveItem] = useState(null);
-  const { user, logout } = useAuthContext();
+  const { user } = useAuthContext();
   const [cartColor, setCartColor] = useState("black");
   const [heartColor, setHeartColor] = useState("black");
 
@@ -38,19 +38,7 @@ function Navbar() {
     setCartColor("black");
   };
 
-  const handleNavbarClick = () => {
-    setHeartColor("black");
-    setCartColor("black");
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-  };
-  console.log(user);
+  // Removed handleNavbarClick function as it's not needed anymore
 
   return (
     <>
@@ -70,7 +58,7 @@ function Navbar() {
             {navigation.map((item, index) =>
               // Check if the item should be displayed based on user role
               (item.adminOnly && user && user.role === "admin") || !item.adminOnly ? (
-                <button key={index} onClick={handleNavbarClick}>
+                <button key={index}>
                   <NavLink
                     to={item.path}
                     onClick={() => handleClick(index)}
@@ -105,7 +93,6 @@ function Navbar() {
             {user ? (
               <div className="hidden md:block">
                 <button
-                  onClick={handleNavbarClick}
                   className="relative flex max-w-xs items-center rounded-full bg-pink-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
                 >
                   <NavLink to="/profile">

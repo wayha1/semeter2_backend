@@ -109,10 +109,12 @@ function App() {
       <Route
         path="/profile"
         element={
-          <ProtectRoute>
-            <Navbar />
-            <Profile />
-          </ProtectRoute>
+         <div>
+
+           <Navbar />
+           <Profile />
+       
+         </div>
         }
       />
       <Route
