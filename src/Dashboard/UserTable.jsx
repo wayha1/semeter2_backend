@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "../Components/api/axios";
 import ModelEdit from "./ModelEdit";
 import ModalDelete from "./ModalDelete";
-import useAuthContext from "./../Components/context/AuthContext"; // Import the useAuthContext hook
+// import useAuthContext from "./../Components/context/AuthContext"; // Import the useAuthContext hook
+import Cookies from "js-cookie";
 
 function UserTable() {
   // const { user } = useAuthContext();
@@ -14,7 +15,7 @@ function UserTable() {
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       console.log("Fetching data...");
       const response = await axios.request({
         url: "/profile",
