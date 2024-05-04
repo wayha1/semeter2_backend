@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 function AddCategory() {
   const [category, setCategory] = useState({
     category_title: "",
+    category_icon: null, // New state for handling category icon image file
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -19,10 +20,14 @@ function AddCategory() {
     }
   };
 
+  const handleIconInput = (e) => {
+    setCategory({ ...category, category_icon: e.target.files[0] });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = Cookies.getItem("token");
+    const token = Cookies.get("token");
     if (!token) {
       setErrorMessage("Unauthorized access. Please login.");
       return;
@@ -31,6 +36,9 @@ function AddCategory() {
     const formData = new FormData();
     if (category.category_title.trim() !== "") {
       formData.append("category_title", category.category_title);
+    }
+    if (category.category_icon) {
+      formData.append("category_icon", category.category_icon);
     }
 
     try {
@@ -41,9 +49,9 @@ function AddCategory() {
         },
       });
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log("Category added successfully:", response.data);
-        setCategory({ ...category, category_title: "" });
+        setCategory({ ...category, category_title: "", category_icon: null });
         setSuccessMessage("Category added successfully.");
 
         // Clear success message after 3 seconds
@@ -73,6 +81,20 @@ function AddCategory() {
             className="p-2 rounded-lg"
             value={category.category_title}
             onChange={handleInput}
+          />
+        </div>
+
+        {/* New input field for category icon */}
+        <div className="flex flex-col w-[80%] ">
+          <label htmlFor="category_icon" className="mt-3 mb-1">
+            Category Icon (Image)
+          </label>
+          <input
+            type="file"
+            id="category_icon"
+            name="category_icon"
+            accept="image/*"
+            onChange={handleIconInput}
           />
         </div>
 
