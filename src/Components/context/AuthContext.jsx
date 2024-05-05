@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -106,6 +107,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       Cookies.remove("token");
+      Cookies.remove("username");
       await axios.post("/logout", null, {
         headers: {
           Authorization: `Bearer ${token}`,
