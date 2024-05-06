@@ -108,16 +108,16 @@ const DashboardLayout = ({ children, title }) => {
                 <div className="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
                   <div className="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
                     <NavLink
-                      className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white hover:text-white dark-mode:text-gray-200 md:mt-0  focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-                      to={"/dashboard/posts"}
-                    >
-                      Products
-                    </NavLink>
-                    <NavLink
                       className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white  dark-mode:text-gray-200 md:mt-0 hover:text-white focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
                       to={"/dashboard/dashboardCategory"}
                     >
                       Categories
+                    </NavLink>
+                    <NavLink
+                      className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white hover:text-white dark-mode:text-gray-200 md:mt-0  focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+                      to={"/dashboard/posts"}
+                    >
+                      Products
                     </NavLink>
                   </div>
                 </div>
