@@ -9,12 +9,16 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirm] = useState("");
-  const { signup, loading } = useAuthContext(); // Get loading state from useAuthContext
+  const { signup, loading, error: authError } = useAuthContext(); // Get loading state and error message from useAuthContext
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Call signup function with form data
-    signup({ name, email, password, password_confirmation, gender });
+    try {
+      // Call signup function with form data
+      await signup({ name, email, password, password_confirmation, gender});
+    } catch (error) {
+      console.error("Error signing up:", error);
+    }
   };
 
   const handleGenderChange = (e) => {
@@ -90,12 +94,16 @@ export default function SignUp() {
             <button
               onClick={handleSubmit} // Call handleSubmit when the button is clicked
               className="w-full text-xl px-4 py-2
-                    m-2 mb-4 bg-pink-400 text-white
+                    m-2 mb-4 bg-pink-400 text-white active:bg-slate-500
                     rounded-xl focus:outline-none focus:border-blue-500"
             >
               {loading ? <Loading /> : "Sign Up"}{" "}
               {/* Show Loading component when loading is true */}
             </button>
+
+            {authError && (
+              <p className="text-red-500">{authError}</p>
+            )}
 
             <p className="mt-10">
               You already have an account!

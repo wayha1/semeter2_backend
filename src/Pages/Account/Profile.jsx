@@ -53,7 +53,8 @@ function Profile() {
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <button
                       onClick={handleLogout}
-                      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                      className="bg-red-500 hover:bg-red-600 text-white
+                      active:bg-gray-200 py-2 px-4 rounded"
                     >
                       Sign Out
                     </button>
@@ -127,7 +128,7 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <p className="mb-6 text-lg text-gray-600">Park Jimin</p>
+                      {user && <p className="mb-6 text-lg text-gray-600">{user.name}</p>}
                     </div>
                   </a>
                   <a
