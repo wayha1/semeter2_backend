@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import axios from "../../Components/api/axios";
 import useAuthContext from "../../Components/context/AuthContext";
 
@@ -6,6 +7,7 @@ function Profile() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const { user, logout } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -30,6 +32,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       await logout();
+      navigate('/login');
     } catch (error) {
       console.error("Error logging out:", error);
     }
