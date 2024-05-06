@@ -6,9 +6,7 @@ import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
 import ProductDetails from "./Components/Shop/ProductDetails";
-import AddCategory from "./Dashboard/AddCategory";
 import Contact from "./Dashboard/Contact";
-import DashboardCategory from "./Dashboard/DashboardCategory";
 import Dashboard from "./Dashboard/DashboardLayout";
 import User from "./Dashboard/User";
 import Footer from "./Footer/Footer";
@@ -18,11 +16,8 @@ import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
-<<<<<<< veha-branch
 import DashboardCategory from "./Dashboard/DashboardCategory";
 import AddCategory from "./Dashboard/Category/AddCategory";
-=======
->>>>>>> master
 import ProtectRoute from "./ProtectRoute";
 
 function App() {
