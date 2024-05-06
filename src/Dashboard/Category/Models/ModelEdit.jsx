@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios'; // Import axios if you're using it
-import Cookies from 'js-cookie'; // Import Cookies if you're using it
+import React, { useState, useEffect } from 'react';
+import axios from '../../../Components/api/axios';
+import Cookies from 'js-cookie';
 
 function ModelEdit({ category, handleCloseModal }) {
-  const [editedCategory, setEditedCategory] = useState(category);
-  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
-  const [categoryImage, setCategoryImage] = useState(null); // New state to hold the image file
-  const [categoryName, setCategoryName] = useState(category.name); // State to hold the edited category name
+  const [categoryImage, setCategoryImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [categoryTitle, setCategoryTitle] = useState(category.category_title);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    setCategoryTitle(category.category_title);
+  }, [category]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setCategoryImage(file);
-  
-    // Preview the image
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
@@ -21,36 +25,42 @@ function ModelEdit({ category, handleCloseModal }) {
   };
 
   const handleNameChange = (e) => {
-    setCategoryName(e.target.value);
+    setCategoryTitle(e.target.value);
   };
 
   const handleSave = async () => {
     try {
-      // Create form data to send in the PUT request
+      const token = Cookies.get("token");
+  
       const formData = new FormData();
       formData.append('category_icon', categoryImage);
-      formData.append('name', categoryName);
-      const token = Cookies.get("token");
-      // Send PUT request to update the category
-      const response = await axios.put(`/category/${editedCategory.id}`, formData, {
+      formData.append('category_title', categoryTitle);
+  
+      const response = await axios.put(`/category/${category.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
-          // Add any additional headers like authorization if needed
         },
       });
-      
+  
+      // Update the category title in the state after successful update
+      setCategoryTitle(response.data.category.category_title);
+  
       // Handle successful response
       console.log('Category updated successfully:', response.data);
-      
-      // Close the modal
-      handleCloseModal();
+      setSuccessMessage("Category updated successfully.");
+  
+      setTimeout(() => {
+        handleCloseModal();
+        setSuccessMessage("");
+      }, 3000);
     } catch (error) {
-      // Handle error
       console.error('Error updating category:', error);
+      setErrorMessage("An error occurred while updating the category.");
     }
   };
   
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto bg-opacity-75">
       <div className="flex items-center justify-center min-h-screen">
@@ -73,12 +83,11 @@ function ModelEdit({ category, handleCloseModal }) {
               <label className="block text-sm font-medium text-gray-700">Name:</label>
               <input
                 type="text"
-                value={categoryName}
+                value={categoryTitle}
                 onChange={handleNameChange}
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-1 block w-full shadow-sm border-gray-300 rounded-md"
               />
             </div>
-            {/* Add more form fields for editing category properties */}
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
