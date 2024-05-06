@@ -141,7 +141,7 @@ function Profile() {
                     <div>
                       <div className="flex justify-between items-center   ">
                         <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Date of Birth
+                          Gender
                         </div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
@@ -162,7 +162,7 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <p className="mb-6 text-lg text-gray-600">12 July 2004</p>
+                      {user && <p className="mb-6 text-lg text-gray-600">{user.gender}</p>}
                     </div>
                   </a>
                   <a
@@ -172,7 +172,7 @@ function Profile() {
                     <div>
                       <div className="flex justify-between items-center   ">
                         <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Country Region
+                          Role
                         </div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
@@ -193,7 +193,7 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <p className="mb-6 text-lg text-gray-600">Cambodia</p>
+                      {user && <p className="mb-6 text-lg text-gray-600">{user.role}</p>}
                     </div>
                   </a>
                   <a
@@ -203,7 +203,7 @@ function Profile() {
                     <div>
                       <div className="flex justify-between items-center   ">
                         <div className="pb-5 text-xl font-bold lg:text-2xl">
-                          Location
+                          Email
                         </div>
                         <div className="px-15">
                           <div className="flex items-center justify-center w-10 h-10 bg-pink-100 border rounded-full shadow-inner lg:h-16 lg:w-16">
@@ -229,7 +229,7 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <p className="mb-6 text-lg text-gray-600">Phnom Penh</p>
+                      {user && <p className="mb-6 text-lg text-gray-600">{user.email}</p>}
                     </div>
                   </a>
                   <a
