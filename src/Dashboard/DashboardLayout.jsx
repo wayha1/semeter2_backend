@@ -71,6 +71,7 @@ const DashboardLayout = ({ children, title }) => {
                 focus:text-white hover:bg-pink-500 z-30
                 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
                 // to={"/dashboard/dashboardCategory"}
+                
               >
                 Dashboard
                 {/* dashboard icons */}
@@ -115,7 +116,8 @@ const DashboardLayout = ({ children, title }) => {
                     </NavLink>
                     <NavLink
                       className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white hover:text-white dark-mode:text-gray-200 md:mt-0  focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-                      to={"/dashboard/posts"}
+                      to={"/dashboard/dashboardProduct"}
+                      
                     >
                       Products
                     </NavLink>

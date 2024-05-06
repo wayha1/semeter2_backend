@@ -19,6 +19,7 @@ import Shop from "./Pages/Shoppage";
 import DashboardCategory from "./Dashboard/DashboardCategory";
 import AddCategory from "./Dashboard/Category/AddCategory";
 import ProtectRoute from "./ProtectRoute";
+import DashboardProduct from "./Dashboard/Products/DashboardProduct";
 
 function App() {
   return (
@@ -81,6 +82,14 @@ function App() {
             <AddCategory />
           </div>
         }
+      />
+      <Route
+        path="/dashboard/dashboardProduct"
+        element={
+          <div>
+            <DashboardProduct/>
+          </div>
+        }      
       />
       <Route
         path="/dashboard/contacts"
