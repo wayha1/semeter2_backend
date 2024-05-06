@@ -21,7 +21,7 @@ function Branding() {
           <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
             <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://naturerepublickh.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className=" w-full h-full hover:scale-110 ">
                       <img src={NatureRepublic} alt="Natural Republic"></img>
@@ -30,7 +30,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://www.axis-y.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Axisy} alt="Axis-y"></img>
@@ -39,7 +39,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://eng.marynmay.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={MaryandMay} alt="Mary&May"></img>
@@ -48,7 +48,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://beautyofjoseon.com/">
                   <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Joseon} className=" " alt="Joseon"></img>
@@ -57,7 +57,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://stylenandaen.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={ThreeCE} className=" " alt="3CE"></img>
@@ -66,7 +66,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-10">
-                <Link to="/about">
+                <Link to="https://www.klairscosmetics.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Klairs} className=" " alt="Klairs"></img>
@@ -75,7 +75,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-12">
-                <Link to="/about">
+                <Link to="https://www.cosrx.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Cosrx} className=" " alt="Cosrx"></img>
@@ -84,7 +84,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://us.innisfree.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Innisfree} className=" " alt="Innisfree"></img>
@@ -96,7 +96,7 @@ function Branding() {
             {/* Second scroll */}
             <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://naturerepublickh.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className=" w-full h-full hover:scale-110 ">
                       <img src={NatureRepublic} alt="Natural Republic"></img>
@@ -105,7 +105,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://www.axis-y.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Axisy} alt="Axis-y"></img>
@@ -114,7 +114,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://eng.marynmay.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={MaryandMay} alt="Mary&May"></img>
@@ -123,7 +123,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://beautyofjoseon.com/">
                   <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Joseon} className=" " alt="Joseon"></img>
@@ -132,7 +132,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://stylenandaen.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={ThreeCE} className=" " alt="3CE"></img>
@@ -141,7 +141,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-10">
-                <Link to="/about">
+                <Link to="https://www.klairscosmetics.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Klairs} className=" " alt="Klairs"></img>
@@ -150,7 +150,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-12">
-                <Link to="/about">
+                <Link to="https://www.cosrx.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Cosrx} className=" " alt="Cosrx"></img>
@@ -159,7 +159,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://us.innisfree.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Innisfree} className=" " alt="Innisfree"></img>
@@ -171,7 +171,7 @@ function Branding() {
             {/* Third Scroll */}
             <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://naturerepublickh.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className=" w-full h-full hover:scale-110 ">
                       <img src={NatureRepublic} alt="Natural Republic"></img>
@@ -180,7 +180,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://www.axis-y.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Axisy} alt="Axis-y"></img>
@@ -189,7 +189,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-14">
-                <Link to="/about">
+                <Link to="https://eng.marynmay.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={MaryandMay} alt="Mary&May"></img>
@@ -198,7 +198,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://beautyofjoseon.com/">
                   <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Joseon} className=" " alt="Joseon"></img>
@@ -207,7 +207,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center ">
-                <Link to="/about">
+                <Link to="https://stylenandaen.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={ThreeCE} className=" " alt="3CE"></img>
@@ -216,7 +216,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-10">
-                <Link to="/about">
+                <Link to="https://www.klairscosmetics.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Klairs} className=" " alt="Klairs"></img>
@@ -225,7 +225,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center pt-12">
-                <Link to="/about">
+                <Link to="https://www.cosrx.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Cosrx} className=" " alt="Cosrx"></img>
@@ -234,7 +234,7 @@ function Branding() {
                 </Link>
               </div>
               <div className="flex justify-center items-center">
-                <Link to="/about">
+                <Link to="https://us.innisfree.com/">
                   <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
                     <div className="w-full h-full hover:scale-110">
                       <img src={Innisfree} className=" " alt="Innisfree"></img>
