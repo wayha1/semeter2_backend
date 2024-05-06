@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post("/register", data);
       if (response.status === 200) {
-        Cookies.set("token", response.data.token, { expires: 7 }); // Set cookie with expiration
+        Cookies.set("token", response.data.token, { expires: 7 }); 
         await getUser();
         navigate("/");
       } else {
@@ -124,7 +124,7 @@ export const AuthProvider = ({ children }) => {
   const handleAuthError = (error) => {
     if (error.response) {
       if (error.response.status === 401) {
-        setError("Unauthorized access. Please log in again.");
+        // setError("Unauthorized access. Please log in again.");
       } else if (error.response.status === 422) {
         setError(error.response.data.error);
       } else {
