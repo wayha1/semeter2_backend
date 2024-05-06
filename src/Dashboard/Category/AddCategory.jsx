@@ -9,7 +9,7 @@ function AddCategory() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
+  const [imagePreview, setImagePreview] = useState(null); 
 
   const handleInput = (e) => {
     e.persist();
@@ -59,9 +59,9 @@ function AddCategory() {
       });
 
       if (response.status === 200) {
-        console.log("Category added successfully:", response.data);
         setCategory({ ...category, category_title: "", category_icon: null });
         setSuccessMessage("Category added successfully.");
+        console.log("Category added successfully:", response.data);
 
         // Clear success message after 3 seconds
         setTimeout(() => {
