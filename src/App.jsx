@@ -17,7 +17,7 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import DashboardCategory from "./Dashboard/DashboardCategory";
-import AddCategory from "./Dashboard/AddCategory";
+import AddCategory from "./Dashboard/Category/AddCategory";
 import ProtectRoute from "./ProtectRoute";
 
 function App() {

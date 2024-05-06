@@ -1,6 +1,6 @@
 import React from 'react';
 import DashboardLayout from './DashboardLayout';
-import Categoryinformation from './Categoryinformation';
+import Categoryinformation from './Category/Categoryinformation';
 
 function DashboardCategory() {
   return (

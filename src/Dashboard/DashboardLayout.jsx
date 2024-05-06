@@ -109,7 +109,7 @@ const DashboardLayout = ({ children, title }) => {
                   <div className="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
                     <NavLink
                       className="block px-4 py-2 mt-2 text-lg font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white  dark-mode:text-gray-200 md:mt-0 hover:text-white focus:text-gray-900 hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-                      to={"/dashboard/dashboardCategory"}
+                      to={"/dashboard/dashboardCategory/"}
                     >
                       Categories
                     </NavLink>
@@ -336,7 +336,7 @@ const DashboardLayout = ({ children, title }) => {
         {/* navbar header  */}
         <div className="md:h-10 w-full"></div>
         {/* dashboard body */}
-        <div className="min-h-[90vh] pt-[1px] px-[1px] w-full bg-gray-200">
+        <div className="min-h-[90vh] pt-[1px] px-[1px] w-full bg-gray-200 overflow-y-auto">
           {title && <h1 className="p-10 text-2xl">{title}</h1>}
           {children}
         </div>
