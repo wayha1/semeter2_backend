@@ -14,7 +14,7 @@ export const Cart = () => {
         </div>
         <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
           <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
-            <div className="flex flex-col justify-start items-start dark:bg-gray-800 bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
+            <div className="flex flex-col justify-start items-start  bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
               <p className="text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800">
                 Customer’s Cart
               </p>
@@ -78,7 +78,7 @@ export const Cart = () => {
               </div>
             </div>
             <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
-              <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 dark:bg-gray-800 space-y-6">
+              <div className="flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50  space-y-6">
                 <h3 className="text-xl font-semibold leading-5 text-gray-800">
                   Summary
                 </h3>
@@ -116,7 +116,7 @@ export const Cart = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col  px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 dark:bg-gray-800 space-y-6">
+              <div className="flex flex-col  px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50  space-y-6">
                 <h3 className="text-xl font-semibold leading-5 text-gray-800">
                   Shipping
                 </h3>
@@ -129,7 +129,7 @@ export const Cart = () => {
                         id="radioButton1"
                         className="h-5 w-5"
                       />
-                      <img src={deliphoto1} className="h-10 w-15 pl-2" />
+                      <img src={deliphoto1} className="h-10 w-15 pl-2" alt="" />
                     </div>
                     <div className="flex items-center">
                       <input
@@ -138,7 +138,7 @@ export const Cart = () => {
                         id="radioButton2"
                         className="h-5 w-5"
                       />
-                      <img src={deliphoto2} className="h-10 w-15 pl-2" />
+                      <img src={deliphoto2} className="h-10 w-15 pl-2" alt="" />
                     </div>
                     <div className="flex items-center">
                       <input
@@ -147,7 +147,7 @@ export const Cart = () => {
                         id="radioButton2"
                         className="h-5 w-5"
                       />
-                      <img src={deliphoto3} className="h-10 w-15 pl-2" />
+                      <img src={deliphoto3} className="h-10 w-15 pl-2" alt="" />
                     </div>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export const Cart = () => {
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
+          <div className="bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
             <h3 className="text-xl font-semibold leading-5 text-gray-800">
               Customer
             </h3>

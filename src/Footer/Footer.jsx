@@ -16,29 +16,29 @@ import { Link } from "react-router-dom";
 import Logo from "../asset/img.png";
 export default function Footer() {
   return (
-    <footer className="text-center text-neutral-600 dark:bg-gray-800 dark:text-neutral-200 lg:text-left">
+    <footer className="text-center text-neutral-600  lg:text-left">
       <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-400 lg:justify-between">
         <div className="mr-12 hidden lg:block">
           <span>Get connected with us on social networks</span>
         </div>
         {/* <!-- Social network icons container --> */}
         <div className="flex justify-center">
-          <div className="mr-6 text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="mr-6 text-neutral-600 hover:text-pink-400 ">
             <FaFacebook />
           </div>
-          <div className="mr-6 text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="mr-6 text-neutral-600 hover:text-pink-400 ">
             <FaInstagram />
           </div>
-          <div className="mr-6 text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="mr-6 text-neutral-600 hover:text-pink-400 ">
             <FaGoogle />
           </div>
-          <div className="mr-6 text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="mr-6 text-neutral-600 hover:text-pink-400 ">
             <FaLinkedin />
           </div>
-          <div className="mr-6 text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="mr-6 text-neutral-600 hover:text-pink-400 ">
             <FaSquareXTwitter />
           </div>
-          <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+          <div className="text-neutral-600 hover:text-pink-400 ">
             <FaTiktok />
           </div>
         </div>
@@ -73,28 +73,28 @@ export default function Footer() {
             </h6>
             <p className="mb-4">
               <Link to="/shop">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Shop
                 </div>
               </Link>
             </p>
             <p className="mb-4">
               <Link to="/cart">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Cart
                 </div>
               </Link>
             </p>
             <p className="mb-4">
               <Link to="/">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Product Listing
                 </div>
               </Link>
             </p>
             <p>
               <Link to="/">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Order History
                 </div>
               </Link>
@@ -110,28 +110,28 @@ export default function Footer() {
             </h6>
             <p className="mb-4">
               <Link to="/about">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   About Us
                 </div>
               </Link>
             </p>
             <p className="mb-4">
               <Link to="/contact">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Contact Us
                 </div>
               </Link>
             </p>
             <p className="mb-4">
               <Link to="/">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   FAQs
                 </div>
               </Link>
             </p>
             <p>
               <Link to="/">
-                <div className="text-neutral-600 hover:text-pink-400 dark:text-neutral-200 dark:hover:text-pink-400">
+                <div className="text-neutral-600 hover:text-pink-400 ">
                   Terms & Conditions
                 </div>
               </Link>
