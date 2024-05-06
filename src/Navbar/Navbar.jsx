@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { CgHeart } from "react-icons/cg";
 import { GrShop } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
@@ -11,7 +12,7 @@ const navigation = [
   { name: "Shop", path: "/shop", current: false },
   { name: "About", path: "/about", current: false },
   { name: "Contact", path: "/contact", current: false },
-  { name: "Dashboard", path: "/dashboard", current: false, adminOnly: true }, // Add adminOnly property
+  { name: "Dashboard", path: "/dashboard", current: false, adminOnly: true },
 ];
 
 function classNames(...classes) {
@@ -20,7 +21,8 @@ function classNames(...classes) {
 
 function Navbar() {
   const [activeItem, setActiveItem] = useState(null);
-  const { user } = useAuthContext();
+  const { user, logout } = useAuthContext();
+  const navigate = useNavigate();
   const [cartColor, setCartColor] = useState("black");
   const [heartColor, setHeartColor] = useState("black");
 
@@ -38,7 +40,14 @@ function Navbar() {
     setCartColor("black");
   };
 
-  // Removed handleNavbarClick function as it's not needed anymore
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <>
@@ -77,7 +86,8 @@ function Navbar() {
         </div>
         <div className="hidden lg:block pr-6">
           {/* cart and favorite */}
-          <div className="ml-4 flex items-center md:ml-6">
+          <div className="space-x-4 flex items-center md:ml-6">
+         
             <button className={`relative mr-2 ${cartColor}`} onClick={handleCartClick}>
               <NavLink to="/cart">
                 <GrShop size={25} />
@@ -92,6 +102,7 @@ function Navbar() {
             {/* Conditional Rendering based on user login status */}
             {user ? (
               <div className="hidden md:block">
+                <div className="flex space-x-5">
                 <button
                   className="relative flex max-w-xs items-center rounded-full bg-pink-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-800"
                 >
@@ -105,6 +116,13 @@ function Navbar() {
                     />
                   </NavLink>
                 </button>
+                <button 
+                  onClick={handleLogout}
+                  className="relative bg-red-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 ">
+                    Sign Out
+                </button>
+                </div>
+                
               </div>
             ) : (
               <div className="sign_in_up">
