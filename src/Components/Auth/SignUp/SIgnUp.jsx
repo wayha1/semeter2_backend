@@ -9,13 +9,16 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirm] = useState("");
+  const [is_active, setIsActive] = useState(0);
+  const [role, setRole] = useState("");
   const { signup, loading, error: authError } = useAuthContext(); // Get loading state and error message from useAuthContext
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Call signup function with form data
-      await signup({ name, email, password, password_confirmation, gender });
+      await signup({ name, email, password, password_confirmation, gender,is_active,role });
     } catch (error) {
       console.error("Error signing up:", error);
     }
