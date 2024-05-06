@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../Components/api/axios";
+import axios from "../../Components/api/axios";
 import Cookies from "js-cookie";
 
 function AddCategory() {
@@ -9,6 +9,7 @@ function AddCategory() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [imagePreview, setImagePreview] = useState(null); // State to store image preview URL
 
   const handleInput = (e) => {
     e.persist();
@@ -21,7 +22,15 @@ function AddCategory() {
   };
 
   const handleIconInput = (e) => {
-    setCategory({ ...category, category_icon: e.target.files[0] });
+    const file = e.target.files[0];
+    setCategory({ ...category, category_icon: file });
+
+    // Preview the image
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
@@ -73,29 +82,40 @@ function AddCategory() {
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col w-[80%] ">
+        <div className="flex flex-col w-[80%]">
           <input
             type="text"
             name="category_title"
             placeholder="Category"
-            className="p-2 rounded-lg"
+            className="p-2 rounded-lg border border-gray-300"
             value={category.category_title}
             onChange={handleInput}
           />
         </div>
 
-        {/* New input field for category icon */}
-        <div className="flex flex-col w-[80%] ">
-          <label htmlFor="category_icon" className="mt-3 mb-1">
+        <div className="flex flex-col w-[80%]">
+          <label htmlFor="category_icon" className="mt-3 mb-1 text-gray-700">
             Category Icon (Image)
           </label>
+          {/* Hidden input file button */}
           <input
             type="file"
             id="category_icon"
             name="category_icon"
             accept="image/*"
             onChange={handleIconInput}
+            className="hidden"
           />
+          {/* Label for the input file button */}
+          <label htmlFor="category_icon" className="cursor-pointer">
+            {imagePreview ? (
+              <img src={imagePreview} alt="Preview" className="mt-2 max-w-[200px] max-h-[200px]" />
+            ) : (
+              <div className="border border-gray-300 p-2 rounded-lg mt-2">
+                Click to upload image
+              </div>
+            )}
+          </label>
         </div>
 
         <button

@@ -18,6 +18,11 @@ import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
+<<<<<<< veha-branch
+import DashboardCategory from "./Dashboard/DashboardCategory";
+import AddCategory from "./Dashboard/Category/AddCategory";
+=======
+>>>>>>> master
 import ProtectRoute from "./ProtectRoute";
 
 function App() {

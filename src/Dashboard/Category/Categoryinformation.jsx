@@ -46,7 +46,7 @@ function Categoryinformation() {
         </Button>
         {/* Conditionally render the Show Category page */}
         {showShowCategory && (
-          <div className="mt-10" style={{ position: "relative", transform: "translateX(-120%)" }}>
+          <div className="mt-10 " style={{ position: "relative", transform: "translateX(-120%) " }}>
             <ShowCategory />
           </div>
         )}
