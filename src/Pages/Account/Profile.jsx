@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../Components/api/axios";
+import useAuthContext from "../../Components/context/AuthContext";
+
 function Profile() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const { user, logout } = useAuthContext();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get("/category", {
           headers: {
-            Authorization: `Bearer ${"9|Oxgo4q50UpWUXultKjwvnis8spS6QdOldedyPCWD20cbe583"}`,
+            Authorization: `Bearer ${user.token}`,
           },
         });
-        setUserData(response.data);
+        setUserData({ ...user, ...response.data }); // Include user data along with fetched user data
         console.log(userData);
       } catch (error) {
         setError("Error fetching user data");
@@ -21,7 +24,17 @@ function Profile() {
     };
 
     fetchUserData();
-  },[]);
+  }, [user]); // Include user as a dependency
+
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
     <>
       <div className="bg-[#F7EFF2] h-screen w-full">
@@ -38,12 +51,13 @@ function Profile() {
                   <h1 className="text-xl font-bold">Mateo</h1>
                   <p className="text-gray-700">General User</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <a
-                      href="/login"
-                      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                    <button
+                      onClick={handleLogout}
+                      className="bg-red-500 hover:bg-red-600 text-white
+                      active:bg-gray-200 py-2 px-4 rounded"
                     >
                       Sign Out
-                    </a>
+                    </button>
                     <a
                       href="/"
                       className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded"
@@ -114,7 +128,7 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <p className="mb-6 text-lg text-gray-600">Park Jimin</p>
+                      {user && <p className="mb-6 text-lg text-gray-600">{user.name}</p>}
                     </div>
                   </a>
                   <a
