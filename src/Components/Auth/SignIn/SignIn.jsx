@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { CgPhone } from "react-icons/cg";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import logoGoogle from "../../../asset/google1.png";
-import logoPhone from "../../../asset/p1.png";
 import Loading from "../../Loading/Loading"; // Import the Loading component
 import useAuthContext from "../../context/AuthContext";
 export const SignIn = () => {
@@ -25,82 +25,106 @@ export const SignIn = () => {
 
   return (
     <section>
-      <div className="min-h-screen bg-[#F7EFF2] w-full">
+      <div className="min-h-screen bg-pink-100 w-full">
         <div className="flex flex-col w-full h-screen items-center justify-center">
           <p className="text-7xl text-blue-800 font-bold font-abc">skin.me</p>
           <p className="text-blue-500 font-abc text-sm">
             Love Your Skin, Love Yourself
           </p>
 
-          <div className="flex w-[350px] mt-10 flex-col items-center relative">
-            <p className="absolute top-0 left-0 text-2xl font-medium font-dbc text-gray-700">
-              Sign In to your Account
-            </p>
-            <div className="mt-14 flex flex-col items-center w-[350px]">
+          <div className="flex mt-10 flex-col items-center relative">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+              <p className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Sign In to your Account
+              </p>
+              <p className="mt-2 flex justify-center">
+                Or{" "}
+                <button className="ml-2 text-pink-400 cursor-pointer hover:underline">
+                  <Link to="/signup">
+                    <p>Create an account</p>
+                  </Link>
+                </button>
+              </p>
+            </div>
+            <div className="mt-10 flex flex-col items-center">
               <form onSubmit={handleSubmit}>
+                <label
+                  for="email address"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Email Address
+                </label>
                 <input
                   type="email"
                   name="email"
                   value={email}
                   onChange={handleInputChange}
-                  placeholder="Email"
-                  className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                  placeholder="Enter your email address"
+                  className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-pink-400"
                 />
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
                 <input
                   type="password"
                   name="password"
                   value={password}
                   onChange={handleInputChange}
-                  placeholder="Password"
-                  className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                  placeholder="Enter your password"
+                  className="w-full px-4 py-2 mb-4 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-pink-400"
                 />
                 {error && <p className="text-red-500">{error}</p>}
 
                 <button
                   type="submit"
-                  className="w-full px-4 py-2 m-2 mb-4 bg-pink-400 text-white rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2 mt-2 mb-4 bg-pink-400 text-white rounded-lg focus:outline-none focus:border-pink-400"
                 >
                   Sign In
                 </button>
               </form>
               {isLoading && <Loading />}{" "}
               {/* Render Loading component when isLoading is true */}
-              <div className="flex items-center justify-center mt-10 rounded-3xl bg-[#82165C]">
-                <img
-                  className="w-[40px] h-[40px]"
-                  src={logoGoogle}
-                  alt="Google Logo"
-                />
-                <a
-                  type="button"
-                  href="auth/google"
-                  className="px-2 py-2 m-1 text-white"
-                >
-                  Sign In with Google
-                </a>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className=" text-gray-500 px-24">
+                    <span className="relative bg-pink-100">
+                      Or continue with
+                    </span>
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center justify-center mt-10 rounded-3xl bg-[#82165C]">
-                <img
-                  className="w-[40px] h-[40px]"
-                  src={logoPhone}
-                  alt="Google Logo"
-                />
-                <a
-                  type="button"
-                  href="auth/google"
-                  className="px-2 py-2 m-1 text-white"
-                >
-                  Sign In with No.
-                </a>
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                <div>
+                  <a
+                    href="/"
+                    className="w-full flex items-center justify-center px-8 py-3 border-2 border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:text-pink-400 hover:bg-gray-100"
+                  >
+                    <FaFacebook size={24} />
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="/"
+                    className="w-full flex items-center justify-center px-8 py-3 border-2 border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:text-pink-400 hover:bg-gray-50"
+                  >
+                    <CgPhone size={24} />
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="/"
+                    className="w-full flex items-center justify-center px-8 py-3 border-2 border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:text-pink-400 hover:bg-gray-50"
+                  >
+                    <FaGoogle size={24} />
+                  </a>
+                </div>
               </div>
-              <p className="mt-10">
-              You already have an account!
-              <button className="ml-2 text-pink-400 cursor-pointer hover:underline">
-                <Link to="/signup">
-                  <p>Sign Up</p>
-                </Link>
-              </button>
-            </p>
             </div>
           </div>
         </div>
