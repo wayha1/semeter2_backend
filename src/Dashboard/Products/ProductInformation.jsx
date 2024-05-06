@@ -19,8 +19,7 @@ function ProductInformation() {
     setShowShowProduct(true); // Ensure only one page is shown at a time
     setActiveButton("show");
   };
-  
-  
+
   return (
     <div className=" flex justify-center bg-white h-[60px] p-2">
       <div className="mr-5 mb-10" style={{ width: "400px" }}>
@@ -28,12 +27,12 @@ function ProductInformation() {
           onClick={toggleAddProduct}
           className={`w-full ${activeButton === "add" ? "bg-green-600" : "bg-green-400"}`}
         >
-          Add To Category
+          Add Product
         </Button>
         {/* Conditionally render the Add Category page */}
         {showAddProduct && (
           <div className="mt-10" style={{ position: "relative", transform: "translateX(-10%)" }}>
-            <AddProduct/>
+            <AddProduct />
           </div>
         )}
       </div>
@@ -42,17 +41,17 @@ function ProductInformation() {
           onClick={toggleShowProduct}
           className={`w-full ${activeButton === "show" ? "bg-red-500" : "bg-red-400"}`}
         >
-          Show Category
+          Show Product
         </Button>
         {/* Conditionally render the Show Category page */}
         {showShowProduct && (
           <div className="mt-10 " style={{ position: "relative", transform: "translateX(-120%) " }}>
-            <ShowProduct/>
+            <ShowProduct />
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default ProductInformation
+export default ProductInformation;
