@@ -47,7 +47,7 @@ function ShowCategory() {
           >
             <div className="mr-10 ">
               <img
-                src={`http://localhost:8000/${category.category_icon}`}
+                src={category.category_icon}
                 alt={category.category_title}
                 className="mr-6 border-2 w-[100px] h-[100px]"
               />
