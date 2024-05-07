@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import axios from "../../Components/api/axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 
 function AddCategory() {
   const [category, setCategory] = useState({
     category_title: "",
-    category_icon: null, // New state for handling category icon image file
+    category_icon: null,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [imagePreview, setImagePreview] = useState(null); 
+  const [uploadedImageUrl, setUploadedImageUrl] = useState(""); // State to store the uploaded image URL
 
-  const handleInput = (e) => {
-    e.persist();
-    setCategory({ ...category, [e.target.name]: e.target.value });
-    // Clear the error and success messages when the category title is changed
-    if (e.target.name === "category_title") {
+  const cloudName = "ds9ccmtdq";
+  const unsignedUploadPreset = "ntrpox3d";
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setCategory({ ...category, [name]: value });
+    if (name === "category_title") {
       setErrorMessage("");
       setSuccessMessage("");
     }
@@ -25,10 +27,9 @@ function AddCategory() {
     const file = e.target.files[0];
     setCategory({ ...category, category_icon: file });
 
-    // Preview the image
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImagePreview(reader.result);
+      setUploadedImageUrl(reader.result); // Set the uploaded image URL to display
     };
     reader.readAsDataURL(file);
   };
@@ -47,23 +48,29 @@ function AddCategory() {
       formData.append("category_title", category.category_title);
     }
     if (category.category_icon) {
-      formData.append("category_icon", category.category_icon);
+      formData.append("file", category.category_icon);
     }
 
     try {
-      const response = await axios.post("/category", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          params: {
+            upload_preset: unsignedUploadPreset,
+          },
+        }
+      );
 
       if (response.status === 200) {
         setCategory({ ...category, category_title: "", category_icon: null });
         setSuccessMessage("Category added successfully.");
+        setUploadedImageUrl(""); // Clear the uploaded image URL
         console.log("Category added successfully:", response.data);
 
-        // Clear success message after 3 seconds
         setTimeout(() => {
           setSuccessMessage("");
         }, 3000);
@@ -71,7 +78,8 @@ function AddCategory() {
         setErrorMessage("An error occurred while adding the category.");
       }
     } catch (error) {
-      // Error handling code remains the same
+      console.error("Error:", error);
+      setErrorMessage("An error occurred while adding the category.");
     }
   };
 
@@ -97,7 +105,6 @@ function AddCategory() {
           <label htmlFor="category_icon" className="mt-3 mb-1 text-gray-700">
             Category Icon (Image)
           </label>
-          {/* Hidden input file button */}
           <input
             type="file"
             id="category_icon"
@@ -106,17 +113,16 @@ function AddCategory() {
             onChange={handleIconInput}
             className="hidden"
           />
-          {/* Label for the input file button */}
           <label htmlFor="category_icon" className="cursor-pointer">
-            {imagePreview ? (
-              <img src={imagePreview} alt="Preview" className="mt-2 max-w-[200px] max-h-[200px]" />
-            ) : (
-              <div className="border border-gray-300 p-2 rounded-lg mt-2">
-                Click to upload image
-              </div>
-            )}
+            <div className="border border-gray-300 p-2 rounded-lg mt-2">
+              Click to upload image
+            </div>
           </label>
         </div>
+
+        {uploadedImageUrl && ( // Conditionally render the uploaded image
+          <img src={uploadedImageUrl} alt="Uploaded" className="mt-2 max-w-[200px] max-h-[200px]" />
+        )}
 
         <button
           type="submit"
