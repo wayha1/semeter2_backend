@@ -6,8 +6,12 @@ import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
 import ProductDetails from "./Components/Shop/ProductDetails";
+import AddCategory from "./Dashboard/Category/AddCategory";
 import Contact from "./Dashboard/Contact";
+import DashboardCategory from "./Dashboard/DashboardCategory";
 import Dashboard from "./Dashboard/DashboardLayout";
+import DashboardVideo from "./Dashboard/DashboardVideo";
+import DashboardProduct from "./Dashboard/Products/DashboardProduct";
 import User from "./Dashboard/User";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
@@ -16,10 +20,7 @@ import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
-import DashboardCategory from "./Dashboard/DashboardCategory";
-import AddCategory from "./Dashboard/Category/AddCategory";
 import ProtectRoute from "./ProtectRoute";
-import DashboardProduct from "./Dashboard/Products/DashboardProduct";
 
 function App() {
   return (
@@ -76,6 +77,14 @@ function App() {
         }
       />
       <Route
+        path="/dashboard/dashboardVideo"
+        element={
+          <div>
+            <DashboardVideo />
+          </div>
+        }
+      />
+      <Route
         path="/dashboard/dashboardCategory/AddCategory"
         element={
           <div>
@@ -87,9 +96,9 @@ function App() {
         path="/dashboard/dashboardProduct"
         element={
           <div>
-            <DashboardProduct/>
+            <DashboardProduct />
           </div>
-        }      
+        }
       />
       <Route
         path="/dashboard/contacts"
@@ -118,12 +127,10 @@ function App() {
       <Route
         path="/profile"
         element={
-         <div>
-
-           <Navbar />
-           <Profile />
-       
-         </div>
+          <div>
+            <Navbar />
+            <Profile />
+          </div>
         }
       />
       <Route
