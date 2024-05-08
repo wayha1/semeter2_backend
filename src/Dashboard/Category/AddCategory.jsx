@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import UploadFile from "../UploadFile";
 
 function AddCategory() {
   const [category, setCategory] = useState({
     category_title: "",
-    category_icon: null,
+    category_icon: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(""); // State to store the uploaded image URL
+  const [uploadConfirmed, setUploadConfirmed] = useState(false); 
 
   const cloudName = "ds9ccmtdq";
   const unsignedUploadPreset = "ntrpox3d";
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+        setCategory({ ...category, category_title: "", category_icon: "" });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -23,65 +34,84 @@ function AddCategory() {
     }
   };
 
-  const handleIconInput = (e) => {
-    const file = e.target.files[0];
-    setCategory({ ...category, category_icon: file });
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setUploadedImageUrl(reader.result); // Set the uploaded image URL to display
-    };
-    reader.readAsDataURL(file);
+  const handleImageUpload = (imageUrl) => {
+    setCategory({ ...category, category_icon: imageUrl });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = Cookies.get("token");
-    if (!token) {
-      setErrorMessage("Unauthorized access. Please login.");
-      return;
-    }
-
-    const formData = new FormData();
-    if (category.category_title.trim() !== "") {
-      formData.append("category_title", category.category_title);
-    }
-    if (category.category_icon) {
-      formData.append("file", category.category_icon);
-    }
-
+  const handleConfirmUpload = async (imageUrl) => {
     try {
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData,
+      const token = Cookies.get("token");
+      if (!token) {
+        setErrorMessage("Unauthorized access. Please login.");
+        return;
+      }
+      const categoryResponse = await axios.post(
+        "/category",
+        {
+          category_title: category.category_title,
+          category_icon: imageUrl, // Pass the uploaded image URL
+        },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          params: {
-            upload_preset: unsignedUploadPreset,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+  
+      // Set success message
+      setSuccessMessage("Category added successfully.");
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("An error occurred while adding the category.");
+    }
+  };
+  
 
-      if (response.status === 200) {
-        setCategory({ ...category, category_title: "", category_icon: null });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!category.category_title || !category.category_icon) {
+      setErrorMessage("Please provide both category title and icon.");
+      return;
+    }
+  
+    try {
+      const token = Cookies.get("token");
+      if (!token) {
+        setErrorMessage("Unauthorized access. Please login.");
+        return;
+      }
+  
+      // Send category data to your backend server
+      const categoryResponse = await axios.post(
+        "http://127.0.0.1:8000/api/category",
+        {
+          category_title: category.category_title,
+          category_icon: category.category_icon,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // Check if the category was successfully added
+      if (categoryResponse.status === 200) {
         setSuccessMessage("Category added successfully.");
-        setUploadedImageUrl(""); // Clear the uploaded image URL
-        console.log("Category added successfully:", response.data);
-
-        setTimeout(() => {
-          setSuccessMessage("");
-        }, 3000);
+        // Clear category data and reset upload confirmation state
+        setCategory({ category_title: "", category_icon: "" });
+        setUploadConfirmed(false);
       } else {
-        setErrorMessage("An error occurred while adding the category.");
+        // If there was an issue with the request, display an error message
+        setErrorMessage("Failed to add category. Please try again later.");
       }
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("An error occurred while adding the category.");
     }
   };
+  
 
   return (
     <div className="w-[930px] h-[450px] container flex flex-col m-2 space-y-5">
@@ -102,30 +132,18 @@ function AddCategory() {
         </div>
 
         <div className="flex flex-col w-[80%]">
-          <label htmlFor="category_icon" className="mt-3 mb-1 text-gray-700">
-            Category Icon (Image)
-          </label>
-          <input
-            type="file"
-            id="category_icon"
-            name="category_icon"
-            accept="image/*"
-            onChange={handleIconInput}
-            className="hidden"
+          <UploadFile
+            cloudName={cloudName}
+            unsignedUploadPreset={unsignedUploadPreset}
+            handleImageUpload={handleImageUpload}
+            onConfirmUpload={handleConfirmUpload} // Pass the callback function
+            setUploadConfirmed={setUploadConfirmed} // Pass the state setter function
           />
-          <label htmlFor="category_icon" className="cursor-pointer">
-            <div className="border border-gray-300 p-2 rounded-lg mt-2">
-              Click to upload image
-            </div>
-          </label>
         </div>
 
-        {uploadedImageUrl && ( // Conditionally render the uploaded image
-          <img src={uploadedImageUrl} alt="Uploaded" className="mt-2 max-w-[200px] max-h-[200px]" />
-        )}
-
         <button
-          type="submit"
+          type="button" // Change the type to "button"
+          onClick={handleSubmit} // Bind handleSubmit function to onClick event
           className="bg-blue-500 hover:bg-blue-700 active:bg-blue-800 w-32 rounded-xl p-2 text-white text-lg font-custom mt-5"
         >
           {"Upload"}

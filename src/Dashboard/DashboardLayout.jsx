@@ -144,7 +144,7 @@ const DashboardLayout = ({ children, title }) => {
         <div className="md:h-16 w-full"></div>
         {/* dashboard body */}
         <div className="min-h-[90vh] pt-[1px] px-[1px] w-full bg-gray-200 overflow-y-auto">
-          {title && <h1 className="p-10 text-2xl">{title}</h1>}
+          {title && <h1 className="text-2xl">{title}</h1>}
           {children}
         </div>
         <footer className="h-[5vh] border w-full font-semibold text-sm flex items-center justify-center md:justify-end md:px-10">
