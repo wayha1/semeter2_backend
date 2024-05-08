@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "../../Components/api/axios";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile";
 
@@ -10,10 +10,20 @@ function AddCategory() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [uploadConfirmed, setUploadConfirmed] = useState(false); // State to track upload confirmation
+  const [uploadConfirmed, setUploadConfirmed] = useState(false); 
 
   const cloudName = "ds9ccmtdq";
   const unsignedUploadPreset = "ntrpox3d";
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+        setCategory({ ...category, category_title: "", category_icon: "" });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -35,8 +45,6 @@ function AddCategory() {
         setErrorMessage("Unauthorized access. Please login.");
         return;
       }
-  
-      // Send category data to your backend server
       const categoryResponse = await axios.post(
         "/category",
         {
@@ -50,12 +58,8 @@ function AddCategory() {
         }
       );
   
-      // Set success message directly here
+      // Set success message
       setSuccessMessage("Category added successfully.");
-  
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("An error occurred while adding the category.");
@@ -66,11 +70,45 @@ function AddCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (uploadConfirmed) { // Check if upload is confirmed
-      // Clear category data and reset upload confirmation state
-      setCategory({ category_title: "", category_icon: "" });
-      setUploadConfirmed(false);
-      setUploadConfirmed(true); // Set uploadConfirmed to true before submitting the form
+    if (!category.category_title || !category.category_icon) {
+      setErrorMessage("Please provide both category title and icon.");
+      return;
+    }
+  
+    try {
+      const token = Cookies.get("token");
+      if (!token) {
+        setErrorMessage("Unauthorized access. Please login.");
+        return;
+      }
+  
+      // Send category data to your backend server
+      const categoryResponse = await axios.post(
+        "http://127.0.0.1:8000/api/category",
+        {
+          category_title: category.category_title,
+          category_icon: category.category_icon,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // Check if the category was successfully added
+      if (categoryResponse.status === 200) {
+        setSuccessMessage("Category added successfully.");
+        // Clear category data and reset upload confirmation state
+        setCategory({ category_title: "", category_icon: "" });
+        setUploadConfirmed(false);
+      } else {
+        // If there was an issue with the request, display an error message
+        setErrorMessage("Failed to add category. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("An error occurred while adding the category.");
     }
   };
   

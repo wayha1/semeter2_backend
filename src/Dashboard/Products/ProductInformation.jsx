@@ -31,12 +31,12 @@ function ProductInformation() {
         </Button>
         {/* Conditionally render the Add Category page */}
         {showAddProduct && (
-          <div className="mt-10" style={{ position: "relative", transform: "translateX(-10%)" }}>
+          <div className="relative w-full" style={{ transform: "translateX(-10%)" }}>
             <AddProduct />
           </div>
         )}
       </div>
-      <div className="mb-10" style={{ width: "400px" }}>
+      <div className="mb-10 w-fit items-center" style={{ width: "400px" }}>
         <Button
           onClick={toggleShowProduct}
           className={`w-full ${activeButton === "show" ? "bg-red-500" : "bg-red-400"}`}
@@ -45,7 +45,7 @@ function ProductInformation() {
         </Button>
         {/* Conditionally render the Show Category page */}
         {showShowProduct && (
-          <div className="mt-10 " style={{ position: "relative", transform: "translateX(-120%) " }}>
+          <div className="mt-10" style={{ position: "relative", transform: "translateX(-120%) " }}>
             <ShowProduct />
           </div>
         )}

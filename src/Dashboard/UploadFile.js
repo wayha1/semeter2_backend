@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UploadFile = ({ cloudName, unsignedUploadPreset, handleImageUpload, onConfirmUpload, setUploadConfirmed }) => {
+const UploadFile = ({ cloudName, 
+  unsignedUploadPreset, 
+  handleImageUpload, 
+  onConfirmUpload, 
+  setUploadConfirmed 
+}) => {
+
   const [file, setFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [showModal, setShowModal] = useState(false);
