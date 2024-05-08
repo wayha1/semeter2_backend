@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../Components/api/axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile";
 
@@ -38,7 +38,7 @@ function AddCategory() {
   
       // Send category data to your backend server
       const categoryResponse = await axios.post(
-        "http://127.0.0.1:8000/api/category",
+        "/category",
         {
           category_title: category.category_title,
           category_icon: imageUrl, // Pass the uploaded image URL

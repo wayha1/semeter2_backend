@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../Components/api/axios";
 import Cookies from "js-cookie";
-import ModelEdit from '../Category/Models/ModelEdit';
+import ModelEdit from '../Category/Modal/ModelEdit';
 
 function ShowCategory() {
   const [categoryData, setCategoryData] = useState([]);
@@ -36,6 +36,22 @@ function ShowCategory() {
     setIsModalOpen(false);
   };
 
+  const handleDelete = async (categoryId) => {
+    try {
+      const token = Cookies.get("token");
+      await axios.delete(`/category/${categoryId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Assuming success, you may want to update the UI by refetching the data
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+
   return (
     <div className="p-10 w-[850px] h-screen">
       <h2 className="text-xl font-bold mb-4">Category Information</h2>
@@ -65,6 +81,7 @@ function ShowCategory() {
                   Edit
                 </button>
                 <button
+                onClick={() => handleDelete(category.id)}
                   className="btn-blue bg-red-600 px-2 py-1 rounded-lg text-white hover:bg-red-300"
                 >
                   Delete
