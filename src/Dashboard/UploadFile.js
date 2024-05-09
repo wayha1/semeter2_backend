@@ -58,7 +58,7 @@ const UploadFile = ({
         } else if (section === "product_banner") {
           handleIconUpload(imageUrl);
           handleBannerUpload(imageUrl); // Handle image upload for product_banner
-        }else if(section == "category_icon"){
+        }else if(section === "category_icon"){
           handleImageUpload(imageUrl);
         }
         setUploadedImageUrl(imageUrl);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../Components/api/axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile"; // Import the UploadFile component
 
