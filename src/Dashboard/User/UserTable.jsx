@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "../Components/api/axios";
-import ModelEdit from "./ModelEdit";
-import ModalDelete from "./ModalDelete";
+import React, { useEffect, useState } from "react";
+import axios from "../../Components/api/axios";
+import ModalDelete from "../ModalDelete";
+import ModelEdit from "../ModelEdit";
 // import useAuthContext from "./../Components/context/AuthContext"; // Import the useAuthContext hook
 import Cookies from "js-cookie";
 
@@ -59,8 +59,10 @@ function UserTable() {
   };
 
   return (
-    <div className="container mx-auto w-full dark:bg-black-900 dark:border-black-700">
-      <h1 className="text-xl font-bold mb-4 text-black p-2 text-center">Users Information</h1>
+    <div className="container mx-auto w-full h-screen">
+      <h1 className="text-xl font-bold mb-4 pt-10 text-black p-2 text-center">
+        Users Information
+      </h1>
       <table className="table-auto w-full border-collapse border border-gray-500">
         <thead>
           <tr className="bg-blue-300">
@@ -86,20 +88,30 @@ function UserTable() {
               <td className="border border-gray-500 p-2">{data.id}</td>
               <td className="border border-gray-500 p-2">{data.name}</td>
               <td className="border border-gray-500 p-2">{data.email}</td>
-              <td className="border border-gray-500 p-2">{data.email_verified_at || "null"}</td>
-              <td className="border border-gray-500 p-2">{data.google_id || "null"}</td>
+              <td className="border border-gray-500 p-2">
+                {data.email_verified_at || "null"}
+              </td>
+              <td className="border border-gray-500 p-2">
+                {data.google_id || "null"}
+              </td>
               <td className="border border-gray-500 p-2">{data.gender}</td>
               <td className="border border-gray-500 p-2">{data.is_active}</td>
-              <td className="border border-gray-500 p-2">{data.user_image || "null"}</td>
-              <td className="border border-gray-500 p-2">{data.phone_number || "null"}</td>
-              <td className="border border-gray-500 p-2">{data.user_address || "null"}</td>
+              <td className="border border-gray-500 p-2">
+                {data.user_image || "null"}
+              </td>
+              <td className="border border-gray-500 p-2">
+                {data.phone_number || "null"}
+              </td>
+              <td className="border border-gray-500 p-2">
+                {data.user_address || "null"}
+              </td>
               <td className="border border-gray-500 p-2">{data.status}</td>
               <td className="border border-gray-500 p-2">{data.created_at}</td>
               <td className="border border-gray-500 p-2">{data.updated_at}</td>
-              <td className="border border-gray-500 p-2 flex">
+              <td className=" border-gray-500 p-2 flex">
                 <button
                   onClick={() => handleEdit(data)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mr-2"
+                  className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded mr-2"
                 >
                   Edit
                 </button>
@@ -115,10 +127,17 @@ function UserTable() {
         </tbody>
       </table>
       {/* ModelEdit component */}
-      {isEditModalOpen && <ModelEdit user={editingUser} handleCloseModal={handleCloseEditModal} />}
+      {isEditModalOpen && (
+        <ModelEdit user={editingUser} handleCloseModal={handleCloseEditModal} />
+      )}
 
       {/* ModalDelete component */}
-      {isDeleteModalOpen && <ModalDelete user={deleting} handleCloseModal={handleCloseDeleteModal} />}
+      {isDeleteModalOpen && (
+        <ModalDelete
+          user={deleting}
+          handleCloseModal={handleCloseDeleteModal}
+        />
+      )}
     </div>
   );
 }

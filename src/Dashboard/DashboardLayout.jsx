@@ -1,6 +1,5 @@
-import { Button } from "@material-tailwind/react";
 import { useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaVideo } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { MdCategory, MdDashboard } from "react-icons/md";
@@ -65,22 +64,48 @@ const DashboardLayout = ({ children, title }) => {
             } flex-grow md:block px-4 overflow-auto pb-4 md:pb-0 md:overflow-y-auto`}
           >
             <div className="relative">
-              <Button
+              <NavLink
+                activeClassName="bg-pink-400 text-white"
                 className="flex justify-between cursor-pointer w-full items-center px-4 py-2 mt-4 text-lg font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200  hover:bg-pink-500 focus:bg-pink-500 hover:text-white focus:outline-none focus:shadow-outline"
                 to={"/dashboard"}
               >
                 Dashboard
                 {/* dashboard icons */}
                 <MdDashboard />
-              </Button>
+              </NavLink>
             </div>
             <NavLink
+            activeClassName="bg-pink-400 text-white"
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
               to={"/dashboard/users"}
             >
               User
               {/* user icon */}
               <FaCircleUser />
+            </NavLink>
+            {/* Product */}
+            <NavLink
+              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              to={"/dashboard/dashboardProduct/"}
+            >
+              Products
+              <FaShoppingCart />
+            </NavLink>
+            {/* Categories */}
+            <NavLink
+              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              to={"/dashboard/dashboardCategory"}
+            >
+              Categories
+              <MdCategory />
+            </NavLink>
+            {/* video  */}
+            <NavLink
+              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              to={"/dashboard/dashboardVideo"}
+            >
+              Videos
+              <FaVideo />
             </NavLink>
             {/* contact menu  */}
             <NavLink
@@ -90,30 +115,6 @@ const DashboardLayout = ({ children, title }) => {
               Contact
               <RiContactsBook2Fill />
             </NavLink>
-            <NavLink
-              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-              to={"/dashboard/dashboardProduct/"}
-            >
-              Products
-              <FaShoppingCart />
-            </NavLink>
-            <NavLink
-              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-              to={"/dashboard/dashboardCategory"}
-            >
-              Categories
-              <MdCategory />
-            </NavLink>
-            <NavLink
-              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-              to={"/dashboard/dashboardVideo"}
-            >
-              Videos
-              <MdCategory />
-            </NavLink>
-            {/* </div>
-              </div> */}
-
             {/* back to home page menu  */}
             <NavLink
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 hover:text-white hover:bg-pink-500 focus:bg-pink-500  focus:outline-none focus:shadow-outline"
@@ -141,15 +142,15 @@ const DashboardLayout = ({ children, title }) => {
       {/* content  */}
       <div className="flex flex-col w-full ml-0 md:ml-64  ">
         {/* navbar header  */}
-        <div className="md:h-16 w-full"></div>
+        <div className="w-full"></div>
         {/* dashboard body */}
-        <div className="min-h-[90vh] pt-[1px] px-[1px] w-full bg-gray-200 overflow-y-auto">
+        <div className="h-auto w-full bg-pink-100  ">
           {title && <h1 className="text-2xl">{title}</h1>}
           {children}
         </div>
-        <footer className="h-[5vh] border w-full font-semibold text-sm flex items-center justify-center md:justify-end md:px-10">
+        {/* <footer className="h-auto border w-full font-semibold text-sm flex items-center justify-center md:justify-end md:px-10">
           &#169; Copyright Skinme {currYear}
-        </footer>
+        </footer> */}
       </div>
     </div>
   );
