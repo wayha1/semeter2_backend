@@ -6,6 +6,7 @@ const UploadFile = ({
   unsignedUploadPreset,
   handleImageUpload,
   handleBannerUpload,
+  handleIconUpload,
   setUploadConfirmed,
   section,
 }) => {
@@ -21,6 +22,7 @@ const UploadFile = ({
   };
 
   const handleYesClick = async () => {
+    handleIconUpload(uploadedImageUrl); 
     setShowModal(false);
     handleUpload();
   };
@@ -48,11 +50,15 @@ const UploadFile = ({
 
       if (response.status === 200) {
         const imageUrl = response.data.secure_url;
-        
-        if (section === "product_image" ) {
-          handleImageUpload(imageUrl); // Handle image upload for product_image
+
+        if (section === "product_image") {
+          handleImageUpload(imageUrl);
+
+          // Handle image upload for product_image
         } else if (section === "product_banner") {
+          handleIconUpload(imageUrl);
           handleBannerUpload(imageUrl); // Handle image upload for product_banner
+        } else if (section === "category_item") {
         }
         setUploadedImageUrl(imageUrl);
         setUploadConfirmed(true);

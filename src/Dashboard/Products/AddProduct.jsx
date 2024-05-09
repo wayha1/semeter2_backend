@@ -59,6 +59,8 @@ function AddProduct() {
     const token = Cookies.get("token");
     if (!token) {
       setErrorMessage("Unauthorized access. Please login.");
+
+      
       return;
     }
 

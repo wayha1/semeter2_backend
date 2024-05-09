@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ThreeCE from "../../asset/3CE.png";
-import Axisy from "../../asset/Axis-y.png";
-import Cosrx from "../../asset/COSRX.png";
-import Joseon from "../../asset/Joseon.png";
-import MaryandMay from "../../asset/Mary&May.png";
-import NatureRepublic from "../../asset/Nature republic.png";
-import Innisfree from "../../asset/innisfree.png";
-import Klairs from "../../asset/klairs.png";
+import Cookies from "js-cookie";
+import axios from "../api/axios";
 
 function Branding() {
+  const [categoryBanner, setCategoryBanner] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const token = Cookies.get("token");
+      console.log("Fetching data...");
+      const response = await axios.request({
+        url: "/category",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCategoryBanner(response.data.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setCategoryBanner([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <div>
@@ -20,228 +38,17 @@ function Branding() {
           {/* animate-loop-scroll */}
           <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
             <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
-              <div className="flex justify-center items-center ">
-                <Link to="https://naturerepublickh.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className=" w-full h-full hover:scale-110 ">
-                      <img src={NatureRepublic} alt="Natural Republic"></img>
+              {categoryBanner.map((item, index) => (
+                <div key={index} className="flex justify-center items-center">
+                  <Link to={item.link}>
+                    <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
+                      <div className="w-full h-full hover:scale-110">
+                        <img src={item.category_icon} alt={item.alt} />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://www.axis-y.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Axisy} alt="Axis-y"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://eng.marynmay.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={MaryandMay} alt="Mary&May"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://beautyofjoseon.com/">
-                  <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Joseon} className=" " alt="Joseon"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center ">
-                <Link to="https://stylenandaen.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={ThreeCE} className=" " alt="3CE"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-10">
-                <Link to="https://www.klairscosmetics.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Klairs} className=" " alt="Klairs"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-12">
-                <Link to="https://www.cosrx.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Cosrx} className=" " alt="Cosrx"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://us.innisfree.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Innisfree} className=" " alt="Innisfree"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            {/* Second scroll */}
-            <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
-              <div className="flex justify-center items-center ">
-                <Link to="https://naturerepublickh.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className=" w-full h-full hover:scale-110 ">
-                      <img src={NatureRepublic} alt="Natural Republic"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://www.axis-y.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Axisy} alt="Axis-y"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://eng.marynmay.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={MaryandMay} alt="Mary&May"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://beautyofjoseon.com/">
-                  <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Joseon} className=" " alt="Joseon"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center ">
-                <Link to="https://stylenandaen.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={ThreeCE} className=" " alt="3CE"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-10">
-                <Link to="https://www.klairscosmetics.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Klairs} className=" " alt="Klairs"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-12">
-                <Link to="https://www.cosrx.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Cosrx} className=" " alt="Cosrx"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://us.innisfree.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Innisfree} className=" " alt="Innisfree"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            {/* Third Scroll */}
-            <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
-              <div className="flex justify-center items-center ">
-                <Link to="https://naturerepublickh.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className=" w-full h-full hover:scale-110 ">
-                      <img src={NatureRepublic} alt="Natural Republic"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://www.axis-y.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Axisy} alt="Axis-y"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-14">
-                <Link to="https://eng.marynmay.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={MaryandMay} alt="Mary&May"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://beautyofjoseon.com/">
-                  <div className=" w-20 h-15 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Joseon} className=" " alt="Joseon"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center ">
-                <Link to="https://stylenandaen.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={ThreeCE} className=" " alt="3CE"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-10">
-                <Link to="https://www.klairscosmetics.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Klairs} className=" " alt="Klairs"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center pt-12">
-                <Link to="https://www.cosrx.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Cosrx} className=" " alt="Cosrx"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-              <div className="flex justify-center items-center">
-                <Link to="https://us.innisfree.com/">
-                  <div className=" w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110 ">
-                    <div className="w-full h-full hover:scale-110">
-                      <img src={Innisfree} className=" " alt="Innisfree"></img>
-                    </div>
-                  </div>
-                </Link>
-              </div>
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>
