@@ -22,7 +22,7 @@ function Categoryinformation() {
   };
 
   return (
-    <div className=" flex justify-center bg-white h-[60px] p-2">
+    <div className=" flex justify-center w-full h-auto pt-10 p-2">
       <div className="mr-5 mb-10" style={{ width: "400px" }}>
         <Button
           onClick={toggleAddCategory}

@@ -1,15 +1,15 @@
 import React from "react";
 import DashboardLayout from "./DashboardLayout";
-import Videoinformation from "./Videos/VideoInformation";
+import ProductInformation from "./Products/ProductInformation";
 
-function DashboardVideo() {
+function DashboardProduct() {
   return (
     <>
       <DashboardLayout>
-        <Videoinformation />
+        <ProductInformation />
       </DashboardLayout>
     </>
   );
 }
 
-export default DashboardVideo;
+export default DashboardProduct;

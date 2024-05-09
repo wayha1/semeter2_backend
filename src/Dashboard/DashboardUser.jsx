@@ -1,15 +1,15 @@
 import React from "react";
 import DashboardLayout from "./DashboardLayout";
-import Videoinformation from "./Videos/VideoInformation";
+import UserTable from "./User/UserTable";
 
-function DashboardVideo() {
+function User() {
   return (
     <>
       <DashboardLayout>
-        <Videoinformation />
+        <UserTable />
       </DashboardLayout>
     </>
   );
 }
 
-export default DashboardVideo;
+export default User;
