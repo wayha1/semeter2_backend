@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../Components/api/axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile"; // Import the UploadFile component
 
@@ -11,9 +11,9 @@ function AddProduct() {
     product_stock: "",
     product_rating: "",
     product_feedback: "",
-    product_image: null,
+    product_image: "",
     product_review: "",
-    product_banner: null,
+    product_banner: "",
     category_id: "",
   });
   const [categories, setCategories] = useState([]); // State to store categories data
@@ -21,7 +21,6 @@ function AddProduct() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [uploadConfirmed, setUploadConfirmed] = useState(false); // State to track upload confirmation
-
   const cloudName = "ds9ccmtdq";
   const unsignedUploadPreset = "ntrpox3d";
 
@@ -35,7 +34,7 @@ function AddProduct() {
     try {
       const token = Cookies.get("token");
       console.log("Fetching data...");
-      const response = await axios.get("/category", {
+      const response = await axios.get("http://127.0.0.1:8000/api/category", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +53,7 @@ function AddProduct() {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  // Function to handle form submission
+  // Inside the handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = Cookies.get("token");
@@ -63,51 +62,105 @@ function AddProduct() {
       return;
     }
 
-    const formData = new FormData();
-    // Append product data to FormData object
-    for (const key in product) {
-      formData.append(key, product[key]);
-    }
+    // Log the data before submitting the form
+    console.log("Product Data:", product);
 
     try {
-      const response = await axios.post("/product", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // Upload the product image to Cloudinary
+      const imageFormData = new FormData();
+      imageFormData.append("file", product.product_image);
+      imageFormData.append("upload_preset", unsignedUploadPreset);
 
-      if (response.status === 200) {
-        // Reset product state to clear form fields after successful submission
-        setProduct({
-          product_name: "",
-          product_description: "",
-          product_price: "",
-          product_stock: "",
-          product_rating: "",
-          product_feedback: "",
-          product_image: null,
-          product_review: "",
-          product_banner: null,
-          category_id: "",
-        });
-        // Product added successfully
-        setSuccessMessage("Product added successfully.");
-        console.log("Product added successfully:", response.data);
-      } else {
-        // Handle error adding product
+      // Declare imageResponse variable
+      const imageResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        imageFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // Upload the product banner to Cloudinary
+      const bannerFormData = new FormData();
+      bannerFormData.append("file", product.product_banner);
+      bannerFormData.append("upload_preset", unsignedUploadPreset);
+
+      // Declare bannerResponse variable
+      const bannerResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        bannerFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (imageResponse.status === 200 && bannerResponse.status === 200) {
+        const imageUrl = imageResponse.data.secure_url;
+        const bannerUrl = bannerResponse.data.secure_url;
+
+        // Update product object with uploaded image URLs
+        setProduct({ ...product, product_image: imageUrl, product_banner: bannerUrl });
+
+        // Send product data to your backend server
+        const productResponse = await axios.post(
+          "http://127.0.0.1:8000/api/product",
+          {
+            // Include other product data here
+            product_name: product.product_name,
+            product_description: product.product_description,
+            product_price: product.product_price,
+            product_stock: product.product_stock,
+            product_rating: product.product_rating,
+            product_feedback: product.product_feedback,
+            product_image: imageUrl,
+            product_review: product.product_review,
+            product_banner: bannerUrl,
+            category_id: product.category_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        // Check if the product was successfully added
+        if (productResponse.status === 200) {
+          setSuccessMessage("Product added successfully.");
+          // Clear product data
+          setProduct({
+            product_name: "",
+            product_description: "",
+            product_price: "",
+            product_stock: "",
+            product_rating: "",
+            product_feedback: "",
+            product_image: null,
+            product_review: "",
+            product_banner: null,
+            category_id: "",
+          });
+        } else {
+          // If there was an issue with the request, display an error message
+          setErrorMessage("Failed to add product. Please try again later.");
+        }
       }
     } catch (error) {
-      // Handle error
+      console.error("Error:", error);
+      setErrorMessage("An error occurred while adding the product.");
     }
   };
 
   // Function to handle image upload
-  const handleImageUpload = (imageUrl, bannerUrl) => {
-    setProduct({ ...product, product_image: imageUrl, product_banner: bannerUrl });
-  };
+  // const handleImageUpload = (imageUrl, bannerUrl) => {
+  //   setProduct({ ...product, product_image: imageUrl, product_banner: bannerUrl });
+  // };
 
-  const handleConfirmUpload = async (imageUrl,bannerUrl) => {
+  const handleConfirmUpload = async () => {
     try {
       const token = Cookies.get("token");
       if (!token) {
@@ -123,110 +176,125 @@ function AddProduct() {
 
   return (
     <div className="w-full h-auto flex justify-center items-center">
-       <div className="mt-10">
-      <h1 className="text-xl font-semibold mb-4">Add Product</h1>
-      <div className="w-[800px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_name">
-              Product Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="product_name"
-              type="text"
-              placeholder="Product Name"
-              name="product_name"
-              value={product.product_name}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_description">
-              Product Description
-            </label>
-            <textarea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="product_description"
-              placeholder="Product Description"
-              name="product_description"
-              value={product.product_description}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_id">
-              Category
-            </label>
-            <select
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="category_id"
-              value={product.category_id}
-              onChange={(e) => setProduct({ ...product, category_id: e.target.value })}
-            >
-              <option>Select category...</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.category_title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_stock">
-              Stock
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="product_stock"
-              type="number"
-              placeholder="Stock"
-              name="product_stock"
-              value={product.product_stock}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_price">
-              Price
-            </label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-2">$</span>
+      <div className="mt-10">
+        <h1 className="text-xl font-semibold mb-4">Add Product</h1>
+        <div className="w-[800px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_name">
+                Product Name
+              </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 pl-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="product_price"
-                type="number"
-                placeholder="Price"
-                name="product_price"
-                value={product.product_price}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="product_name"
+                type="text"
+                placeholder="Product Name"
+                name="product_name"
+                value={product.product_name}
                 onChange={handleInput}
               />
             </div>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_review">
-              Link video Product
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="product_review"
-              type="text"
-              placeholder="Link video Product"
-              name="product_review"
-              value={product.product_review}
-              onChange={handleInput}
-            />
-          </div>
-          <div className="mb-4">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_description">
+                Product Description
+              </label>
+              <textarea
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="product_description"
+                placeholder="Product Description"
+                name="product_description"
+                value={product.product_description}
+                onChange={handleInput}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_id">
+                Category
+              </label>
+              <select
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="category_id"
+                value={product.category_id}
+                onChange={(e) => setProduct({ ...product, category_id: e.target.value })}
+              >
+                <option>Select category...</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.category_title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_stock">
+                Stock
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="product_stock"
+                type="number"
+                placeholder="Stock"
+                name="product_stock"
+                value={product.product_stock}
+                onChange={handleInput}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_price">
+                Price
+              </label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 flex items-center pl-2">$</span>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 pl-8 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="product_price"
+                  type="number"
+                  placeholder="Price"
+                  name="product_price"
+                  value={product.product_price}
+                  onChange={handleInput}
+                />
+              </div>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_review">
+                Link video Product
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="product_review"
+                type="text"
+                placeholder="Link video Product"
+                name="product_review"
+                value={product.product_review}
+                onChange={handleInput}
+              />
+            </div>
+            <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_image">
                 Product Image
               </label>
               <UploadFile
+                section="product_image"
                 cloudName={cloudName}
                 unsignedUploadPreset={unsignedUploadPreset}
-                handleImageUpload={handleImageUpload}
-                onConfirmUpload={handleConfirmUpload} // Pass the callback function
-                setUploadConfirmed={setUploadConfirmed} // Pass the state setter function
+                handleImageUpload={(imageUrl) => setProduct({ ...product, product_image: imageUrl })}
+                onConfirmUpload={handleConfirmUpload}
+                setUploadConfirmed={setUploadConfirmed}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_banner">
+                Product Banner
+              </label>
+
+              <UploadFile
+                section="product_banner"
+                cloudName={cloudName}
+                unsignedUploadPreset={unsignedUploadPreset}
+                handleBannerUpload={(bannerUrl) => setProduct({ ...product, product_banner: bannerUrl })} // Ensure this line is present
+                onConfirmUpload={handleConfirmUpload}
+                setUploadConfirmed={setUploadConfirmed}
               />
             </div>
             {/* Error and success messages */}
@@ -240,9 +308,9 @@ function AddProduct() {
                 Upload
               </button>
             </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
