@@ -34,10 +34,10 @@ function AddCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!category.category_title || !file) {
-      setErrorMessage("Please provide both category title and icon.");
-      return;
-    }
+    // if (!category.category_title || !file) {
+    //   setErrorMessage("Please provide both category title and icon.");
+    //   return;
+    // }
 
     try {
       const token = Cookies.get("token");
