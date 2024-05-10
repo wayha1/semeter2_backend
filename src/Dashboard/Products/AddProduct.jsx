@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import UploadFile from "../UploadFile"; // Import the UploadFile component
+import UploadFile from "../UploadFile"; 
 
 function AddProduct() {
   const [product, setProduct] = useState({
     product_name: "",
+    product_brand: "",
     product_description: "",
     product_price: "",
     product_stock: "",
@@ -16,7 +17,7 @@ function AddProduct() {
     product_banner: "",
     category_id: "",
   });
-  const [categories, setCategories] = useState([]); // State to store categories data
+  const [categories, setCategories] = useState([]); 
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -113,6 +114,7 @@ function AddProduct() {
           {
             // Include other product data here
             product_name: product.product_name,
+            product_brand: product.product_brand,
             product_description: product.product_description,
             product_price: product.product_price,
             product_stock: product.product_stock,
@@ -136,6 +138,7 @@ function AddProduct() {
           // Clear product data
           setProduct({
             product_name: "",
+            product_brand: "",
             product_description: "",
             product_price: "",
             product_stock: "",
@@ -177,10 +180,10 @@ function AddProduct() {
   };
 
   return (
-    <div className="w-full h-auto flex justify-center items-center">
-       <div className="mt-10">
-      <h1 className="text-xl font-semibold mb-4">Add Product</h1>
-      <div className="w-[800px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <div className="w-full h-auto">
+       <div className="mt-5">
+      <h1 className="text-2xl font-semibold mb-4 text-blue-600">Add Product</h1>
+      <div className="w-[600px] bg-white shadow-md rounded px-5 py-4">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_name">
@@ -193,6 +196,20 @@ function AddProduct() {
               placeholder="Product Name"
               name="product_name"
               value={product.product_name}
+              onChange={handleInput}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_brand">
+              Product Brand
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="product_brand"
+              type="text"
+              placeholder="Product Brand"
+              name="product_brand"
+              value={product.product_brand}
               onChange={handleInput}
             />
           </div>
