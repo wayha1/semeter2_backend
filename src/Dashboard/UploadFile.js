@@ -22,7 +22,7 @@ const UploadFile = ({
   };
 
   const handleYesClick = async () => {
-    handleIconUpload(uploadedImageUrl); 
+    handleIconUpload(file); 
     setShowModal(false);
     handleUpload();
   };
@@ -58,7 +58,8 @@ const UploadFile = ({
         } else if (section === "product_banner") {
           handleIconUpload(imageUrl);
           handleBannerUpload(imageUrl); // Handle image upload for product_banner
-        } else if (section === "category_item") {
+        }else if(section == "category_icon"){
+          handleImageUpload(imageUrl);
         }
         setUploadedImageUrl(imageUrl);
         setUploadConfirmed(true);
