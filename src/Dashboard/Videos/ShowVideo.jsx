@@ -15,7 +15,7 @@ function ShowVideo() {
     try {
       const token = Cookies.get("token");
       console.log("Fetching data...");
-      const response = await axios.get("/Video", {
+      const response = await axios.get("/video", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,7 +36,7 @@ function ShowVideo() {
     try {
       const token = Cookies.get("token");
       console.log("Deleting Video with ID:", VideoId);
-      const response = await axios.delete(`/Video/${VideoId}`, {
+      const response = await axios.delete(`/video/${VideoId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

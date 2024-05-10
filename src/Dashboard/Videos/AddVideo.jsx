@@ -1,45 +1,64 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { default as React, useEffect, useState } from "react";
 
 function AddVideo() {
   const [video, setVideo] = useState({
-    name: "",
-    link: "",
+    video_title1: "",
+    video1: "",
     category_id: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [categories, setCategories] = useState([]);
 
-  const [categories, setCategories] = useState([]); // State to store categories data
+  const handleInput = (e) => {
+    e.persist();
+    setVideo({ ...video, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/videos", video);
-      alert("Video added successfully!");
-      setVideo({ name: "", link: "" });
-    } catch (error) {
-      console.error("Error adding video:", error);
-      alert("Failed to add video. Please try again later.");
-    }
-  };
-  // Fetch categories data when component mounts
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // Function to fetch categories data from the API
-  const fetchData = async () => {
-    try {
       const token = Cookies.get("token");
-      console.log("Fetching data...");
-      const response = await axios.get("/category", {
+      if (!token) {
+        setErrorMessage("Unauthorized access. Please login.");
+        return;
+      }
+
+      const respone = await axios.post("http://127.0.0.1:8000/api/video", {
+        video_title1: video.video_title1,
+        video1: video.video1,
+        category_id: video.category_id,
+      }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Response:", response.data);
+
+      console.log(respone)
+      if(respone.status === 200){
+        setSuccessMessage("Video added successfully!");
+      }
+      setVideo({ video_title1: "", video1: "", category_id: "" });
+    } catch (error) {
+      console.error("Error adding video:", error);
+      setErrorMessage("Failed to add video. Please try again later.");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const token = Cookies.get("token");
+      const response = await axios.get("http://127.0.0.1:8000/api/category", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setCategories(response.data.data);
     } catch (error) {
       console.error("Error fetching category data:", error);
@@ -53,61 +72,43 @@ function AddVideo() {
         <h2 className="text-lg font-semibold mb-4">Add Video</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="category_id"
-            >
-              Category
-            </label>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_id">Category</label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="category_id"
-              value={video.category_id} // Corrected from product.category_id
-              onChange={
-                (e) => setVideo({ ...video, category_id: e.target.value }) // Corrected from setProduct
-              }
+              value={video.category_id}
+              onChange={(e) => setVideo({ ...video, category_id: e.target.value })}
             >
               <option>Select category...</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.category_title}
-                </option>
+                <option key={category.id} value={category.id}>{category.category_title}</option>
               ))}
             </select>
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-800 text-sm font-semibold mb-2"
-              htmlFor="name"
-            >
-              Video Name
-            </label>
+            <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="name">Video Name</label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-              id="name"
+              id="video_title1"
               type="text"
               placeholder="Enter Video Name"
-              value={video.name}
-              onChange={(e) => setVideo({ ...video, name: e.target.value })}
-            />
+              name="video_title1"
+              value={video.video_title1}
+              onChange={handleInput}           
+              />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-800 text-sm font-semibold mb-2"
-              htmlFor="link"
-            >
-              Video Link (YouTube or TikTok)
-            </label>
+            <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="link">Video Link (YouTube or TikTok)</label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-              id="link"
+              id="video1"
               type="text"
+              name="video1"
               placeholder="Enter Video Link"
-              value={video.link}
-              onChange={(e) => setVideo({ ...video, link: e.target.value })}
+              value={video.video1}
+              onChange={handleInput}
             />
           </div>
-          {/* Error and success messages */}
           {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           {successMessage && <p className="text-green-500">{successMessage}</p>}
           <button

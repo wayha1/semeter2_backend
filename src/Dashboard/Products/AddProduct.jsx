@@ -65,9 +65,6 @@ function AddProduct() {
       return;
     }
 
-    // Log the data before submitting the form
-    console.log("Product Data:", product);
-
     try {
       // Upload the product image to Cloudinary
       const imageFormData = new FormData();

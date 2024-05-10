@@ -51,7 +51,7 @@ function AddCategory() {
         "http://127.0.0.1:8000/api/category",
         {
           category_title: category.category_title,
-          category_icon: category.category_icon, // Pass the uploaded image URL
+          category_icon: category.category_icon, 
         },
         {
           headers: {
