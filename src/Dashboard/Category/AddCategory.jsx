@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// AddCategory.js
+import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile";
@@ -8,6 +9,7 @@ function AddCategory() {
     category_title: "",
     category_icon: "",
   });
+  const [uploadConfirmed, setUploadConfirmed] = useState(false); // State to track upload confirmation
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [file, setFile] = useState(null); // State to store selected file
@@ -24,18 +26,19 @@ function AddCategory() {
     }
   };
 
-  const handleImageUpload = (file) => {
-    setFile(file); // Store the selected file in state
+  const handleImageUpload = (imageUrl) => {
+    // This function is called when the file is uploaded
+    setCategory({ ...category, category_icon: imageUrl });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!category.category_title || !file) {
       setErrorMessage("Please provide both category title and icon.");
       return;
     }
-  
+
     try {
       const token = Cookies.get("token");
       if (!token) {
@@ -43,46 +46,28 @@ function AddCategory() {
         return;
       }
 
-      // Upload the file to Cloudinary
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", unsignedUploadPreset);
-
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        formData,
+      // Send category data to your backend server
+      const categoryResponse = await axios.post(
+        "http://127.0.0.1:8000/api/category",
+        {
+          category_title: category.category_title,
+          category_icon: category.category_icon, // Pass the uploaded image URL
+        },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      if (response.status === 200) {
-        const imageUrl = response.data.secure_url;
-        // Send category data to your backend server
-        const categoryResponse = await axios.post(
-          "http://127.0.0.1:8000/api/category",
-          {
-            category_title: category.category_title,
-            category_icon: imageUrl, // Pass the uploaded image URL
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        // Check if the category was successfully added
-        if (categoryResponse.status === 200) {
-          setSuccessMessage("Category added successfully.");
-          // Clear category data
-          setCategory({ category_title: "", category_icon: "" });
-        } else {
-          // If there was an issue with the request, display an error message
-          setErrorMessage("Failed to add category. Please try again later.");
-        }
+      // Check if the category was successfully added
+      if (categoryResponse.status === 200) {
+        setSuccessMessage("Category added successfully.");
+        // Clear category data
+        setCategory({ category_title: "", category_icon: "" });
+      } else {
+        // If there was an issue with the request, display an error message
+        setErrorMessage("Failed to add category. Please try again later.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -110,7 +95,13 @@ function AddCategory() {
 
         <div className="flex flex-col w-[80%]">
           <UploadFile
-            handleImageUpload={handleImageUpload}
+            section="category_icon"
+            handleImageUpload={(imageUrl) => setCategory({ ...category, category_icon: imageUrl })}
+            handleIconUpload={(imageUrl) => setCategory({ ...category, category_icon: imageUrl })}
+            cloudName={cloudName}
+            unsignedUploadPreset={unsignedUploadPreset}
+            onConfirmUpload={handleSubmit}
+            setUploadConfirmed={setUploadConfirmed}
           />
         </div>
 

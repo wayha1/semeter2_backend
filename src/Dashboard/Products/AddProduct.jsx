@@ -281,6 +281,7 @@ function AddProduct() {
                 cloudName={cloudName}
                 unsignedUploadPreset={unsignedUploadPreset}
                 handleImageUpload={(imageUrl) => setProduct({ ...product, product_image: imageUrl })}
+                handleIconUpload={(imageUrl) => setProduct({ ...product, product_banner: imageUrl })}
                 onConfirmUpload={handleConfirmUpload}
                 setUploadConfirmed={setUploadConfirmed}
               />
@@ -295,6 +296,7 @@ function AddProduct() {
                 cloudName={cloudName}
                 unsignedUploadPreset={unsignedUploadPreset}
                 handleBannerUpload={(bannerUrl) => setProduct({ ...product, product_banner: bannerUrl })} // Ensure this line is present
+                handleIconUpload={(imageUrl) => setProduct({ ...product, product_banner: imageUrl })}
                 onConfirmUpload={handleConfirmUpload}
                 setUploadConfirmed={setUploadConfirmed}
               />
