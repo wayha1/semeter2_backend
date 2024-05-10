@@ -1,78 +1,85 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const UploadFile = ({ cloudName, 
-  unsignedUploadPreset, 
-  handleImageUpload, 
-  onConfirmUpload, 
-  setUploadConfirmed 
+const UploadFile = ({
+  cloudName,
+  unsignedUploadPreset,
+  handleImageUpload,
+  handleBannerUpload,
+  handleIconUpload,
+  setUploadConfirmed,
+  section,
 }) => {
-
   const [file, setFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const handleIconInput = (e) => {
     if (!showModal) {
-      // Toggle showModal state if it's not already true
       setShowModal(true);
     }
     setFile(e.target.files[0]);
   };
 
   const handleYesClick = async () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", unsignedUploadPreset);
-  
-      try {
-        const response = await axios.post(
-          `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-  
-        if (response.status === 200) {
-          const imageUrl = response.data.secure_url;
-          setUploadedImageUrl(imageUrl);
-          handleImageUpload(imageUrl); // Notify parent component of the uploaded image URL
-          onConfirmUpload(imageUrl); // Trigger the callback to handle backend upload
-          setUploadConfirmed(true);
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
-  
-    setFile(null);
-    document.getElementById("category_icon").value = null;
-  
+    handleIconUpload(file); 
     setShowModal(false);
-    setUploadConfirmed(false); // Reset uploadConfirmed state
+    handleUpload();
   };
-  
-  
+
   const handleNoClick = () => {
     setFile(null);
     setShowModal(false);
+  };
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", unsignedUploadPreset);
+
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const imageUrl = response.data.secure_url;
+
+        if (section === "product_image") {
+          handleImageUpload(imageUrl);
+
+          // Handle image upload for product_image
+        } else if (section === "product_banner") {
+          handleIconUpload(imageUrl);
+          handleBannerUpload(imageUrl); // Handle image upload for product_banner
+        }else if(section === "category_icon"){
+          handleImageUpload(imageUrl);
+        }
+        setUploadedImageUrl(imageUrl);
+        setUploadConfirmed(true);
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   };
 
   return (
     <div>
       <input
         type="file"
-        id="category_icon"
-        name="category_icon"
+        id={section}
+        name={section}
         accept="image/*"
         onChange={handleIconInput}
         className="hidden"
       />
-      <label htmlFor="category_icon" className="cursor-pointer">
+      <label htmlFor={section} className="cursor-pointer">
         <div className="border border-gray-300 p-2 rounded-lg mt-2">Click to upload image</div>
       </label>
 
@@ -82,8 +89,15 @@ const UploadFile = ({ cloudName,
             <div className="modal-content bg-white p-5">
               <p className="mb-4">Do you want to display the uploaded image?</p>
               <div className="flex justify-between">
-                <button onClick={handleYesClick} className="modal-button p-2 bg-green-500 text-white w-[100px]">Yes</button>
-                <button onClick={handleNoClick} className="modal-button bg-red-500 text-white w-[100px]">No</button>
+                <button
+                  onClick={handleYesClick}
+                  className="modal-button p-2 bg-green-500 text-white w-[100px]"
+                >
+                  Yes
+                </button>
+                <button onClick={handleNoClick} className="modal-button bg-red-500 text-white w-[100px]">
+                  No
+                </button>
               </div>
             </div>
           </div>

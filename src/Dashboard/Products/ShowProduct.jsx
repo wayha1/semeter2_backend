@@ -68,6 +68,16 @@ function ShowProduct() {
                 className="mr-6 border-2 w-[150px] h-[150px]"
               />
             </div>
+
+            <div className="flex ml-10 w-[50%] ">
+              {/* Left side with product_icon */}
+              {/* <img src="{{ $product_icon }}" /> */}
+              <img
+               src={product.product_banner}
+                alt={product.product_title}
+                className="mr-6 border-2 w-[150px] h-[150px]"
+              />
+            </div>
             <div className="flex flex-col w-[50%] ">
               {/* Right side with product title, created at, and updated at */}
               <div className="mb-2 ">
