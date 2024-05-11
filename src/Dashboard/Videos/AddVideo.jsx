@@ -4,8 +4,8 @@ import Cookies from "js-cookie";
 
 function AddVideo() {
   const [video, setVideo] = useState({
-    video_title1: "",
-    video1: "",
+    video_title: "",
+    video_link: "",
     category_id: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,8 +27,8 @@ function AddVideo() {
       }
 
       const respone = await axios.post("http://127.0.0.1:8000/api/video", {
-        video_title1: video.video_title1,
-        video1: video.video1,
+        video_title: video.video_title,
+        video_link: video.video_link,
         category_id: video.category_id,
       }, {
         headers: {
@@ -40,7 +40,7 @@ function AddVideo() {
       if(respone.status === 200){
         setSuccessMessage("Video added successfully!");
       }
-      setVideo({ video_title1: "", video1: "", category_id: "" });
+      setVideo({ video_title: "", video_link: "", category_id: "" });
     } catch (error) {
       console.error("Error adding video:", error);
       setErrorMessage("Failed to add video. Please try again later.");
@@ -89,11 +89,11 @@ function AddVideo() {
             <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="name">Video Name</label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-              id="video_title1"
+              id="video_title"
               type="text"
               placeholder="Enter Video Name"
-              name="video_title1"
-              value={video.video_title1}
+              name="video_title"
+              value={video.video_title}
               onChange={handleInput}           
               />
           </div>
@@ -101,11 +101,11 @@ function AddVideo() {
             <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="link">Video Link (YouTube or TikTok)</label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
-              id="video1"
+              id="video_link"
               type="text"
-              name="video1"
+              name="video_link"
               placeholder="Enter Video Link"
-              value={video.video1}
+              value={video.video_link}
               onChange={handleInput}
             />
           </div>
