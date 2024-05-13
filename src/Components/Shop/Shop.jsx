@@ -32,34 +32,3 @@ function Shop() {
 }
 
 export default Shop;
-{
-  /* <div classNameName="container mx-auto p-10 pt-0 md:py-20 px-0 md:pt-0 md:pb-10 md:px-0">
-        <div className="transform ">
-          <img
-            className="lg:max-w-lg w-full"
-            // className=""lg:max-h-lg auto=compress&amp;dpr=1&amp;h=30&amp;w=500 ,relative px-10 md:p-0 transform duration-500 hover:shadow-2xl cursor-pointer hover:-translate-y-1
-            src="https://editorial.femaledaily.com/wp-content/uploads/2022/03/BA-Korea-featured.png"
-            alt=""
-          />
-          <div className="content bg-white p-2 pt-8 md:p-12 pb-12 lg:max-w-lg w-full lg:absolute top-12 right-5">
-            <div className="flex justify-between font-bold text-sm">
-              <p>New Product</p>
-              <p className="text-gray-400">12th March, 2024</p>
-            </div>
-            <h2 className="text-3xl font-semibold mt-4 md:mt-10">
-              SNAIL TRUECICA
-            </h2>
-            <p className="my-3 text-justify font-medium text-gray-700 leading-relaxed">
-              This serum contains 89% Snail Truecica, which provides powerful
-              skin energy trough the combination of black snail mucin and
-              SomeByMi's Truecica technique, which helps against signs of
-              anti-aging and keeping the skin free from external irritations.
-            </p>
-            <button className="mt-2 md:mt-5 p-3 px-5 bg-black text-white font-bold text-sm hover:bg-purple-800">
-              Read More
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> */
-}
