@@ -17,6 +17,7 @@ function Branding() {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("Response data:", response.data);
       setCategoryBanner(response.data.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -39,7 +40,7 @@ function Branding() {
           <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
             <div className="flex space-x-10 md:space-x-20 animate-loop-scroll  group-hover:paused">
               {categoryBanner.map((item, index) => (
-                <div key={index} className="flex justify-center items-center">
+                <div key={index} className="flex flex-col justify-center items-center">
                   <Link to={item.link}>
                     <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                       <div className="w-full h-full hover:scale-110">
@@ -47,6 +48,7 @@ function Branding() {
                       </div>
                     </div>
                   </Link>
+                  <p className="text-center">{item.category_title}</p>
                 </div>
               ))}
             </div>

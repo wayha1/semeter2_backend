@@ -170,7 +170,7 @@ function App() {
         }
       />
       <Route
-        path="/details/:id"
+        path="/details"
         element={
           <div>
             <Navbar />

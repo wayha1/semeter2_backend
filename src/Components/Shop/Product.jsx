@@ -1,159 +1,55 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Filter from "./FilterSearch";
+import Cookies from "js-cookie";
+import axios from "../api/axios";
+
 const ProductCard = ({ product }) => {
-  // const { image, brand, title, price, oldPrice } = product;
-  const products = [
-    {
-      id: 1,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 2,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SOLD",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 3,
-      image:
-        "https://sokoskins.shop/cdn/shop/files/thumb-02_405x405_c83d7242-a942-4488-8c8e-fd1560acff91_405x.jpg?v=1682600891",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SOLD",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 4,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ149u_PSE1HoSDXR-GV9YDyblzMwfI7_H69w&usqp=CAU",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 5,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
+  const [products, setProduct] = useState([]);
+  const navigate = useNavigate(); // Import useNavigate hook
 
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 6,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
+  const navigateToProductDetails = (
+    productImage,
+    productName,
+    productDescription,
+    productPrice,
+    productStock,
+    productReview) => {
+    // Navigate to ProductDetails component with the product image as state
+    navigate(`/details`, { state: { 
+      productImage, 
+      productName,
+      productDescription,
+      productPrice,
+      productStock,
+      productReview}});
+  };
 
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 7,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
 
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 8,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
+  const fetchData = async () => {
+    try {
+      const token = Cookies.get("token");
+      console.log("Fetching data...");
+      const response = await axios.request({
+        url: "/product",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Response data:", response.data);
+      setProduct(response.data.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setProduct([]);
+    }
+  };
 
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 9,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 10,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 11,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
-      price: 30,
-      oldPrice: 45,
-    },
-    {
-      id: 12,
-      image:
-        "https://moonglow.md/wp-content/uploads/2023/05/MaryMay_Vegan-CICA-Tea-Tree-AHA-PHA-Toner-200ml.webp",
-      brand: "Mary&May",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duisvitae ante vel eros fermentum faucibus sit amet euismod lorem.",
-      title: "Product Title 1",
-      status: "SALE",
-      price: 30,
-      oldPrice: 45,
-    },
-  ];
+
 
   return (
     <>
@@ -176,41 +72,38 @@ const ProductCard = ({ product }) => {
             >
               <div className="relative">
                 <img
-                  src={product.image}
+                  src={product.product_image}
                   alt="Product"
                   className="max-sm:w-30 max-sm:h-50 lg:h-80 lg:w-72 object-cover rounded-t-xl"
                 />
-                <div className="px-4 pt-3 w-72">
-                  {/* Conditional rendering of status */}
-                  {product.status === "SALE" && (
-                    <div className="absolute top-0 left-0 bg-green-600 text-white px-2 py-1 m-3 rounded-md text-sm font-medium">
-                      {product.status}
-                    </div>
-                  )}
-                  {product.status === "SOLD" && (
-                    <div className="absolute top-0 left-0 bg-red-600 text-white px-2 py-1 m-3 rounded-md text-sm font-medium">
-                      {product.status}
-                    </div>
-                  )}
-                </div>
+                
               </div>
               <div className="px-4">
                 <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
-                  {product.brand}
+                  {product.product_brand}
+                </h3>
+                <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
+                  Stock: {product.product_stock}
                 </h3>
                 <p className="text-gray-600 line-clamp-3 text-xs md:text-sm mb-4">
-                  {product.description}
+                  {product.product_description}
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="font-bold md:text-lg text-xs max-sm:text-sm ">
                     {" "}
-                    ${product.price}
+                    ${product.product_price}
                   </span>
-                  <Link to={`/details/${product.id}`}>
-                    <button className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded">
+                  <button 
+                    onClick={() => navigateToProductDetails(
+                      product.product_image, 
+                      product.product_name,
+                      product.product_description,
+                      product.product_price,
+                      product.product_stock,
+                      product.product_review)}
+                    className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded">
                       Buy Now
                     </button>
-                  </Link>
                 </div>
               </div>
             </div>
