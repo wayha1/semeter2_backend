@@ -6,6 +6,7 @@ import axios from "../api/axios";
 function Branding() {
   const [categoryBanner, setCategoryBanner] = useState([]);
 
+  
   const fetchData = async () => {
     try {
       const token = Cookies.get("token");
