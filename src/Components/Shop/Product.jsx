@@ -2,7 +2,6 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import CommentRate from "./CommentRate"; // Import CommentRate component
 import Filter from "./FilterSearch";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
@@ -180,8 +179,6 @@ const ProductCard = () => {
                     Buy Now
                   </button>
                 </div>
-                <CommentRate productId={product.id} />{" "}
-                {/* Add CommentRate component */}
               </div>
             </div>
           ))}

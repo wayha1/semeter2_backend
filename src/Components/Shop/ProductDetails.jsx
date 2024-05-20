@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import CommentRate from "./CommentRate";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -8,13 +9,18 @@ function ProductDetails() {
   console.log("Location state:", location.state);
   const productImage = location.state && location.state.productImage;
   const productName = location.state && location.state.productName;
-  const productDescription = location.state && location.state.productDescription;
+  const productDescription =
+    location.state && location.state.productDescription;
   const productPrice = location.state && location.state.productPrice;
   const productStock = location.state && location.state.productStock;
-  const productReview = location.state && location.state.productReview;
+  // const productReview = location.state && location.state.productReview;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
-
+  // const [rating, setRating] = useState(0); // Initialize rating state
+  
+  // const handleRatingChange = (e) => {
+  //   setRating(e.target.value);
+  // };
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
@@ -56,7 +62,9 @@ function ProductDetails() {
             </div>
           </div>
           <div className="md:flex-1 px-4">
-            <h2 className="text-2xl font-bold mb-2">Product Name: {productName}</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Product Name: {productName}
+            </h2>
             <p className="text-gray-600 text-sm mb-4">
               Product Description:{" "}
               {showFullDescription ? (
@@ -86,11 +94,35 @@ function ProductDetails() {
               </div>
             </div>
             <div className=" mb-4">
-              <iframe
-              className="w-full h-[250px]"
-              src={productReview}
-              />
+              {/* Rating Section */}
+              {/* <div className="flex items-center mb-2">
+                <span className="font-bold mr-2">Rating:</span>
+                <select
+                  value={rating}
+                  onChange={handleRatingChange}
+                  className="border border-gray-300 rounded px-2 py-1"
+                >
+                  <option value="0">Select rating</option>
+                  {[...Array(5)].map((_, index) => (
+                    <option key={index + 1} value={index + 1}>
+                      {index + 1}
+                    </option>
+                  ))}
+                </select>
+              </div> */}
+              {/* Insert Rating Component Here */}
             </div>
+            <div className=" mb-4">
+              {/* Comment Section */}
+              <CommentRate productId={id} />
+            </div>
+            {/* <div className=" mb-4">
+              <iframe
+                className="w-full h-[250px]"
+                src={productReview}
+                title="Product Review"
+              />
+            </div> */}
           </div>
         </div>
       </div>

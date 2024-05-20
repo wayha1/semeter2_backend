@@ -1,15 +1,30 @@
-import React, { useState } from "react";
-import axios from "../api/axios";
 import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import axios from "../api/axios";
 
 const CommentRate = ({ productId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [comments, setComments] = useState([]);
 
-  const handleRatingChange = (e) => {
-    setRating(e.target.value);
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(`/product/comments/${productId}`);
+      setComments(response.data.comments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+  const handleRatingClick = (value) => {
+    setRating(value);
   };
 
   const handleCommentChange = (e) => {
@@ -37,6 +52,7 @@ const CommentRate = ({ productId }) => {
       setError("");
       setRating(0);
       setComment("");
+      fetchComments(); // Fetch comments again after submitting new comment
     } catch (error) {
       setError("Failed to submit comment and rating.");
       setSuccess("");
@@ -48,27 +64,25 @@ const CommentRate = ({ productId }) => {
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
-        <label>
-          Rating:
-          <select
-            value={rating}
-            onChange={handleRatingChange}
-            className="ml-2 border border-gray-300 rounded"
-          >
-            <option value="0">Select rating</option>
-            {[...Array(5)].map((_, index) => (
-              <option key={index + 1} value={index + 1}>
-                {index + 1}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="flex items-center">
+          <span className="mr-2">Rating:</span>
+          {[...Array(5)].map((_, index) => (
+            <FaStar
+              key={index}
+              className={`cursor-pointer ${
+                index < rating ? "text-yellow-500" : "text-gray-300"
+              }`}
+              onClick={() => handleRatingClick(index + 1)}
+            />
+          ))}
+        </div>
         <label>
           Comment:
           <textarea
             value={comment}
             onChange={handleCommentChange}
-            className="ml-2 w-full border border-gray-300 rounded"
+            className="w-full border border-gray-300 rounded"
+            style={{ height: "150px" }} // Adjust the height value as needed
           />
         </label>
         <button
@@ -78,6 +92,17 @@ const CommentRate = ({ productId }) => {
           Submit
         </button>
       </form>
+      {/* Display Comments */}
+      <div className="mt-4">
+        <h3 className="text-lg font-semibold mb-2">Comments:</h3>
+        <ul>
+          {comments.map((comment, index) => (
+            <li key={index} className="mb-2">
+              {comment}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
