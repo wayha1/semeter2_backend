@@ -1,19 +1,25 @@
-import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import axios from "../api/axios";
+import Cookies from "js-cookie";
+import axios from "axios";
+import useAuthContext from "../context/AuthContext";
 
-const CommentRate = ({ productId }) => {
+const CommentRate = () => {
+  const [comment, setComment] = useState({
+    user_id: "",
+    comments: "",
+  });
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [comments, setComments] = useState([]);
+  const { user } = useAuthContext();
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`/product/comments/${productId}`);
-      setComments(response.data.comments);
+      const response = await axios.get("http://127.0.0.1:8000/api/comments");
+      setComments(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -21,26 +27,32 @@ const CommentRate = ({ productId }) => {
 
   useEffect(() => {
     fetchComments();
-  }, []);
+    if (user) {
+      setComment((prevComment) => ({
+        ...prevComment,
+        user_id: user.id,
+      }));
+    }
+  }, [user]);
 
   const handleRatingClick = (value) => {
     setRating(value);
   };
 
   const handleCommentChange = (e) => {
-    setComment(e.target.value);
+    setComment({ ...comment, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = Cookies.get("token");
-      await axios.post(
-        "/product/comment-rate",
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/comments",
         {
-          productId,
-          rating,
-          comment,
+          user_id: comment.user_id,
+          comment: comment.comments,
+          rating: rating, // Include rating in the submission
         },
         {
           headers: {
@@ -48,11 +60,13 @@ const CommentRate = ({ productId }) => {
           },
         }
       );
-      setSuccess("Comment and rating submitted successfully!");
-      setError("");
-      setRating(0);
-      setComment("");
-      fetchComments(); // Fetch comments again after submitting new comment
+      if (response.status === 201) {
+        setSuccess("Comment and rating submitted successfully!");
+        setComment({ user_id: user.id, comments: "" });
+        setRating(0);
+        setError("");
+        fetchComments(); // Fetch comments again after submitting new comment
+      }
     } catch (error) {
       setError("Failed to submit comment and rating.");
       setSuccess("");
@@ -79,10 +93,11 @@ const CommentRate = ({ productId }) => {
         <label>
           Comment:
           <textarea
-            value={comment}
+            name="comments"
+            value={comment.comments}
             onChange={handleCommentChange}
             className="w-full border border-gray-300 rounded"
-            style={{ height: "150px" }} // Adjust the height value as needed
+            style={{ height: "150px" }}
           />
         </label>
         <button
@@ -98,7 +113,7 @@ const CommentRate = ({ productId }) => {
         <ul>
           {comments.map((comment, index) => (
             <li key={index} className="mb-2">
-              {comment}
+              {comment.comment} - Rating: {comment.rating}
             </li>
           ))}
         </ul>
