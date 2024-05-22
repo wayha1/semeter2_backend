@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import Filter from "./FilterSearch";
+import useAuthContext from "./../context/AuthContext"
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
@@ -75,6 +76,7 @@ const ProductCard = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const navigateToProductDetails = (
     productImage,
@@ -82,8 +84,10 @@ const ProductCard = () => {
     productDescription,
     productPrice,
     productStock,
-    productReview
+    productReview,
+    productId
   ) => {
+    console.log("User ID:", user.id);
     navigate(`/details`, {
       state: {
         productImage,
@@ -92,6 +96,8 @@ const ProductCard = () => {
         productPrice,
         productStock,
         productReview,
+        userId: user.id,
+        productId
       },
     });
   };
@@ -118,7 +124,7 @@ const ProductCard = () => {
 
   useEffect(() => {
     fetchData(currentPage);
-  }, [currentPage]);
+  }, [currentPage, user]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -164,16 +170,18 @@ const ProductCard = () => {
                     ${product.product_price}
                   </span>
                   <button
-                    onClick={() =>
+                    onClick={() => {
+                     
+                      console.log("Product data:", product);
                       navigateToProductDetails(
                         product.product_image,
                         product.product_name,
                         product.product_description,
                         product.product_price,
                         product.product_stock,
-                        product.product_review
-                      )
-                    }
+                        product.product_review,
+                      );
+                    }}
                     className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
                   >
                     Buy Now

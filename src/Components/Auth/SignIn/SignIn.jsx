@@ -96,6 +96,7 @@ export const SignIn = () => {
                     <span className="relative bg-pink-100">
                       Or continue with
                     </span>
+                    
                   </span>
                 </div>
               </div>
