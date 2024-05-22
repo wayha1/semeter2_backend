@@ -97,7 +97,7 @@ const ProductCard = () => {
         productStock,
         productReview,
         userId: user.id,
-        productId
+        productId: productId
       },
     });
   };
@@ -180,6 +180,7 @@ const ProductCard = () => {
                         product.product_price,
                         product.product_stock,
                         product.product_review,
+                        product.id
                       );
                     }}
                     className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
