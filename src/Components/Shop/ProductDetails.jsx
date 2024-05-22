@@ -2,27 +2,58 @@ import React, { useState } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { Link, useLocation, useParams } from "react-router-dom";
 import CommentRate from "./CommentRate";
+import Cookies from "js-cookie";
+import axios from "../api/axios";
+import useAuthContext from "./../context/AuthContext"
 
 function ProductDetails() {
   const { id } = useParams();
   const location = useLocation();
-  console.log("Location state:", location.state);
   const productImage = location.state && location.state.productImage;
   const productName = location.state && location.state.productName;
   const productDescription =
     location.state && location.state.productDescription;
   const productPrice = location.state && location.state.productPrice;
   const productStock = location.state && location.state.productStock;
-  // const productReview = location.state && location.state.productReview;
+  const productId = location.state && location.state.productId;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
-  // const [rating, setRating] = useState(0); // Initialize rating state
-  
-  // const handleRatingChange = (e) => {
-  //   setRating(e.target.value);
-  // };
+
+  console.log("Location state:", location.state);
+
+  // user id
+  const { user } = useAuthContext();
+
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      const token = Cookies.get("token");
+      const response = await axios.post(
+        "/cart",
+        {
+          user_id: user.id,
+          product_id: productId,
+          quantity: productStock, // Set quantity as needed
+          totale_price: productPrice,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Product added to cart:", response.data);
+    } catch (error) {
+      if (error.response) {
+        // Log detailed error response
+        console.error("Error adding product to cart:", error.response.data);
+      } else {
+        console.error("Error adding product to cart:", error.message);
+      }
+    }
   };
 
   return (
@@ -50,21 +81,22 @@ function ProductDetails() {
             </div>
             <div className="flex mb-4">
               <div className="w-1/2 pr-2">
-                <button className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700">
+                <button
+                  className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700"
+                  onClick={handleAddToCart}
+                >
                   Add to Cart
                 </button>
               </div>
-              <div className="w-1/2 ">
-                <button className="w-full bg-sky-100 dark:bg-gray-700 text-pink-500 dark:text-white py-2  rounded-full font-bold hover:bg-pink-500 hover:text-white dark:hover:bg-gray-600">
+              <div className="w-1/2">
+                <button className="w-full bg-sky-100 dark:bg-gray-700 text-pink-500 dark:text-white py-2 rounded-full font-bold hover:bg-pink-500 hover:text-white dark:hover:bg-gray-600">
                   Add to Favorite
                 </button>
               </div>
             </div>
           </div>
           <div className="md:flex-1 px-4">
-            <h2 className="text-2xl font-bold mb-2">
-              Product Name: {productName}
-            </h2>
+            <h2 className="text-2xl font-bold mb-2">Product Name: {productName}</h2>
             <p className="text-gray-600 text-sm mb-4">
               Product Description:{" "}
               {showFullDescription ? (
@@ -82,7 +114,7 @@ function ProductDetails() {
                 </>
               )}
             </p>
-            <div className=" mb-4">
+            <div className="mb-4">
               <div className="mr-4">
                 <span className="font-bold">Price: {productPrice}$</span>
               </div>
@@ -93,36 +125,9 @@ function ProductDetails() {
                 </span>
               </div>
             </div>
-            <div className=" mb-4">
-              {/* Rating Section */}
-              {/* <div className="flex items-center mb-2">
-                <span className="font-bold mr-2">Rating:</span>
-                <select
-                  value={rating}
-                  onChange={handleRatingChange}
-                  className="border border-gray-300 rounded px-2 py-1"
-                >
-                  <option value="0">Select rating</option>
-                  {[...Array(5)].map((_, index) => (
-                    <option key={index + 1} value={index + 1}>
-                      {index + 1}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
-              {/* Insert Rating Component Here */}
-            </div>
-            <div className=" mb-4">
-              {/* Comment Section */}
+            <div className="mb-4">
               <CommentRate productId={id} />
             </div>
-            {/* <div className=" mb-4">
-              <iframe
-                className="w-full h-[250px]"
-                src={productReview}
-                title="Product Review"
-              />
-            </div> */}
           </div>
         </div>
       </div>

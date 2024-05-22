@@ -71,6 +71,10 @@ export const AuthProvider = ({ children }) => {
   
         // Fetch user data
         await getUser();
+
+        // Display user ID
+      const userId = response.data.user.id;
+      console.log("User ID:", userId);
   
         // Redirect to home page
         navigate("/");
