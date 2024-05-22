@@ -93,6 +93,7 @@ function Order() {
                   <div className="flex justify-center p-5">
                     <img
                       className="w-26 h-20"
+                      alt="pics"
                       src="https://www.cerave.com/-/media/project/loreal/brand-sites/cerave/americas/us/sunscreen/hydrating-sheer-sunscreen-broad-spectrum-spf-30-for-face-body/2022/2022-10/hydrating-sheer-sunscreen-front-3floz_700x875-v1.jpg?rev=152f66edae8a44a3a159a80aa7621cea&w=500&hash=36DDEAC8D9EA2D683BA733BA9D6E4E79"
                     ></img>
                   </div>
