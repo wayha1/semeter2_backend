@@ -3,8 +3,10 @@ import { CgArrowLeftO } from "react-icons/cg";
 import { Link, useLocation, useParams } from "react-router-dom";
 import CommentRate from "./CommentRate";
 import Cookies from "js-cookie";
+import { errorToast, successToast } from "./Toast";
 import axios from "../api/axios";
 import useAuthContext from "./../context/AuthContext"
+import { ToastContainer } from "react-toastify";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -18,6 +20,8 @@ function ProductDetails() {
   const productId = location.state && location.state.productId;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [addToCartClicked, setAddToCartClicked] = useState(false);
+
 
   console.log("Location state:", location.state);
 
@@ -29,6 +33,13 @@ function ProductDetails() {
   };
 
   const handleAddToCart = async () => {
+
+    if (addToCartClicked) {
+      // If button already clicked, display warning and return
+      errorToast("Item already added to cart!");
+      return;
+    }
+
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
@@ -46,6 +57,9 @@ function ProductDetails() {
         }
       );
       console.log("Product added to cart:", response.data);
+      successToast("Item add to Cart!");
+      // Set addToCartClicked to true to disable the button
+      setAddToCartClicked(true);
     } catch (error) {
       if (error.response) {
         // Log detailed error response
@@ -55,6 +69,7 @@ function ProductDetails() {
       }
     }
   };
+
 
   return (
     <div className="py-8 bg-pink-100">
@@ -82,7 +97,9 @@ function ProductDetails() {
             <div className="flex mb-4">
               <div className="w-1/2 pr-2">
                 <button
-                  className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700"
+                  className="w-full bg-pink-500 dark:bg-pink-500 text-white py-2 
+                  rounded-full font-bold hover:bg-pink-800 dark:hover:bg-pink-700
+                  active:bg-blue-300"
                   onClick={handleAddToCart}
                 >
                   Add to Cart
@@ -131,6 +148,7 @@ function ProductDetails() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }
