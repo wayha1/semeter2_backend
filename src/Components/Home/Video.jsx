@@ -34,14 +34,14 @@ function Video() {
         {videoData.map((video, index) => (
           <div key={index} className="rounded-lg max-w-sm">
             <a href={video.video_link}>
-              <iframe
+              <video
                 src={video.video_link}
                 width="320"
                 height="240"
                 controls
                 className="w-full rounded-t-lg">
                 Your browser does not support the video tag.
-              </iframe>
+              </video>
             </a>
             <div className="p-6">
               <h5 className="text-gray-900 text-center text-sm font-medium mb-2">{video.video_title}</h5>
