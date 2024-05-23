@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import deliphoto1 from "../../asset/J&T.jpg";
 import deliphoto2 from "../../asset/VET.jpg";
 import photo from "../../asset/cerave.jpg";
 import deliphoto3 from "../../asset/kerry.jpg";
+import Cookies from "js-cookie";
+import axios from "../api/axios";
+
 export const Cart = () => {
+  const [getProduct, setGetProduct] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const token = Cookies.get("token");
+      console.log("Fetching data...");
+      const response = await axios.request({
+        url: "/cart",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Response data:", response.data);
+      setGetProduct(response.data.data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      setGetProduct([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleAddToCart = (product) => {
+    setGetProduct((prevProducts) => [...prevProducts, product]);
+  };
+
   return (
     <>
       <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
@@ -19,62 +51,18 @@ export const Cart = () => {
                 Customer’s Cart
               </p>
               <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
-                <div className="pb-4 md:pb-8 w-full md:w-40">
-                  <img
-                    className="w-full hidden md:block"
-                    src={photo}
-                    alt="dress"
-                  />
-                  <img className="w-full md:hidden" src={photo} alt="dress" />
-                </div>
-                <div className=" md:flex-row flex-col flex justify-between items-start w-full space-y-4 md:space-y-0">
-                  <div className="w-full flex flex-col justify-start items-start space-y-10">
-                    <h3 className="text-xl lg:flex lg:justify-center xl:text-2xl font-semibold leading-6 text-gray-800">
-                      CeraVe Daily Moisturizing Lotion
-                    </h3>
-                  </div>
-                  <div className="flex justify-between space-x-8 items-start w-full">
-                    <p className="text-base xl:text-lg leading-6">
-                      $36.00{" "}
-                      <span className="text-red-300 line-through"> $45.00</span>
-                    </p>
-                    <p className="text-base xl:text-lg leading-6 text-gray-800">
-                      01
-                    </p>
-                    <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">
-                      $36.00
-                    </p>
+              {getProduct.map((item, index) => (
+                <div key={index} className="w-64 bg-white shadow-lg p-4 m-4 rounded-lg">
+                  <img src={item.product_id.product_image} alt={item.product_id.product_name} className="w-full h-40 object-cover rounded-md" />
+                  <div className="mt-4">
+                    <h2 className="text-xl font-semibold">{item.product_id.product_name}</h2>
+                    <p className="text-gray-600">${item.product_id.product_price}</p>
+                    <div className="flex justify-between items-center mt-4">
+                      {/* Additional UI elements can be added here */}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mt-0 md:mt-0 flex justify-start flex-col md:flex-row items-start md:items-center space-y-4 md:space-x-6 xl:space-x-8 w-full">
-                <div className="w-full md:w-40">
-                  <img
-                    className="w-full hidden md:block"
-                    src={photo}
-                    alt="dress"
-                  />
-                  <img className="w-full md:hidden" src={photo} alt="dress" />
-                </div>
-                <div className="flex justify-between items-start w-full flex-col md:flex-row space-y-4 md:space-y-0">
-                  <div className="w-full flex flex-col justify-start items-start space-y-8">
-                    <h3 className="text-xl lg:flex lg:justify-center xl:text-2xl font-semibold leading-6 text-gray-800">
-                      CeraVe Daily Moisturizing Lotion
-                    </h3>
-                  </div>
-                  <div className="flex justify-between space-x-8 items-start w-full">
-                    <p className="text-base xl:text-lg leading-6">
-                      $20.00{" "}
-                      <span className="text-red-300 line-through"> $30.00</span>
-                    </p>
-                    <p className="text-base xl:text-lg leading-6 text-gray-800">
-                      01
-                    </p>
-                    <p className="text-base xl:text-lg font-semibold leading-6 text-gray-800">
-                      $20.00
-                    </p>
-                  </div>
-                </div>
+              ))}
               </div>
             </div>
             <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">
@@ -151,23 +139,6 @@ export const Cart = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="flex flex-col justify-start items-center">
-                      <p className="text-lg leading-6 font-semibold text-gray-800">
-                        DPD Delivery
-                        <br />
-                        <span className="font-normal">Delivery with 24 Hours</span>
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-lg font-semibold leading-6 text-gray-800">
-                    $8.00
-                  </p>
-                </div>
-                <div className="w-full flex justify-center items-center">
-                  <button className="hover:bg-black   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white">
-                    View Carrier Details
-                  </button>
-                </div> */}
               </div>
             </div>
           </div>
