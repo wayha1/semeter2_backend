@@ -2,8 +2,8 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import useAuthContext from "./../context/AuthContext";
 import Filter from "./FilterSearch";
-import useAuthContext from "./../context/AuthContext"
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
@@ -78,6 +78,10 @@ const ProductCard = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
+  const cardsPerPage = 12;
+  const rowsPerPage = 3;
+  const columnsPerPage = 4;
+
   const navigateToProductDetails = (
     productImage,
     productName,
@@ -123,12 +127,19 @@ const ProductCard = () => {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
+    // Fetch data only if user is available
+    if (user) {
+      fetchData(currentPage);
+    }
   }, [currentPage, user]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  // Calculate the index range of products to display based on the current page
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const endIndex = Math.min(startIndex + cardsPerPage, products.length);
 
   return (
     <>
@@ -143,7 +154,7 @@ const ProductCard = () => {
         <Filter />
         {/* Product card */}
         <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 justify-center gap-y-20 gap-x-14 pt-10 pb-5">
-          {products.map((product) => (
+        {products.slice(startIndex, endIndex).map((product) => (
             <div
               key={product.id}
               className="max-sm:w-36 max-sm:h-50 lg:w-72 duration-500"
