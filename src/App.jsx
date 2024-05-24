@@ -26,6 +26,14 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
+import DataBranding from "./Components/Home/DataBranding";
+import ProductNameLuminous from "./Components/Shop/FilterProductName.jsx/ProductNameLuminous";
+import ShopBanner from "./Components/Shop/ShopBanner";
+import ProductNamePure from "./Components/Shop/FilterProductName.jsx/ProductNamePure";
+import ProductNameElysian from "./Components/Shop/FilterProductName.jsx/ProductNameElysian";
+import ProductNameSerene from "./Components/Shop/FilterProductName.jsx/ProductNameSerene";
+import ProductNameVitale from "./Components/Shop/FilterProductName.jsx/ProductNameVitale";
+import ProductNameNature from "./Components/Shop/FilterProductName.jsx/ProductNameNature";
 
 function App() {
   return (
@@ -86,28 +94,71 @@ function App() {
       />
 
       {/* Display Route Category product  */}
-      <Route
-        path="/shop/product/:name"
-        element={
-          <div>
-            <Navbar />
-            <ShopBanner />
-            <ProductNameLuminous />
-            <Footer />
-          </div>
-        }
+      <Route 
+      path="/shop/product/:name" 
+      element={
+        <div>
+          <Navbar/>
+          <ProductNameLuminous/>
+          <Footer/>
+        </div>
+      }
       />
 
       <Route
-        path="/shop/product/:name"
-        element={
-          <div>
-            <Navbar />
-            <ShopBanner />
-            <ProductNamePure />
-            <Footer />
-          </div>
-        }
+      path="/shop1/product/:name" 
+      element={
+        <div>
+          <Navbar/>
+          <ProductNamePure/>
+          <Footer/>
+        </div>
+      }
+      />
+
+
+      <Route
+      path="/shop2/product/:name"
+      element={
+        <div>
+          <Navbar/>
+          <ProductNameElysian/>
+          <Footer/>
+        </div>
+      }
+      />
+
+      <Route
+      path="/shop3/product/:name"
+      element={
+        <div>
+          <Navbar/>
+          <ProductNameSerene/>
+          <Footer/>
+        </div>
+      }
+      />
+
+      <Route
+      path="/shop4/product/:name"
+      element={
+        <div>
+          <Navbar/>
+          <ProductNameVitale/>
+          <Footer/>
+        </div>
+      }
+      />
+
+      <Route
+      path="/shop5/product/:name"
+      element={
+        <div>
+          <Navbar/>
+          <ProductNameNature/>
+          <Footer/>
+        </div>
+      }
       />
 
       <Route
