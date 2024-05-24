@@ -8,6 +8,7 @@ import axios from "../api/axios";
 import useAuthContext from "./../context/AuthContext"
 import { ToastContainer } from "react-toastify";
 
+
 function ProductDetails() {
   const { id } = useParams();
   const location = useLocation();

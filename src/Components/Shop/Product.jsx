@@ -152,6 +152,7 @@ const ProductCard = () => {
           skin type, preferences, and budget.
         </p>
         <Filter />
+        <productName1/>
         {/* Product card */}
         <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 justify-center gap-y-20 gap-x-14 pt-10 pb-5">
         {products.slice(startIndex, endIndex).map((product) => (
@@ -194,7 +195,8 @@ const ProductCard = () => {
                         product.id
                       );
                     }}
-                    className="bg-pink-400 hover:bg-pink-600 text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
+                    className="bg-pink-400 hover:bg-pink-600 
+                    text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
                   >
                     Buy Now
                   </button>

@@ -21,6 +21,10 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
+import DataBranding from "./Components/Home/DataBranding";
+import ProductNameLuminous from "./Components/Shop/FilterProductName.jsx/ProductNameLuminous";
+import ShopBanner from "./Components/Shop/ShopBanner";
+import ProductNamePure from "./Components/Shop/FilterProductName.jsx/ProductNamePure";
 
 function App() {
   return (
@@ -67,6 +71,45 @@ function App() {
           </div>
         }
       />
+
+      {/* data category */}
+      <Route
+        path="/category/:id/products"
+        element={
+          <div>
+            <Navbar/>
+            <DataBranding/>
+            <Footer/>
+          </div>
+        }
+      />
+
+
+      {/* Display Route Category product  */}
+      <Route 
+      path="/shop/product/:name" 
+      element={
+        <div>
+          <Navbar/>
+          <ShopBanner/>
+          <ProductNameLuminous/>
+          <Footer/>
+        </div>
+      }
+      />
+
+      <Route
+      path="/shop/product/:name" 
+      element={
+        <div>
+          <Navbar/>
+          <ShopBanner/>
+          <ProductNamePure/>
+          <Footer/>
+        </div>
+      }
+      />
+
 
       <Route
         path="/dashboard/dashboardCategory"
