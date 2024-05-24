@@ -5,9 +5,14 @@ import SIgnUp from "./Components/Auth/SignUp/SIgnUp";
 import { Cart } from "./Components/Cart/Cart";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
+import DataBranding from "./Components/Home/DataBranding";
+import ProductNameLuminous from "./Components/Shop/FilterProductName.jsx/ProductNameLuminous";
+import ProductNamePure from "./Components/Shop/FilterProductName.jsx/ProductNamePure";
 import ProductDetails from "./Components/Shop/ProductDetails";
+import ShopBanner from "./Components/Shop/ShopBanner";
 import AddCategory from "./Dashboard/Category/AddCategory";
 import Contact from "./Dashboard/Contact";
+import DashboardBrand from "./Dashboard/DashboardBrand";
 import DashboardCategory from "./Dashboard/DashboardCategory";
 import Dashboard from "./Dashboard/DashboardLayout";
 import DashboardProduct from "./Dashboard/DashboardProduct";
@@ -21,10 +26,6 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
-import DataBranding from "./Components/Home/DataBranding";
-import ProductNameLuminous from "./Components/Shop/FilterProductName.jsx/ProductNameLuminous";
-import ShopBanner from "./Components/Shop/ShopBanner";
-import ProductNamePure from "./Components/Shop/FilterProductName.jsx/ProductNamePure";
 
 function App() {
   return (
@@ -77,45 +78,51 @@ function App() {
         path="/category/:id/products"
         element={
           <div>
-            <Navbar/>
-            <DataBranding/>
-            <Footer/>
+            <Navbar />
+            <DataBranding />
+            <Footer />
           </div>
         }
       />
 
-
       {/* Display Route Category product  */}
-      <Route 
-      path="/shop/product/:name" 
-      element={
-        <div>
-          <Navbar/>
-          <ShopBanner/>
-          <ProductNameLuminous/>
-          <Footer/>
-        </div>
-      }
+      <Route
+        path="/shop/product/:name"
+        element={
+          <div>
+            <Navbar />
+            <ShopBanner />
+            <ProductNameLuminous />
+            <Footer />
+          </div>
+        }
       />
 
       <Route
-      path="/shop/product/:name" 
-      element={
-        <div>
-          <Navbar/>
-          <ShopBanner/>
-          <ProductNamePure/>
-          <Footer/>
-        </div>
-      }
+        path="/shop/product/:name"
+        element={
+          <div>
+            <Navbar />
+            <ShopBanner />
+            <ProductNamePure />
+            <Footer />
+          </div>
+        }
       />
-
 
       <Route
         path="/dashboard/dashboardCategory"
         element={
           <div>
             <DashboardCategory />
+          </div>
+        }
+      />
+      <Route
+        path="/dashboard/dashboardBrand"
+        element={
+          <div>
+            <DashboardBrand />
           </div>
         }
       />

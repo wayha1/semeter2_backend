@@ -1,25 +1,22 @@
-// Addbrand.js
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import UploadFile from "../UploadFile";
 
 function Addbrand() {
-  const [brand, setbrand] = useState({
+  const [brand, setBrand] = useState({
     brand_title: "",
     brand_icon: "",
   });
-  const [uploadConfirmed, setUploadConfirmed] = useState(false); // State to track upload confirmation
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [file, setFile] = useState(null); // State to store selected file
 
   const cloudName = "ds9ccmtdq";
   const unsignedUploadPreset = "ntrpox3d";
 
   const handleInput = (event) => {
     const { name, value } = event.target;
-    setbrand({ ...brand, [name]: value });
+    setBrand({ ...brand, [name]: value });
     if (name === "brand_title") {
       setErrorMessage("");
       setSuccessMessage("");
@@ -28,16 +25,16 @@ function Addbrand() {
 
   const handleImageUpload = (imageUrl) => {
     // This function is called when the file is uploaded
-    setbrand({ ...brand, brand_icon: imageUrl });
+    setBrand({ ...brand, brand_icon: imageUrl });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!brand.brand_title || !file) {
-    //   setErrorMessage("Please provide both brand title and icon.");
-    //   return;
-    // }
+    if (!brand.brand_title || !brand.brand_icon) {
+      setErrorMessage("Please provide both brand title and icon.");
+      return;
+    }
 
     try {
       const token = Cookies.get("token");
@@ -62,9 +59,9 @@ function Addbrand() {
 
       // Check if the brand was successfully added
       if (brandResponse.status === 200) {
-        setSuccessMessage("brand added successfully.");
+        setSuccessMessage("Brand added successfully.");
         // Clear brand data
-        setbrand({ brand_title: "", brand_icon: "" });
+        setBrand({ brand_title: "", brand_icon: "" });
       } else {
         // If there was an issue with the request, display an error message
         setErrorMessage("Failed to add brand. Please try again later.");
@@ -78,7 +75,7 @@ function Addbrand() {
   return (
     <div className="w-[930px] h-[450px] container flex flex-col m-2 space-y-5">
       <h1 className="container text-2xl font-bold font-style hover:text-cyan-700">
-        {"+ Input brand Of Product"}
+        {"+ Input Brand Of Product"}
       </h1>
 
       <form onSubmit={handleSubmit}>
@@ -86,7 +83,7 @@ function Addbrand() {
           <input
             type="text"
             name="brand_title"
-            placeholder="brand"
+            placeholder="Brand"
             className="p-2 rounded-lg border border-gray-300"
             value={brand.brand_title}
             onChange={handleInput}
@@ -96,12 +93,9 @@ function Addbrand() {
         <div className="flex flex-col w-[80%]">
           <UploadFile
             section="brand_icon"
-            handleImageUpload={(imageUrl) => setbrand({ ...brand, brand_icon: imageUrl })}
-            handleIconUpload={(imageUrl) => setbrand({ ...brand, brand_icon: imageUrl })}
+            handleImageUpload={handleImageUpload}
             cloudName={cloudName}
             unsignedUploadPreset={unsignedUploadPreset}
-            onConfirmUpload={handleSubmit}
-            setUploadConfirmed={setUploadConfirmed}
           />
         </div>
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaShoppingCart, FaVideo } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
 import { IoArrowBackCircle } from "react-icons/io5";
-import { MdCategory, MdDashboard } from "react-icons/md";
+import { MdBrandingWatermark, MdCategory, MdDashboard } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
@@ -98,6 +98,13 @@ const DashboardLayout = ({ children, title }) => {
             >
               Categories
               <MdCategory />
+            </NavLink>
+            <NavLink
+              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              to={"/dashboard/dashboardBrand"}
+            >
+              Brand
+              <MdBrandingWatermark />
             </NavLink>
             {/* video  */}
             <NavLink
