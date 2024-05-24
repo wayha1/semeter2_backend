@@ -14,18 +14,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           disabled={currentPage === 1}
           className="inline-flex items-center justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
+          {/* Previous page icon */}
+          Back
         </button>
       </li>
 
@@ -53,18 +43,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           disabled={currentPage === totalPages}
           className="inline-flex items-center justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-8 h-8"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
+          {/* Next page icon */}
+          Next
         </button>
       </li>
     </ul>
@@ -78,9 +58,7 @@ const ProductCard = () => {
   const navigate = useNavigate();
   const { user } = useAuthContext();
 
-  const cardsPerPage = 12;
-  const rowsPerPage = 3;
-  const columnsPerPage = 4;
+  const cardsPerPage = 8; // Adjusted to display 8 products per page
 
   const navigateToProductDetails = (
     productImage,
@@ -101,7 +79,7 @@ const ProductCard = () => {
         productStock,
         productReview,
         userId: user.id,
-        productId: productId
+        productId: productId,
       },
     });
   };
@@ -152,10 +130,9 @@ const ProductCard = () => {
           skin type, preferences, and budget.
         </p>
         <Filter />
-        <productName1/>
         {/* Product card */}
         <div className="w-fit mx-auto grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2 justify-center gap-y-20 gap-x-14 pt-10 pb-5">
-        {products.slice(startIndex, endIndex).map((product) => (
+          {products.slice(startIndex, endIndex).map((product) => (
             <div
               key={product.id}
               className="max-sm:w-36 max-sm:h-50 lg:w-72 duration-500"
@@ -183,7 +160,6 @@ const ProductCard = () => {
                   </span>
                   <button
                     onClick={() => {
-                     
                       console.log("Product data:", product);
                       navigateToProductDetails(
                         product.product_image,
@@ -196,7 +172,7 @@ const ProductCard = () => {
                       );
                     }}
                     className="bg-pink-400 hover:bg-pink-600 
-                    text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
+                text-white font-bold py-2 px-4 max-sm:p-2 max-sm:text-xs rounded"
                   >
                     Buy Now
                   </button>

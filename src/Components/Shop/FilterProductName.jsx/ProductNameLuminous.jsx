@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import useAuthContext from "./../../context/AuthContext"
+import { CgArrowLeftO } from "react-icons/cg";
+
 
 
 function ProductNameLuminous () {
@@ -11,6 +13,7 @@ function ProductNameLuminous () {
   const [product1, setProduct1] = useState([]);
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [brandName, setBrandName] = useState("");
 
 
   const navigateToProductDetails = (
@@ -53,6 +56,11 @@ function ProductNameLuminous () {
         (product) => product.product_brand === "Luminous Glow 2023"
       );
       setProduct1(luminousGlowProducts);
+
+      // Set brand name if products are available
+      if (luminousGlowProducts.length > 0) {
+        setBrandName(luminousGlowProducts[0].product_brand);
+      }
     } catch (error) {
       console.error("Error fetching user data:", error);
       setProduct1([]);
@@ -65,6 +73,14 @@ function ProductNameLuminous () {
 
   return (
     <div>
+      <div className="m-10">
+        <Link to="/shop">
+          <CgArrowLeftO size={32} />
+        </Link>
+      </div>
+      {brandName && (
+        <h1 className="text-center text-2xl font-bold my-4">Product Brand: {brandName}</h1>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 m-10">
         {product1.map((product) => (
           <div key={product.id} className="p-4 border rounded-lg">
