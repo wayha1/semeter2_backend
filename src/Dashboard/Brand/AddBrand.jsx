@@ -32,7 +32,7 @@ function Addbrand() {
     e.preventDefault();
 
     if (!brand.brand_title || !brand.brand_icon) {
-      setErrorMessage("Please provide both brand title and icon.");
+      setErrorMessage("Please provide both brand title and image.");
       return;
     }
 

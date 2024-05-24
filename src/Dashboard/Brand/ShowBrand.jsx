@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "../../Components/api/axios";
 import Cookies from "js-cookie";
-import ModelEdit from '../brand/Modal/ModelEdit';
+import React, { useEffect, useState } from "react";
+import axios from "../../Components/api/axios";
+import ModelEdit from "../Category/Modal/ModelEdit";
 
 function Showbrand() {
   const [brandData, setBrandData] = useState([]);
@@ -90,7 +90,9 @@ function Showbrand() {
           </div>
         ))}
       </div>
-      {isModalOpen && <ModelEdit brand={editingBrand} handleCloseModal={handleCloseModal} />}
+      {isModalOpen && (
+        <ModelEdit brand={editingBrand} handleCloseModal={handleCloseModal} />
+      )}
     </div>
   );
 }
