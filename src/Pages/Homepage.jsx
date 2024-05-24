@@ -4,7 +4,6 @@ import Home from "../Components/Home/Home";
 // import Products from "../Components/Home/Products";
 import BestProducts from "../Components/Home/BestProducts";
 import Video from "../Components/Home/Video";
-import Payment from "./Payment";
 function Homepage() {
   return (
     <>
@@ -15,7 +14,6 @@ function Homepage() {
       <BestProducts />
       {/* <Products /> */}
       <Video />
-      <Payment />
     </>
   );
 }
