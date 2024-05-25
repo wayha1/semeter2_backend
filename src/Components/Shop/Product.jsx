@@ -146,7 +146,7 @@ const ProductCard = () => {
               </div>
               <div className="px-4">
                 <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
-                  {product.product_brand}
+                  {product.product_name}
                 </h3>
                 <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
                   Stock: {product.product_stock}
@@ -162,7 +162,7 @@ const ProductCard = () => {
                     onClick={() => {
                       console.log("Product data:", product);
                       navigateToProductDetails(
-                        product.product_image,
+                        product.product_banner,
                         product.product_name,
                         product.product_description,
                         product.product_price,
