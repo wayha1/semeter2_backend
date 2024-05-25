@@ -33,7 +33,6 @@ function Branding() {
   const handleCategoryClick = (categoryId) => {
     navigate(`/category/${categoryId}/products`);
   };
-  
 
   return (
     <div className="bg-white pt-10">
@@ -48,11 +47,13 @@ function Branding() {
               <div onClick={() => handleCategoryClick(category.id)}>
                 <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                   <div className="w-full h-full hover:scale-110">
-                    <img src={category.category_icon} alt={category.category_title} />
+                    {/* Display product image */}
+                    <img src={category.products[0].product_image} alt={category.products[0].product_name} />
                   </div>
                 </div>
               </div>
-              <p className="text-center">{category.category_title}</p>
+              {/* Display product brand */}
+              <p className="text-center">{category.products[0].product_brand}</p>
             </div>
           ))}
         </div>

@@ -79,7 +79,7 @@ function ProductNameLuminous () {
         </Link>
       </div>
       {brandName && (
-        <h1 className="text-center text-2xl font-bold my-4">Product Brand: {brandName}</h1>
+        <h1 className="text-center text-2xl font-bold my-4">Category: {brandName}</h1>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 m-10">
         {product1.map((product) => (
@@ -89,7 +89,7 @@ function ProductNameLuminous () {
             alt={product.product_name} 
             className="max-sm:w-30 max-sm:h-50 lg:h-80 lg:w-72 object-cover rounded-t-xl"/>
             <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
-              {product.product_brand}
+              {product.product_name}
             </h3>
             <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
               Stock: {product.product_stock}
@@ -107,7 +107,7 @@ function ProductNameLuminous () {
                      
                 console.log("Product data:", product);
                 navigateToProductDetails(
-                  product.product_image,
+                  product.product_banner,
                   product.product_name,
                   product.product_description,
                   product.product_price,

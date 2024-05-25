@@ -60,19 +60,20 @@ function DataBranding() {
   if (!categoryData) {
     return <div>Loading...</div>;
   }
+  
 
   return (
     <div>
-      <h1 className="font-bold text-4xl pb-4 m-10">Category Title: {categoryData.category_title}</h1>
+      <h1 className="font-bold text-4xl pb-4 m-10">Product Brand: {categoryData.category_title}</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 m-10">
         {categoryData.products.map((product) => (
           <div key={product.id} className="p-4 border rounded-lg">
             <img 
             src={product.product_image} 
-            alt={product.product_name} 
+            alt={product.product_image} 
             className="max-sm:w-30 max-sm:h-50 lg:h-80 lg:w-72 object-cover rounded-t-xl"/>
             <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
-              {product.product_brand}
+              {product.product_name}
             </h3>
             <h3 className="md:text-lg text-xs max-sm:text-sm font-medium mb-2">
               Stock: {product.product_stock}
@@ -90,7 +91,7 @@ function DataBranding() {
                      
                 console.log("Product data:", product);
                 navigateToProductDetails(
-                  product.product_image,
+                  product.product_banner,
                   product.product_name,
                   product.product_description,
                   product.product_price,

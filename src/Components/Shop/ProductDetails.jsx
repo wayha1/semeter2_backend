@@ -19,6 +19,8 @@ function ProductDetails() {
   const productPrice = location.state && location.state.productPrice;
   const productStock = location.state && location.state.productStock;
   const productId = location.state && location.state.productId;
+  const productBanner = location.state && location.state.productBanner;
+  const productReview = location.state && location.state.productReview;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [addToCartClicked, setAddToCartClicked] = useState(false);
@@ -141,6 +143,10 @@ function ProductDetails() {
                 <span className="text-green">
                   <div className="text-green-500 font-bold">{productStock}</div>
                 </span>
+              </div>
+              <div>
+              <span className="font-bold">Product Review:</span>
+                <iframe src={productReview}/>
               </div>
             </div>
             <div className="mb-4">
