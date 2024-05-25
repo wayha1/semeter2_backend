@@ -28,7 +28,7 @@ function Profile() {
     fetchUserData();
   }, [user]); // Include user as a dependency
 
-
+console.log(user)
   const handleLogout = async () => {
     try {
       await logout();
@@ -51,8 +51,8 @@ function Profile() {
                     alt="profile"
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
                   ></img>
-                  <h1 className="text-xl font-bold">Mateo</h1>
-                  <p className="text-gray-700">General User</p>
+                  <h1 className="text-xl font-bold">{user.name}</h1>
+                  <p className="text-gray-700">{user.role}</p>
                   <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <button
                       onClick={handleLogout}
