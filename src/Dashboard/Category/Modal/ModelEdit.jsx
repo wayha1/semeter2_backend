@@ -3,23 +3,23 @@ import axios from '../../../Components/api/axios';
 import Cookies from 'js-cookie';
 import UploadFile from "../../../Dashboard/UploadFile";
 
-function ModelEdit({ category, handleCloseModal }) {
-  const [categoryImage, setCategoryImage] = useState(null);
+function ModelEdit({ brand, handleCloseModal }) {
+  const [brandImage, setBrandImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const [categoryTitle, setCategoryTitle] = useState(category.category_title);
+  const [brandName, setBrandName] = useState(brand?.brand || "");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [uploadConfirmed, setUploadConfirmed] = useState(false); // Ensure initial state is false
-  const [showModal, setShowModal] = useState(false); // State for controlling modal visibility
+  const [uploadConfirmed, setUploadConfirmed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const cloudName = "ds9ccmtdq";
   const unsignedUploadPreset = "ntrpox3d";
 
   useEffect(() => {
-    setCategoryTitle(category.category_title);
-  }, [category]);
+    setBrandName(brand?.brand || "");
+  }, [brand]);
 
   const handleImageUpload = (imageUrl) => {
-    setCategoryImage(imageUrl);
+    setBrandImage(imageUrl);
   };
 
   const handleConfirmUpload = async (imageUrl) => {
@@ -30,18 +30,17 @@ function ModelEdit({ category, handleCloseModal }) {
         return;
       }
   
-      const response = await axios.put(`/category/${category.id}`, {
-        category_title: categoryTitle,
-        category_icon: imageUrl, // Pass the uploaded image URL
+      const response = await axios.put(`/brand/${brand.id}`, {
+        brand: brandName,
+        brand_icons: imageUrl,
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
   
-      setSuccessMessage("Category updated successfully.");
+      setSuccessMessage("Brand updated successfully.");
       
-      // Update the imagePreview state with the new image URL
       setImagePreview(imageUrl);
   
       setTimeout(() => {
@@ -50,7 +49,7 @@ function ModelEdit({ category, handleCloseModal }) {
       });
     } catch (error) {
       console.error("Error:", error);
-      setErrorMessage("An error occurred while updating the category.");
+      setErrorMessage("An error occurred while updating the brand.");
     }
   };
   
@@ -58,28 +57,26 @@ function ModelEdit({ category, handleCloseModal }) {
     e.preventDefault();
   
     if (uploadConfirmed) {
-      setCategoryImage(null); // Clear the image state
+      setBrandImage(null);
       setUploadConfirmed(false);
-      setShowModal(false); // Close the modal
+      setShowModal(false);
     }
   };
 
   const handleYesClick = () => {
-    // Handle 'Yes' button click
-    setUploadConfirmed(true); // Confirm upload
-    setShowModal(false); // Close the modal
+    setUploadConfirmed(true);
+    setShowModal(false);
   };
 
   const handleNoClick = () => {
-    // Handle 'No' button click
-    setShowModal(false); // Close the modal
+    setShowModal(false);
   };
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto bg-opacity-75">
       <div className="flex items-center justify-center min-h-screen">
         <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-3xl sm:w-full">
-          <h3 className="text-lg font-medium text-gray-900 text-center mt-5">Edit Category</h3>
+          <h3 className="text-lg font-medium text-gray-900 text-center mt-5">Edit Brand</h3>
           <div className="p-6">
             <div className="mt-2">
               <label className="block text-sm font-medium text-gray-700">Image:</label>
@@ -89,7 +86,7 @@ function ModelEdit({ category, handleCloseModal }) {
                 handleImageUpload={handleImageUpload}
                 onConfirmUpload={handleConfirmUpload}
                 setUploadConfirmed={setUploadConfirmed}
-                setShowModal={setShowModal} // Pass setShowModal to handle modal visibility
+                setShowModal={setShowModal}
               />
               {imagePreview && (
                 <img src={imagePreview} alt="Preview" className="mt-2 max-w-[200px] max-h-[200px]" />
@@ -99,8 +96,8 @@ function ModelEdit({ category, handleCloseModal }) {
               <label className="block text-sm font-medium text-gray-700">Name:</label>
               <input
                 type="text"
-                value={categoryTitle}
-                onChange={(e) => setCategoryTitle(e.target.value)}
+                value={brandName}
+                onChange={(e) => setBrandName(e.target.value)}
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 p-1 block w-full shadow-sm border-gray-300 rounded-md"
               />
             </div>

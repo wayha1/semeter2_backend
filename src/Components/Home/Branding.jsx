@@ -4,23 +4,23 @@ import Cookies from "js-cookie";
 import axios from "../api/axios";
 
 function Branding() {
-  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
       const token = Cookies.get("token");
       console.log("Fetching data...");
-      const response = await axios.get("/category", {
+      const response = await axios.get("/brand", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       console.log("Response data:", response.data);
-      setCategories(response.data.data);
+      setBrands(response.data.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
-      setCategories([]);
+      setBrands([]);
     }
   };
 
@@ -28,9 +28,9 @@ function Branding() {
     fetchData();
   }, []);
 
-  const handleCategoryClick = (categoryId) => {
-    navigate(`/category/${categoryId}/products`);
-  };
+  // const handleCategoryClick = (categoryId) => {
+  //   navigate(`/category/${categoryId}/products`);
+  // };
 
   return (
     <div className="bg-white pt-10">
@@ -39,25 +39,22 @@ function Branding() {
       </div>
       <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
         <div className="flex space-x-10 md:space-x-20 group-hover:paused">
-          {categories.length > 0 ? (
-            categories.map((category) => (
-              // Only render categories that have products
-              category.products && category.products.length > 0 && (
-                <div
-                  key={category.id}
-                  className="flex flex-col justify-center items-center cursor-pointer"
-                  onClick={() => handleCategoryClick(category.id)}
-                >
-                  <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                    <img
-                      src={category.products[0].product_image}
-                      alt={category.products[0].product_name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-center">{category.products[0].product_brand}</p>
+          {brands.length > 0 ? (
+            brands.map((brand) => (
+              <div
+                key={brand.id}
+                className="flex flex-col justify-center items-center cursor-pointer"
+                //onClick={() => handleCategoryClick(category.id)}
+              >
+                <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
+                  <img
+                    src={brand.brand_icons}
+                    alt={brand.brand}
+                    className="w-[100px] h-[100px] object-cover"
+                  />
                 </div>
-              )
+                <p className="text-center">{brand.brand}</p>
+              </div>
             ))
           ) : (
             <p>No categories available</p>
