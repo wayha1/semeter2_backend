@@ -5,18 +5,18 @@ import UploadFile from "../UploadFile";
 
 function AddProduct() {
   const [product, setProduct] = useState({
-    product_name: "",
-    product_brand: "",
-    product_description: "",
-    product_price: "",
-    product_stock: "",
-    product_rating: "",
-    product_feedback: "",
-    product_image: "",
-    product_review: "",
-    product_banner: "",
-    product_id: "",
-    category_id: "",
+    product_name: "", //
+    product_description: "", //
+    product_price: "", //
+    product_stock: "", //
+    product_rating: "", //
+    product_feedback: "", //
+    product_image: "", // 
+    product_review: "", //
+    product_banner: "", //
+    category_id: "", //
+    brand_id: "", // New field for brand id
+    is_done: "", // New field for is done
   });
   const [categories, setCategories] = useState([]); 
   const [brands, setBrands] = useState([]); // State for brands
@@ -130,7 +130,6 @@ function AddProduct() {
           {
             // Include other product data here
             product_name: product.product_name,
-            product_brand: product.product_brand,
             product_description: product.product_description,
             product_price: product.product_price,
             product_stock: product.product_stock,
@@ -139,8 +138,9 @@ function AddProduct() {
             product_image: imageUrl,
             product_review: product.product_review,
             product_banner: bannerUrl,
-            product_id: product.product_id,
             category_id: product.category_id,
+            brand_id: product.brand_id,
+            is_done: product.is_done,
           },
           {
             headers: {
@@ -155,7 +155,6 @@ function AddProduct() {
           // Clear product data
           setProduct({
             product_name: "",
-            product_brand: "",
             product_description: "",
             product_price: "",
             product_stock: "",
@@ -164,8 +163,9 @@ function AddProduct() {
             product_image: null,
             product_review: "",
             product_banner: null,
-            product_id: "",
             category_id: "",
+            brand_id: "",
+            is_done: "",
           });
         } else {
           // If there was an issue with the request, display an error message
@@ -224,8 +224,8 @@ function AddProduct() {
               <select
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="product_brand"
-                name="product_brand"
-                value={product.product_brand}
+                name="brand_id"
+                value={product.brand_id}
                 onChange={handleInput}
               >
                 <option>Select brand...</option>
