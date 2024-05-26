@@ -1,96 +1,80 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import Product from "./Product"; // Assume this component displays the list of products
 import Search from "./Search";
 
 function Filter() {
-  const navigate = useNavigate();
+  const [filter, setFilter] = useState("All");
 
-  const handleCategoryClick = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop/product/${productBrand}`);
-  };
-
-  const handleCategoryClick1 = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop1/product/${productBrand}`);
-  };
-
-  const handleCategoryClick2 = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop2/product/${productBrand}`);
-  };
-
-  const handleCategoryClick3 = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop3/product/${productBrand}`);
-  };
-
-  const handleCategoryClick4 = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop4/product/${productBrand}`);
-  };
-
-  const handleCategoryClick5 = (productBrand) => {
-    console.log(`Navigating to /shop/product/${productBrand}`);
-    navigate(`/shop5/product/${productBrand}`);
+  const handleCategoryClick = (category) => {
+    setFilter(category);
   };
 
   return (
     <div className="md:flex md:justify-between md:px-28">
-      <div>
-        <Search />
-        <div className="flex max-sm:flex-wrap gap-3 max-sm:justify-center text-center">
-          <a
-            href="/shop"
-            className="bg-blue-500 hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold"
-          >
-            All
-          </a>
-          <div
-            onClick={() => handleCategoryClick("Luminous Glow 2023")}
-            className="bg-green-200 text-white hover:bg-green-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-            Luminous Glow
-          </div>
-          <div
-            onClick={() => handleCategoryClick1("Pure Radiance 2023")}
-            className="bg-pink-200 text-white hover:bg-pink-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-            Pure Radiance
-          </div>
-          <div
-            onClick={() => handleCategoryClick2("Elysian Skincare 2023")}
-            className="bg-red-200 text-white hover:bg-red-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-           Elysian Skincare
-          </div>
-          <div
-            onClick={() => handleCategoryClick3("Serene Essence 2023")}
-            className="bg-yellow-200 text-white hover:bg-yellow-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-           Serene Essence
-          </div>
-          <div
-            onClick={() => handleCategoryClick4("Vitalé Beauty 2023")}
-            className="bg-purple-200 text-white hover:bg-purple-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-           Vitalé Beauty
-          </div>
-          <div
-            onClick={() => handleCategoryClick5("Natura Luxe 2023")}
-            className="bg-blue-200 text-white hover:bg-blue-500 py-1 
-            px-2 rounded-lg text-md font-bold w-[180px]"
-          >
-           Natura Luxe
-          </div>
+      <div className="flex flex-wrap gap-3 justify-center md:justify-start text-center mb-4 md:mb-0">
+        <a
+          href="/shop"
+          className={`${
+            filter === "All" ? "bg-blue-700" : "bg-blue-500"
+          } text-white hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold`}
+          onClick={() => handleCategoryClick("All")}
+        >
+          All
+        </a>
+        <div
+          className={`${
+            filter === "Mask" ? "bg-green-700" : "bg-green-200"
+          } text-white hover:bg-green-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Mask")}
+        >
+          Mask
+        </div>
+        <div
+          className={`${
+            filter === "Serum" ? "bg-pink-700" : "bg-pink-200"
+          } text-white hover:bg-pink-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Serum")}
+        >
+          Serum
+        </div>
+        <div
+          className={`${
+            filter === "Moisturizer" ? "bg-red-700" : "bg-red-200"
+          } text-white hover:bg-red-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Moisturizer")}
+        >
+          Moisturizer
+        </div>
+        <div
+          className={`${
+            filter === "Foam" ? "bg-yellow-700" : "bg-yellow-200"
+          } text-white hover:bg-yellow-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Foam")}
+        >
+          Foam
+        </div>
+        <div
+          className={`${
+            filter === "Sunscreen" ? "bg-purple-700" : "bg-purple-200"
+          } text-white hover:bg-purple-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Sunscreen")}
+        >
+          Sunscreen
+        </div>
+        <div
+          className={`${
+            filter === "Lotion" ? "bg-blue-700" : "bg-blue-200"
+          } text-white hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
+          onClick={() => handleCategoryClick("Lotion")}
+        >
+          Lotion
         </div>
       </div>
-      
+      <div className="flex justify-center md:justify-end">
+        <Search />
+      </div>
+      <Product filter={filter} />{" "}
+      {/* Pass the filter to the ProductList component */}
     </div>
   );
 }

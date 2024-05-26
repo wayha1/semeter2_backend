@@ -1,0 +1,63 @@
+import React, { useEffect, useState } from "react";
+import axios from "../api/axios";
+import Cookies from "js-cookie";
+
+function ContactUsDashboard() {
+  const [messages, setMessages] = useState([]);
+
+  const fetchMessages = async () => {
+    try {
+      const token = Cookies.get("token");
+      console.log("Fetching messages...");
+      const response = await axios.get("/messages", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Response data:", response.data);
+      setMessages(response.data.data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      setMessages([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  return (
+    <div className="bg-white pt-10">
+      <div className="text-center pb-10">
+        <h1 className="font-bold text-4xl pb-4">Contact Us Messages</h1>
+      </div>
+      <div className="flex flex-col space-y-4 md:space-y-10 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
+        {messages.length > 0 ? (
+          messages.map((message) => (
+            <div
+              key={message.id}
+              className="flex flex-col p-4 border border-gray-200 rounded-lg"
+            >
+              <div className="flex flex-col mb-4">
+                <span className="font-bold">Name:</span>
+                <span>{message.name}</span>
+              </div>
+              <div className="flex flex-col mb-4">
+                <span className="font-bold">Email:</span>
+                <span>{message.email}</span>
+              </div>
+              <div className="flex flex-col mb-4">
+                <span className="font-bold">Message:</span>
+                <span>{message.message}</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center">No messages available</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default ContactUsDashboard;
