@@ -11,9 +11,7 @@ function Branding() {
     try {
       const token = Cookies.get("token");
       console.log("Fetching data...");
-      const response = await axios.request({
-        url: "/category",
-        method: "GET",
+      const response = await axios.get("/category", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -21,7 +19,7 @@ function Branding() {
       console.log("Response data:", response.data);
       setCategories(response.data.data);
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching categories:", error);
       setCategories([]);
     }
   };
@@ -41,21 +39,29 @@ function Branding() {
       </div>
       <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
         <div className="flex space-x-10 md:space-x-20 group-hover:paused">
-          {categories.map((category, index) => (
-            <div key={index} className="flex flex-col justify-center items-center">
-              {/* Use onClick to handle category click */}
-              <div onClick={() => handleCategoryClick(category.id)}>
-                <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
-                  <div className="w-full h-full hover:scale-110">
-                    {/* Display product image */}
-                    <img src={category.products[0].product_image} alt={category.products[0].product_name} />
+          {categories.length > 0 ? (
+            categories.map((category) => (
+              // Only render categories that have products
+              category.products && category.products.length > 0 && (
+                <div
+                  key={category.id}
+                  className="flex flex-col justify-center items-center cursor-pointer"
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
+                    <img
+                      src={category.products[0].product_image}
+                      alt={category.products[0].product_name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+                  <p className="text-center">{category.products[0].product_brand}</p>
                 </div>
-              </div>
-              {/* Display product brand */}
-              <p className="text-center">{category.products[0].product_brand}</p>
-            </div>
-          ))}
+              )
+            ))
+          ) : (
+            <p>No categories available</p>
+          )}
         </div>
       </div>
     </div>
