@@ -66,6 +66,7 @@ function Showbrand() {
                 className="border-2 w-[100px] h-[100px]"
               />
             </div>
+            
             <div className="flex flex-col">
               <div className="mb-2">
                 <div className="text-lg">Brand</div>

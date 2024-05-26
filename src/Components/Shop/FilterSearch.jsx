@@ -1,80 +1,51 @@
 import React, { useState } from "react";
-import Product from "./Product"; // Assume this component displays the list of products
+import { useNavigate } from "react-router-dom";
 import Search from "./Search";
+import ProductNameLuminous from "./Menu/ProductNameLuminous";
+import ProductNamePure from "./Menu/ProductNamePure";
+import ProductNameElysian from "./Menu/ProductNameElysian";
+import ProductNameSerence from "./Menu/ProductNameSerence";
+import ProductNameVitale from "./Menu/ProductNameVitale";
+import ProductNameNature from "./Menu/ProductNameNature";
+import SeeAll from "./Menu/SeeAll";
 
 function Filter() {
-  const [filter, setFilter] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(""); // State to track the selected category
+  const navigate = useNavigate();
 
-  const handleCategoryClick = (category) => {
-    setFilter(category);
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   return (
-    <div className="md:flex md:justify-between md:px-28">
-      <div className="flex flex-wrap gap-3 justify-center md:justify-start text-center mb-4 md:mb-0">
-        <a
-          href="/shop"
-          className={`${
-            filter === "All" ? "bg-blue-700" : "bg-blue-500"
-          } text-white hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold`}
-          onClick={() => handleCategoryClick("All")}
-        >
-          All
-        </a>
-        <div
-          className={`${
-            filter === "Mask" ? "bg-green-700" : "bg-green-200"
-          } text-white hover:bg-green-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Mask")}
-        >
-          Mask
-        </div>
-        <div
-          className={`${
-            filter === "Serum" ? "bg-pink-700" : "bg-pink-200"
-          } text-white hover:bg-pink-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Serum")}
-        >
-          Serum
-        </div>
-        <div
-          className={`${
-            filter === "Moisturizer" ? "bg-red-700" : "bg-red-200"
-          } text-white hover:bg-red-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Moisturizer")}
-        >
-          Moisturizer
-        </div>
-        <div
-          className={`${
-            filter === "Foam" ? "bg-yellow-700" : "bg-yellow-200"
-          } text-white hover:bg-yellow-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Foam")}
-        >
-          Foam
-        </div>
-        <div
-          className={`${
-            filter === "Sunscreen" ? "bg-purple-700" : "bg-purple-200"
-          } text-white hover:bg-purple-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Sunscreen")}
-        >
-          Sunscreen
-        </div>
-        <div
-          className={`${
-            filter === "Lotion" ? "bg-blue-700" : "bg-blue-200"
-          } text-white hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold cursor-pointer`}
-          onClick={() => handleCategoryClick("Lotion")}
-        >
-          Lotion
-        </div>
-      </div>
-      <div className="flex justify-center md:justify-end">
+    <div className="md:justify-between md:px-28">
+      <div>
         <Search />
+        <div className="max-sm:flex-wrap gap-3 max-sm:justify-center text-center">
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="bg-blue-500 hover:bg-blue-500 py-1 px-2 rounded-lg text-md font-bold"
+          >
+            <option value="">All</option>
+            <option value="Luminous Glow">Luminous Glow</option>
+            <option value="Pure Radiance">Pure Radiance</option>
+            <option value="Elysian Skincare">Elysian Skincare</option>
+            <option value="Serene Essence">Serene Essence</option>
+            <option value="Vitalé Beauty">Vitale Beauty</option>
+            <option value="Natura Luxe">Natura Luxe</option>
+          </select>
+        </div>
       </div>
-      <Product filter={filter} />{" "}
-      {/* Pass the filter to the ProductList component */}
+      {/* Conditional rendering based on selected category */}
+      {selectedCategory === "" && <SeeAll/>}
+      {selectedCategory === "Luminous Glow" && <ProductNameLuminous/>}
+      {selectedCategory === "Pure Radiance" && <ProductNamePure/>}
+      {selectedCategory === "Elysian Skincare" && <ProductNameElysian/>}
+      {selectedCategory === "Serene Essence" && <ProductNameSerence/>}
+      {selectedCategory === "Vitale Beauty" && <ProductNameVitale/>}
+      {selectedCategory === "Natura Luxe" && <ProductNameNature/>}
+      {/* Add similar conditions for other categories */}
     </div>
   );
 }
