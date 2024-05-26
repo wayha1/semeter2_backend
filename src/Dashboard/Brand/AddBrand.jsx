@@ -5,9 +5,10 @@ import UploadFile from "../UploadFile";
 
 function Addbrand() {
   const [brand, setBrand] = useState({
-    brand_title: "",
-    brand_icon: "",
+    brand: "",
+    brand_icons: "",
   });
+  const [uploadConfirmed, setUploadConfirmed] = useState(false); // State to track upload confirmation
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -17,21 +18,16 @@ function Addbrand() {
   const handleInput = (event) => {
     const { name, value } = event.target;
     setBrand({ ...brand, [name]: value });
-    if (name === "brand_title") {
+    if (name === "brand") {
       setErrorMessage("");
       setSuccessMessage("");
     }
   };
 
-  const handleImageUpload = (imageUrl) => {
-    // This function is called when the file is uploaded
-    setBrand({ ...brand, brand_icon: imageUrl });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!brand.brand_title || !brand.brand_icon) {
+    if (!brand.brand || !brand.brand_icons) {
       setErrorMessage("Please provide both brand title and image.");
       return;
     }
@@ -47,8 +43,8 @@ function Addbrand() {
       const brandResponse = await axios.post(
         "http://127.0.0.1:8000/api/brand",
         {
-          brand_title: brand.brand_title,
-          brand_icon: brand.brand_icon, 
+          brand: brand.brand,
+          brand_icons: brand.brand_icons, 
         },
         {
           headers: {
@@ -58,10 +54,10 @@ function Addbrand() {
       );
 
       // Check if the brand was successfully added
-      if (brandResponse.status === 200) {
+      if (brandResponse.status === 201) {
         setSuccessMessage("Brand added successfully.");
         // Clear brand data
-        setBrand({ brand_title: "", brand_icon: "" });
+        setBrand({ brand: "", brand_icons: "" });
       } else {
         // If there was an issue with the request, display an error message
         setErrorMessage("Failed to add brand. Please try again later.");
@@ -82,20 +78,23 @@ function Addbrand() {
         <div className="flex flex-col w-[80%]">
           <input
             type="text"
-            name="brand_title"
+            name="brand"
             placeholder="Brand"
             className="p-2 rounded-lg border border-gray-300"
-            value={brand.brand_title}
+            value={brand.brand}
             onChange={handleInput}
           />
         </div>
 
         <div className="flex flex-col w-[80%]">
           <UploadFile
-            section="brand_icon"
-            handleImageUpload={handleImageUpload}
+            section="product_brand"
+            handleImageUpload={(imageUrl) => setBrand({ ...brand, brand_icons: imageUrl })}
+            handleIconUpload={(imageUrl) => setBrand({ ...brand, brand_icons: imageUrl })}
             cloudName={cloudName}
             unsignedUploadPreset={unsignedUploadPreset}
+            onConfirmUpload={handleSubmit}
+            setUploadConfirmed={setUploadConfirmed}
           />
         </div>
 
