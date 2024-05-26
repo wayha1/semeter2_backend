@@ -17,6 +17,7 @@ const UploadFile = ({
   const handleIconInput = (e) => {
     if (!showModal) {
       setShowModal(true);
+      
     }
     setFile(e.target.files[0]);
   };
@@ -59,6 +60,8 @@ const UploadFile = ({
           handleIconUpload(imageUrl);
           handleBannerUpload(imageUrl); // Handle image upload for product_banner
         }else if(section === "category_icon"){
+          handleImageUpload(imageUrl);
+        }else if(section === "product_brand"){
           handleImageUpload(imageUrl);
         }
         setUploadedImageUrl(imageUrl);

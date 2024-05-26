@@ -15,9 +15,11 @@ function AddProduct() {
     product_image: "",
     product_review: "",
     product_banner: "",
+    product_id: "",
     category_id: "",
   });
   const [categories, setCategories] = useState([]); 
+  const [brands, setBrands] = useState([]); // State for brands
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -28,6 +30,7 @@ function AddProduct() {
   // Fetch categories data when component mounts
   useEffect(() => {
     fetchData();
+    fetchBrands();
   }, []);
 
   // Function to fetch categories data from the API
@@ -45,6 +48,22 @@ function AddProduct() {
     } catch (error) {
       console.error("Error fetching category data:", error);
       setCategories([]);
+    }
+  };
+
+  // Function to fetch brands data from the API
+  const fetchBrands = async () => {
+    try {
+      const token = Cookies.get("token");
+      const response = await axios.get("http://127.0.0.1:8000/api/brand", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setBrands(response.data.data);
+    } catch (error) {
+      console.error("Error fetching brand data:", error);
+      setBrands([]);
     }
   };
 
@@ -120,6 +139,7 @@ function AddProduct() {
             product_image: imageUrl,
             product_review: product.product_review,
             product_banner: bannerUrl,
+            product_id: product.product_id,
             category_id: product.category_id,
           },
           {
@@ -144,6 +164,7 @@ function AddProduct() {
             product_image: null,
             product_review: "",
             product_banner: null,
+            product_id: "",
             category_id: "",
           });
         } else {
@@ -197,19 +218,24 @@ function AddProduct() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_brand">
-              Product Brand
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="product_brand"
-              type="text"
-              placeholder="Product Brand"
-              name="product_brand"
-              value={product.product_brand}
-              onChange={handleInput}
-            />
-          </div>
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_brand">
+                Product Brand
+              </label>
+              <select
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="product_brand"
+                name="product_brand"
+                value={product.product_brand}
+                onChange={handleInput}
+              >
+                <option>Select brand...</option>
+                {brands.map((brand) => (
+                  <option key={brand.id} value={brand.id}>
+                    {brand.brand}
+                  </option>
+                ))}
+              </select>
+            </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product_description">
               Product Description

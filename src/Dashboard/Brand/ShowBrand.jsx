@@ -34,7 +34,6 @@ function Showbrand() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setEditingBrand(null); // Clear the editing brand after closing the modal
   };
 
   const handleDelete = async (brandId) => {
@@ -62,15 +61,15 @@ function Showbrand() {
           >
             <div className="mr-10">
               <img
-                src={brand.brand_icon}
-                alt={brand.brand_title}
+                src={brand.brand_icons}
+                alt={brand.brand_icons}
                 className="border-2 w-[100px] h-[100px]"
               />
             </div>
             <div className="flex flex-col">
               <div className="mb-2">
                 <div className="text-lg">Brand</div>
-                <div className="text-lg text-blue-500">{brand.brand_title}</div>
+                <div className="text-lg text-blue-500">{brand.brand}</div>
               </div>
               <div className="flex space-x-4">
                 <button
