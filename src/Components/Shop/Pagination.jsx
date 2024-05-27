@@ -9,14 +9,17 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="inline-flex items-center justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
+          className="inline-flex items-center justify-center 
+          w-5 h-5 md:w-[100px] md:h-10 border-2 text-white 
+          bg-blue-400 border-pink-600
+          rounded"
         >
           {/* Previous page icon */}
           Back
         </button>
       </li>
 
-      {[...Array(totalPages).keys()].map((_, index) => {
+      {/* {[...Array(totalPages).keys()].map((_, index) => {
         const page = index + 1;
         return (
           <li key={page}>
@@ -32,13 +35,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             </button>
           </li>
         );
-      })}
+      })} */}
 
       <li>
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="inline-flex items-center justify-center w-5 h-5 md:w-10 md:h-10 border border-gray-100 rounded"
+          className="inline-flex items-center justify-center 
+          w-[20px] h-5 md:w-[100px] md:h-10 border-2 text-white bg-blue-400
+           border-pink-600 rounded"
         >
           {/* Next page icon */}
           Next
