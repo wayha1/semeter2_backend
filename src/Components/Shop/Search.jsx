@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "./../api/axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 function Search() {
   const [productBrandSearch, setProductBrandSearch] = useState([]);
   const [query, setQuery] = useState("");
   const [fetching, setFetching] = useState(false);
+  const navigate = useNavigate();
 
   const fetchData = async (name) => {
     try {
@@ -55,6 +57,20 @@ function Search() {
     }
   };
 
+  const handleProductClick = (product) => {
+    navigate(`/details`, {
+      state: {
+        productImage: product.product_image,
+        productName: product.product_name,
+        productDescription: product.product_description,
+        productPrice: product.product_price,
+        productStock: product.product_stock,
+        productReview: product.product_review,
+        productId: product.id,
+      },
+    });
+  };
+
   return (
     <div className="w-full max-sm:py-5 max-sm:flex max-sm:justify-center flex justify-end mb-8">
       <div className="max-w-xs lg:max-w-2xl">
@@ -93,7 +109,11 @@ function Search() {
           productBrandSearch.length > 0 && (
             <ul className="mt-2 bg-white border border-gray-300 rounded-md">
               {productBrandSearch.map((product, index) => (
-                <li key={index} className="py-2 px-4 hover:bg-gray-100">
+                <li
+                  key={index}
+                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleProductClick(product)}
+                >
                   {product.product_name}
                 </li>
               ))}
