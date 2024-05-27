@@ -43,7 +43,7 @@ function Filter() {
       {selectedCategory === "Pure Radiance" && <ProductNamePure/>}
       {selectedCategory === "Elysian Skincare" && <ProductNameElysian/>}
       {selectedCategory === "Serene Essence" && <ProductNameSerence/>}
-      {selectedCategory === "Vitale Beauty" && <ProductNameVitale/>}
+      {selectedCategory === "Vitalé Beauty" && <ProductNameVitale/>}
       {selectedCategory === "Natura Luxe" && <ProductNameNature/>}
       {/* Add similar conditions for other categories */}
     </div>
