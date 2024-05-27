@@ -36,13 +36,13 @@ function Filter() {
         <Search />
       </div>
       {/* Conditional rendering based on selected category */}
-      {selectedCategory === "" && <SeeAll />}
-      {selectedCategory === "Luminous Glow" && <ProductNameLuminous />}
-      {selectedCategory === "Pure Radiance" && <ProductNamePure />}
-      {selectedCategory === "Elysian Skincare" && <ProductNameElysian />}
-      {selectedCategory === "Serene Essence" && <ProductNameSerence />}
-      {selectedCategory === "Vitale Beauty" && <ProductNameVitale />}
-      {selectedCategory === "Natura Luxe" && <ProductNameNature />}
+      {selectedCategory === "" && <SeeAll/>}
+      {selectedCategory === "Luminous Glow" && <ProductNameLuminous/>}
+      {selectedCategory === "Pure Radiance" && <ProductNamePure/>}
+      {selectedCategory === "Elysian Skincare" && <ProductNameElysian/>}
+      {selectedCategory === "Serene Essence" && <ProductNameSerence/>}
+      {selectedCategory === "Vitalé Beauty" && <ProductNameVitale/>}
+      {selectedCategory === "Natura Luxe" && <ProductNameNature/>}
       {/* Add similar conditions for other categories */}
     </div>
   );

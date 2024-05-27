@@ -28,9 +28,9 @@ function Branding() {
     fetchData();
   }, []);
 
-  // const handleCategoryClick = (categoryId) => {
-  //   navigate(`/category/${categoryId}/products`);
-  // };
+  const handleCategoryClick = (categoryId) => {
+    navigate(``);
+  };
 
   return (
     <div className="bg-white pt-10">
@@ -44,7 +44,7 @@ function Branding() {
               <div
                 key={brand.id}
                 className="flex flex-col justify-center items-center cursor-pointer"
-                //onClick={() => handleCategoryClick(category.id)}
+                onClick={() => handleCategoryClick(brand.id)}
               >
                 <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto hover:scale-110">
                   <img
