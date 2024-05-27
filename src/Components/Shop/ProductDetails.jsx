@@ -146,7 +146,7 @@ function ProductDetails() {
               </div>
               <div>
               <span className="font-bold">Product Review:</span>
-                <iframe src={productReview}/>
+                <video src={productReview}/>
               </div>
             </div>
             <div className="mb-4">

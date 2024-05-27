@@ -1,8 +1,12 @@
+import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
 import { SignIn } from "./Components/Auth/SignIn/SignIn";
 import SIgnUp from "./Components/Auth/SignUp/SIgnUp";
 import { Cart } from "./Components/Cart/Cart";
+import CheckoutForm from "./Components/Cart/CheckoutForm";
 import ContactUs from "./Components/Contact/ContactUs";
 import Favorite from "./Components/Favorite/Favorite";
 import DataBranding from "./Components/Home/DataBranding";
@@ -23,6 +27,8 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
+
+const stripePromise = loadStripe("pk_test_51PH2vERvwUFIwe3TbN1v3XQaTAJ0pszrDD7S6ywzyNtnuqIDhTgjNFnYoMxzNdsfdzeHtf0VKaUk9doEeK7qwkAM00lKbVe9q2");
 
 function App() {
   return (
@@ -179,6 +185,17 @@ function App() {
           <div>
             <Navbar />
             <Cart />
+          </div>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <div>
+            <Navbar />
+            <Elements stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
           </div>
         }
       />
