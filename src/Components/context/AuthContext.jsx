@@ -88,18 +88,32 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (data) => {
     try {
-      const response = await axios.post("/register", data);
+      // Add default role and is_active values to the form data
+      const formData = { ...data, role: "user", is_active: 1 };
+
+      // Send a POST request to the register endpoint with the modified form data
+      const response = await axios.post("/register", formData);
+
+      // Check if the request was successful
       if (response.status === 200) {
-        Cookies.set("token", response.data.token, { expires: 7 }); 
+        // Set the token cookie with the received token and expiry date
+        Cookies.set("token", response.data.token, { expires: 7 });
+
+        // Fetch user data
         await getUser();
+
+        // Redirect the user to the home page
         navigate("/");
       } else {
+        // Set an error message if an unexpected error occurred during signup
         setError("Unexpected error occurred during signup.");
       }
     } catch (error) {
+      // Handle any errors that occur during the signup process
       handleAuthError(error);
     }
-  };
+};
+
 
   const logout = async () => {
     try {

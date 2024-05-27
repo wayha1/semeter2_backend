@@ -18,11 +18,12 @@ export default function SignUp() {
     event.preventDefault();
     try {
       // Call signup function with form data
-      await signup({ name, email, password, password_confirmation, gender,is_active,role });
+      await signup({ name, email, password, password_confirmation, gender});
     } catch (error) {
       console.error("Error signing up:", error);
     }
   };
+
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
