@@ -9,21 +9,20 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirm] = useState("");
-  const [is_active, setIsActive] = useState(0);
-  const [role, setRole] = useState("");
-  const { signup, loading, error: authError } = useAuthContext(); // Get loading state and error message from useAuthContext
-
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const { signup, error: authError } = useAuthContext(); // Get loading state and error message from useAuthContext
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       // Call signup function with form data
-      await signup({ name, email, password, password_confirmation, gender});
+      setIsLoading(true); // Set loading state to true
+      await signup({ name, email, password, password_confirmation, gender });
+      setIsLoading(false); // Set loading state to false after signin operation
     } catch (error) {
       console.error("Error signing up:", error);
     }
   };
-
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -36,7 +35,6 @@ export default function SignUp() {
         <p className="text-blue-500 font-abc text-sm">
           Love Your Skin, Love Yourself
         </p>
-
         <div className="flex w-[350px] mt-10 flex-col items-center relative">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <p className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -134,15 +132,13 @@ export default function SignUp() {
               className="w-full text-xl px-4 py-2 mt-2
                      mb-4 bg-pink-400 text-white active:bg-slate-500
                     rounded-xl focus:outline-none focus:border-pink-400"
-              disabled={loading} // Disable the button when loading is true
             >
-              {loading ? <Loading /> : "Sign Up"}{" "}
-              {/* Show Loading component when loading is true */}
+              Sign up
             </button>
-
             {authError && <p className="text-red-500">{authError}</p>}
           </div>
         </div>
+        {isLoading && <Loading />}{" "}
       </div>
     </div>
   );

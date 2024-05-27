@@ -1,13 +1,12 @@
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { Link, useLocation, useParams } from "react-router-dom";
-import CommentRate from "./CommentRate";
-import Cookies from "js-cookie";
-import { errorToast, successToast } from "./Toast";
-import axios from "../api/axios";
-import useAuthContext from "./../context/AuthContext"
 import { ToastContainer } from "react-toastify";
-
+import axios from "../api/axios";
+import useAuthContext from "./../context/AuthContext";
+import CommentRate from "./CommentRate";
+import { errorToast, successToast } from "./Toast";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -24,7 +23,7 @@ function ProductDetails() {
 
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [addToCartClicked, setAddToCartClicked] = useState(false);
-
+  const [addToFavoriteClicked, setAddToFavoriteClicked] = useState(false);
 
   console.log("Location state:", location.state);
 
@@ -36,7 +35,6 @@ function ProductDetails() {
   };
 
   const handleAddToCart = async () => {
-
     if (addToCartClicked) {
       // If button already clicked, display warning and return
       errorToast("Item already added to cart!");
@@ -72,7 +70,40 @@ function ProductDetails() {
       }
     }
   };
+  const handleAddToFavorite = async () => {
+    if (addToFavoriteClicked) {
+      // If button already clicked, display warning and return
+      errorToast("Item already added to Favorite!");
+      return;
+    }
 
+    try {
+      const token = Cookies.get("token");
+      const response = await axios.post(
+        "/favorite",
+        {
+          user_id: user.id,
+          product_id: productId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Product added to Favorite:", response.data);
+      successToast("Item add to Favorite!");
+      // Set addToFavoriteClicked to true to disable the button
+      setAddToFavoriteClicked(true);
+    } catch (error) {
+      if (error.response) {
+        // Log detailed error response
+        console.error("Error adding product to Favorite:", error.response.data);
+      } else {
+        console.error("Error adding product to Favorite:", error.message);
+      }
+    }
+  };
 
   return (
     <div className="py-8 bg-pink-100">
@@ -109,14 +140,21 @@ function ProductDetails() {
                 </button>
               </div>
               <div className="w-1/2">
-                <button className="w-full bg-sky-100 dark:bg-gray-700 text-pink-500 dark:text-white py-2 rounded-full font-bold hover:bg-pink-500 hover:text-white dark:hover:bg-gray-600">
+                <button
+                  onClick={handleAddToFavorite}
+                  className="w-full bg-gray-500 text-white py-2 
+                  rounded-full font-bold hover:bg-gray-800 
+                  active:bg-blue-300"
+                >
                   Add to Favorite
                 </button>
               </div>
             </div>
           </div>
           <div className="md:flex-1 px-4">
-            <h2 className="text-2xl font-bold mb-2">Product Name: {productName}</h2>
+            <h2 className="text-2xl font-bold mb-2">
+              Product Name: {productName}
+            </h2>
             <p className="text-gray-600 text-sm mb-4">
               Product Description:{" "}
               {showFullDescription ? (
@@ -145,8 +183,8 @@ function ProductDetails() {
                 </span>
               </div>
               <div>
-              <span className="font-bold">Product Review:</span>
-                <video src={productReview}/>
+                <span className="font-bold">Product Review:</span>
+                <video src={productReview} />
               </div>
             </div>
             <div className="mb-4">
@@ -155,7 +193,7 @@ function ProductDetails() {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
