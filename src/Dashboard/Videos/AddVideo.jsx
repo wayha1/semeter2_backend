@@ -26,7 +26,7 @@ function AddVideo() {
         return;
       }
 
-      const respone = await axios.post("http://127.0.0.1:8000/api/video", {
+      const respone = await axios.post("https://backend.skinme.site:8000/api/video", {
         video_title: video.video_title,
         video_link: video.video_link,
         category_id: video.category_id,
@@ -54,7 +54,7 @@ function AddVideo() {
   const fetchData = async () => {
     try {
       const token = Cookies.get("token");
-      const response = await axios.get("http://127.0.0.1:8000/api/category", {
+      const response = await axios.get("https://backend.skinme.site:8000/api/category", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
