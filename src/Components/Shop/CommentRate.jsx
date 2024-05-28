@@ -48,7 +48,7 @@ const CommentRate = ({ productId }) => {
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/comments",
+        "https://backend.skinme.site:8000/api/comments",
         {
           user_id: comment.user_id,
           comments: comment.comments,
