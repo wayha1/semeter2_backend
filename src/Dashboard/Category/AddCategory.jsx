@@ -1,7 +1,7 @@
 // AddCategory.js
-import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import React, { useState } from "react";
 import UploadFile from "../UploadFile";
 
 function AddCategory() {
@@ -48,10 +48,10 @@ function AddCategory() {
 
       // Send category data to your backend server
       const categoryResponse = await axios.post(
-        "http://127.0.0.1:8000/api/category",
+        "http://localhost:8000/api/category",
         {
           category_title: category.category_title,
-          category_icon: category.category_icon, 
+          category_icon: category.category_icon,
         },
         {
           headers: {
@@ -96,8 +96,12 @@ function AddCategory() {
         <div className="flex flex-col w-[80%]">
           <UploadFile
             section="category_icon"
-            handleImageUpload={(imageUrl) => setCategory({ ...category, category_icon: imageUrl })}
-            handleIconUpload={(imageUrl) => setCategory({ ...category, category_icon: imageUrl })}
+            handleImageUpload={(imageUrl) =>
+              setCategory({ ...category, category_icon: imageUrl })
+            }
+            handleIconUpload={(imageUrl) =>
+              setCategory({ ...category, category_icon: imageUrl })
+            }
             cloudName={cloudName}
             unsignedUploadPreset={unsignedUploadPreset}
             onConfirmUpload={handleSubmit}
