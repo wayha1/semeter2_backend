@@ -41,7 +41,7 @@ function Addbrand() {
 
       // Send brand data to your backend server
       const brandResponse = await axios.post(
-        "http://127.0.0.1:8000/api/brand",
+        "https://backend.skinme.site:8000/api/brand",
         {
           brand: brand.brand,
           brand_icons: brand.brand_icons, 

@@ -38,7 +38,7 @@ function AddProduct() {
     try {
       const token = Cookies.get("token");
       console.log("Fetching data...");
-      const response = await axios.get("http://127.0.0.1:8000/api/category", {
+      const response = await axios.get("https://backend.skinme.site:8000/api/category", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,7 +55,7 @@ function AddProduct() {
   const fetchBrands = async () => {
     try {
       const token = Cookies.get("token");
-      const response = await axios.get("http://127.0.0.1:8000/api/brand", {
+      const response = await axios.get("https://backend.skinme.site:8000/api/brand", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -126,7 +126,7 @@ function AddProduct() {
 
         // Send product data to your backend server
         const productResponse = await axios.post(
-          "http://127.0.0.1:8000/api/product",
+          "https://backend.skinme.site:8000/api/product",
           {
             // Include other product data here
             product_name: product.product_name,
