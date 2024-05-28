@@ -48,7 +48,7 @@ function AddCategory() {
 
       // Send category data to your backend server
       const categoryResponse = await axios.post(
-        "http://localhost:8000/api/category",
+        "https://backend.skinme.site:8000/api/category",
         {
           category_title: category.category_title,
           category_icon: category.category_icon,
