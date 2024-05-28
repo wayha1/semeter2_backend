@@ -39,18 +39,31 @@ export const Cart = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.request({
-        url: "/cart",
+        url: "/cart/usercart",
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setGetProduct(response.data.data);
+  
+      console.log("Response data:", response.data.data);
+  
+      if (Array.isArray(response.data.data)) {
+        setGetProduct(response.data.data);
+      } else if (typeof response.data.data === "object") {
+        // Convert the object into an array containing one item
+        setGetProduct([response.data.data]);
+      } else {
+        console.error("Data received is neither an array nor an object:", response.data.data);
+        setGetProduct([]);
+      }
     } catch (error) {
       console.error("Error fetching cart data:", error);
       setGetProduct([]);
     }
   };
+  
+
 
   useEffect(() => {
     fetchCartData();

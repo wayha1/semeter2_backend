@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import useAuthContext from "../context/AuthContext";
 
-const CommentRate = () => {
+const CommentRate = ({ productId }) => {
   const [comment, setComment] = useState({
     user_id: "",
     comments: "",
@@ -51,8 +51,9 @@ const CommentRate = () => {
         "http://127.0.0.1:8000/api/comments",
         {
           user_id: comment.user_id,
-          comment: comment.comments,
-          rating: rating, // Include rating in the submission
+          comments: comment.comments,
+          //rating: rating, // Include rating in the submission
+          product_id: productId, // Include productId in the submission
         },
         {
           headers: {
@@ -60,7 +61,7 @@ const CommentRate = () => {
           },
         }
       );
-      if (response.status === 201) {
+      if (response.status === 200) {
         setSuccess("Comment and rating submitted successfully!");
         setComment({ user_id: user.id, comments: "" });
         setRating(0);
@@ -113,7 +114,7 @@ const CommentRate = () => {
         <ul>
           {comments.map((comment, index) => (
             <li key={index} className="mb-2">
-              {comment.comment} - Rating: {comment.rating}
+              {comment.comments} - Rating: {comments.rating}
             </li>
           ))}
         </ul>

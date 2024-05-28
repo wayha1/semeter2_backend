@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -7,6 +6,7 @@ import axios from "../api/axios";
 import useAuthContext from "./../context/AuthContext";
 import CommentRate from "./CommentRate";
 import { errorToast, successToast } from "./Toast";
+import Cookies from "js-cookie";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -48,7 +48,7 @@ function ProductDetails() {
         {
           user_id: user.id,
           product_id: productId,
-          quantity: productStock, // Set quantity as needed
+          quantity: 1, // Adjust quantity as needed
           totale_price: productPrice,
         },
         {
@@ -58,7 +58,7 @@ function ProductDetails() {
         }
       );
       console.log("Product added to cart:", response.data);
-      successToast("Item add to Cart!");
+      successToast("Item added to Cart!");
       // Set addToCartClicked to true to disable the button
       setAddToCartClicked(true);
     } catch (error) {
@@ -70,6 +70,7 @@ function ProductDetails() {
       }
     }
   };
+
   const handleAddToFavorite = async () => {
     if (addToFavoriteClicked) {
       // If button already clicked, display warning and return
@@ -92,7 +93,7 @@ function ProductDetails() {
         }
       );
       console.log("Product added to Favorite:", response.data);
-      successToast("Item add to Favorite!");
+      successToast("Item added to Favorite!");
       // Set addToFavoriteClicked to true to disable the button
       setAddToFavoriteClicked(true);
     } catch (error) {
@@ -184,11 +185,11 @@ function ProductDetails() {
               </div>
               <div>
                 <span className="font-bold">Product Review:</span>
-                <video src={productReview} />
+                <iframe src={productReview} />
               </div>
             </div>
             <div className="mb-4">
-              <CommentRate productId={id} />
+              <CommentRate productId={productId} />
             </div>
           </div>
         </div>
