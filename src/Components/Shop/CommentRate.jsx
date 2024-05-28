@@ -1,7 +1,7 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import Cookies from "js-cookie";
-import axios from "axios";
 import useAuthContext from "../context/AuthContext";
 
 const CommentRate = ({ productId }) => {
@@ -17,7 +17,7 @@ const CommentRate = ({ productId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/comments");
+      const response = await axios.get("https://backend.skinme.site:8000/api/comments");
       setComments(response.data.data);
       console.log(response.data.data);
     } catch (error) {
