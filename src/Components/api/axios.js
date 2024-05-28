@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://backend.skinme.site:8000",
+  baseURL: "https://localhost:8000/api",
   withCredentials: true,
   headers: {
     "Content-type": "application/json",
