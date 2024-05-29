@@ -77,7 +77,7 @@ function AddCategory() {
   };
 
   return (
-    <div className="w-[930px] h-[450px] container flex flex-col m-2 space-y-5">
+    <div className="w-full h-screen flex flex-col m-2 space-y-5">
       <h1 className="container text-2xl font-bold font-style hover:text-cyan-700">
         {"+ Input Category Of Product"}
       </h1>

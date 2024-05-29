@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { CgArrowLeftO } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ totalPayment }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
@@ -26,10 +26,43 @@ const CheckoutForm = () => {
       return;
     }
 
-    // Implement your Stripe payment processing logic here
+    try {
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement(CardElement),
+      });
 
-    setLoading(false);
-    setSucceeded(true);
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productname: "Product Name", // Adjust as needed
+            total: totalPayment, // Adjust as needed
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to create checkout session");
+      }
+
+      const responseData = await response.json();
+
+      // Redirect to Stripe checkout page
+      window.location.href = responseData.sessionId;
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Function to calculate total amount from the cart

@@ -1,14 +1,12 @@
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import deliphoto1 from "../../asset/J&T.jpg";
-import deliphoto2 from "../../asset/VET.jpg";
-import deliphoto3 from "../../asset/kerry.jpg";
 import axios from "../api/axios";
 
 export const Cart = () => {
   const [getProduct, setGetProduct] = useState([]);
   const [selectedDelivery, setSelectedDelivery] = useState(null);
+  const [shippingSelected, setShippingSelected] = useState(false); // State to track whether a shipping option is selected
 
   const deliveryOptions = [
     { id: 1, name: "J&T Express", duration: "1 - 2 days", cost: 2.0 },
@@ -26,9 +24,10 @@ export const Cart = () => {
       (option) => option.id === deliveryId
     );
     setSelectedDelivery(selectedOption);
+    setShippingSelected(true);
   };
 
-  const calculateShippingCost = () => {
+ const calculateShippingCost = () => {
     if (selectedDelivery) {
       return selectedDelivery.cost;
     }
@@ -45,16 +44,18 @@ export const Cart = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       console.log("Response data:", response.data.data);
-  
+
       if (Array.isArray(response.data.data)) {
         setGetProduct(response.data.data);
       } else if (typeof response.data.data === "object") {
-        // Convert the object into an array containing one item
         setGetProduct([response.data.data]);
       } else {
-        console.error("Data received is neither an array nor an object:", response.data.data);
+        console.error(
+          "Data received is neither an array nor an object:",
+          response.data.data
+        );
         setGetProduct([]);
       }
     } catch (error) {
@@ -62,8 +63,6 @@ export const Cart = () => {
       setGetProduct([]);
     }
   };
-  
-
 
   useEffect(() => {
     fetchCartData();
@@ -79,11 +78,22 @@ export const Cart = () => {
     setGetProduct(updatedProducts);
   };
 
-  const handleDeleteProduct = (productId) => {
-    const updatedProducts = getProduct.filter(
-      (item) => item.product_id !== productId
-    );
-    setGetProduct(updatedProducts);
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const token = Cookies.get("token");
+      await axios.delete(`/cart/usercart/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const updatedProducts = getProduct.filter(
+        (item) => item.product_id !== productId
+      );
+      setGetProduct(updatedProducts);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
   const calculateSubtotal = () => {
@@ -181,9 +191,18 @@ export const Cart = () => {
                 </div>
                 <div>
                   <Link to="/checkout">
-                    <button className=" item-center w-full rounded-lg bg-red-500 text-white p-2">
-                      CheckOut
-                    </button>
+                  {shippingSelected ? (
+        <Link to="/checkout">
+          <button 
+            className="item-center w-full rounded-lg bg-red-500 text-white p-2"
+            disabled={!shippingSelected} // Disable the button if shipping is not selected
+          >
+            CheckOut
+          </button>
+        </Link>
+      ) : (
+        <p className="text-red-500">Please select a shipping option before proceeding to checkout.</p>
+      )}
                   </Link>
                 </div>
               </div>
@@ -191,40 +210,22 @@ export const Cart = () => {
                 <h3 className="text-xl font-semibold leading-5 text-gray-800">
                   Shipping
                 </h3>
-                <div className="flex justify-between items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
+                <div className="flex justify-between w-full space-y-4 flex-col border-gray-200 border-b pb-4">
                   {deliveryOptions.map((option) => (
-                    <div
-                      key={option.id}
-                      className="flex justify-start items-start w-full cursor-pointer"
-                      onClick={() => handleDeliveryOptionChange(option.id)}
-                    >
-                      <div
-                        className={`flex justify-center items-center space-x-4 ${
-                          selectedDelivery && selectedDelivery.id === option.id
-                            ? "bg-red-300 rounded-lg p-2 "
-                            : ""
-                        }`}
-                      >
-                        <img
-                          src={
-                            option.id === 1
-                              ? deliphoto1
-                              : option.id === 2
-                              ? deliphoto2
-                              : deliphoto3
-                          }
-                          alt={option.name}
-                          className="w-12 h-12 object-cover rounded-full"
-                        />
-                        <div className="flex flex-col justify-center items-start">
-                          <p className="text-lg font-semibold leading-6 text-gray-800">
-                            {option.name}
-                          </p>
-                          <p className="text-sm leading-5 text-gray-600">
-                            {option.duration}
-                          </p>
-                        </div>
-                      </div>
+                    <div key={option.id} className="flex pt-5">
+                      <input
+                        type="radio"
+                        id={`delivery-${option.id}`}
+                        name="delivery"
+                        value={option.id}
+                        onChange={() => handleDeliveryOptionChange(option.id)}
+                        checked={selectedDelivery?.id === option.id}
+                        className="mr-2"
+                      />
+                      <label htmlFor={`delivery-${option.id}`}>
+                        {option.name} ({option.duration}) - $
+                        {option.cost.toFixed(2)}
+                      </label>
                     </div>
                   ))}
                 </div>
