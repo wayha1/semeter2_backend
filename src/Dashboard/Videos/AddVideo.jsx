@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
+import config from "../../Config";
 
 function AddVideo() {
   const [video, setVideo] = useState({
@@ -26,18 +27,22 @@ function AddVideo() {
         return;
       }
 
-      const respone = await axios.post("https://backend.skinme.site:8000/api/video", {
-        video_title: video.video_title,
-        video_link: video.video_link,
-        category_id: video.category_id,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const respone = await axios.post(
+        `${config.backendBaseURL}${config.endpoints.addVideo}`,
+        {
+          video_title: video.video_title,
+          video_link: video.video_link,
+          category_id: video.category_id,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      console.log(respone)
-      if(respone.status === 200){
+      console.log(respone);
+      if (respone.status === 200) {
         setSuccessMessage("Video added successfully!");
       }
       setVideo({ video_title: "", video_link: "", category_id: "" });
@@ -54,11 +59,14 @@ function AddVideo() {
   const fetchData = async () => {
     try {
       const token = Cookies.get("token");
-      const response = await axios.get("https://backend.skinme.site:8000/api/category", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${config.backendBaseURL}${config.endpoints.addCategory}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setCategories(response.data.data);
     } catch (error) {
       console.error("Error fetching category data:", error);
@@ -72,21 +80,35 @@ function AddVideo() {
         <h2 className="text-lg font-semibold mb-4">Add Video</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_id">Category</label>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="category_id"
+            >
+              Category
+            </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="category_id"
               value={video.category_id}
-              onChange={(e) => setVideo({ ...video, category_id: e.target.value })}
+              onChange={(e) =>
+                setVideo({ ...video, category_id: e.target.value })
+              }
             >
               <option>Select category...</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>{category.category_title}</option>
+                <option key={category.id} value={category.id}>
+                  {category.category_title}
+                </option>
               ))}
             </select>
           </div>
           <div className="mb-6">
-            <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="name">Video Name</label>
+            <label
+              className="block text-gray-800 text-sm font-semibold mb-2"
+              htmlFor="name"
+            >
+              Video Name
+            </label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
               id="video_title"
@@ -94,11 +116,16 @@ function AddVideo() {
               placeholder="Enter Video Name"
               name="video_title"
               value={video.video_title}
-              onChange={handleInput}           
-              />
+              onChange={handleInput}
+            />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-800 text-sm font-semibold mb-2" htmlFor="link">Video Link (YouTube or TikTok)</label>
+            <label
+              className="block text-gray-800 text-sm font-semibold mb-2"
+              htmlFor="link"
+            >
+              Video Link (YouTube or TikTok)
+            </label>
             <input
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
               id="video_link"

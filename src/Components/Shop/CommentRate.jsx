@@ -2,8 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import config from "../../Config";
 import useAuthContext from "../context/AuthContext";
-
 const CommentRate = ({ productId }) => {
   const [comment, setComment] = useState({
     user_id: "",
@@ -17,7 +17,9 @@ const CommentRate = ({ productId }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get("https://backend.skinme.site:8000/api/comments");
+      const response = await axios.get(
+        "https://backend.skinme.site:8000/api/comments"
+      );
       setComments(response.data.data);
       console.log(response.data.data);
     } catch (error) {
@@ -48,7 +50,7 @@ const CommentRate = ({ productId }) => {
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
-        "https://backend.skinme.site:8000/api/comments",
+        `${config.backendBaseURL}${config.endpoints.addComment}`,
         {
           user_id: comment.user_id,
           comments: comment.comments,

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import React, { useState } from "react";
+import config from "../../Config";
 import UploadFile from "../UploadFile";
 
 function Addbrand() {
@@ -41,10 +42,10 @@ function Addbrand() {
 
       // Send brand data to your backend server
       const brandResponse = await axios.post(
-        "https://backend.skinme.site:8000/api/brand",
+        `${config.backendBaseURL}${config.endpoints.addBrand}`,
         {
           brand: brand.brand,
-          brand_icons: brand.brand_icons, 
+          brand_icons: brand.brand_icons,
         },
         {
           headers: {
@@ -89,8 +90,12 @@ function Addbrand() {
         <div className="flex flex-col w-[80%]">
           <UploadFile
             section="product_brand"
-            handleImageUpload={(imageUrl) => setBrand({ ...brand, brand_icons: imageUrl })}
-            handleIconUpload={(imageUrl) => setBrand({ ...brand, brand_icons: imageUrl })}
+            handleImageUpload={(imageUrl) =>
+              setBrand({ ...brand, brand_icons: imageUrl })
+            }
+            handleIconUpload={(imageUrl) =>
+              setBrand({ ...brand, brand_icons: imageUrl })
+            }
             cloudName={cloudName}
             unsignedUploadPreset={unsignedUploadPreset}
             onConfirmUpload={handleSubmit}

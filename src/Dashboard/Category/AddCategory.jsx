@@ -2,6 +2,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import config from "../../Config";
 import UploadFile from "../UploadFile";
 
 function AddCategory() {
@@ -48,7 +49,7 @@ function AddCategory() {
 
       // Send category data to your backend server
       const categoryResponse = await axios.post(
-        "https://backend.skinme.site:8000/api/category",
+        `${config.backendBaseURL}${config.endpoints.addCategory}`,
         {
           category_title: category.category_title,
           category_icon: category.category_icon,
