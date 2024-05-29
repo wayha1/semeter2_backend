@@ -9,7 +9,7 @@ function Favorite() {
     try {
       // Fetch the full product data from the API endpoint using the product id
       const token = Cookies.get("token");
-      const response = await axios.get(`/api/products/${product.id}`, {
+      const response = await axios.get(`/user-favorite`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

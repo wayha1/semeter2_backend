@@ -81,7 +81,7 @@ function ProductDetails() {
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
-        "/favorite",
+        "/user-favorite",
         {
           user_id: user.id,
           product_id: productId,
