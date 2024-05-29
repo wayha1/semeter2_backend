@@ -7,7 +7,7 @@ const config = {
       addCategory: '/api/category',
       addProduct: '/api/product',
       addVideo: '/api/video',
-      addComment: '/api/comment'
+      addComment: '/api/comments'
     },
   };
   

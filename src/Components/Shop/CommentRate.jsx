@@ -18,7 +18,7 @@ const CommentRate = ({ productId }) => {
   const fetchComments = async () => {
     try {
       const response = await axios.get(
-        "https://backend.skinme.site:8000/api/comments"
+        `${config.backendBaseURL}${config.endpoints.addComment}`
       );
       setComments(response.data.data);
       console.log(response.data.data);
