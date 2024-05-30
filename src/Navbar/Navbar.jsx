@@ -10,7 +10,7 @@ const navigation = [
   { name: "Home", path: "/", current: true },
   { name: "Shop", path: "/shop", current: false },
   { name: "About", path: "/about", current: false },
-  { name: "Contact", path: "/contact", current: false },
+  // { name: "Contact", path: "/contact", current: false },
   { name: "Dashboard", path: "/dashboard", current: false, adminOnly: true },
 ];
 
