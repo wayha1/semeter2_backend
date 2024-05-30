@@ -1,5 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const OrderHistory = () => {
   const [history, setHistory] = useState([]);
@@ -9,8 +10,21 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/userhistory"); // Adjust the URL as needed
-        setHistory(response.data.data);
+        const token = Cookies.get("token"); // Catching the token cookie
+        if (!token) {
+          throw new Error("Token not found.");
+        }
+
+        const response = await axios.get("http://127.0.0.1:8000/api/user-history", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.status === 200) {
+          setHistory(response.data.data);
+          console.log(history)
+        } else {
+          throw new Error("Failed to fetch order history");
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -86,7 +100,7 @@ const OrderHistory = () => {
                           <h2 className="text-xl font-bold">
                             Product: {item.product ? item.product.name : 'Unknown Product'}
                           </h2>
-                          <p>Total Price: ${item.total_price}</p>
+                          <p>Total Price: ${item.totale_price}</p>
                           <p>Delivery Address: {item.delivery_address}</p>
                           <p>
                             Date Ordered:{" "}
