@@ -115,13 +115,13 @@ const DashboardLayout = ({ children, title }) => {
               <FaVideo />
             </NavLink>
             {/* contact menu  */}
-            <NavLink
+            {/* <NavLink
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
               to={"/dashboard/contacts"}
             >
               Contact
               <RiContactsBook2Fill />
-            </NavLink>
+            </NavLink> */}
             {/* back to home page menu  */}
             <NavLink
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 hover:text-white hover:bg-pink-500 focus:bg-pink-500  focus:outline-none focus:shadow-outline"
@@ -132,14 +132,14 @@ const DashboardLayout = ({ children, title }) => {
             </NavLink>
             {/* no show when small screen size  */}
             {/* sign out btn menu */}
-            <NavLink
+            {/* <NavLink
               to={"/login"}
               // onClick={handleLogout}
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 hover:text-white hover:bg-pink-500 focus:bg-pink-500  focus:outline-none focus:shadow-outline"
             >
               Sign out
               <PiSignOutBold />
-            </NavLink>
+            </NavLink> */}
           </nav>
 
           {/* sign out menu  */}
