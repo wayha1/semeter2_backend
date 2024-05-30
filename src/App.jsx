@@ -1,6 +1,6 @@
-import React from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AboutUs from "./Components/About/AboutUs";
 import { SignIn } from "./Components/Auth/SignIn/SignIn";
@@ -21,15 +21,17 @@ import User from "./Dashboard/DashboardUser";
 import DashboardVideo from "./Dashboard/DashboardVideo";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
-// import Billing from "./Pages/Account/Billing";
-import Order from "./Pages/Account/Order";
+import Thankyou from "./Components/Cart/Thankyou";
+import BrandProduct from "./Components/Home/BrandProduct";
+import ProductCard from "./Components/Shop/Product";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
-import BrandProduct from "./Components/Home/BrandProduct";
 
-const stripePromise = loadStripe("pk_test_51PH2vERvwUFIwe3TbN1v3XQaTAJ0pszrDD7S6ywzyNtnuqIDhTgjNFnYoMxzNdsfdzeHtf0VKaUk9doEeK7qwkAM00lKbVe9q2");
+const stripePromise = loadStripe(
+  "pk_test_51PH2vERvwUFIwe3TbN1v3XQaTAJ0pszrDD7S6ywzyNtnuqIDhTgjNFnYoMxzNdsfdzeHtf0VKaUk9doEeK7qwkAM00lKbVe9q2"
+);
 
 function App() {
   return (
@@ -52,6 +54,16 @@ function App() {
           <div>
             <Navbar />
             <Shop />
+            <Footer />
+          </div>
+        }
+      />
+      <Route
+        path="/product"
+        element={
+          <div>
+            <Navbar />
+            <ProductCard />
             <Footer />
           </div>
         }
@@ -88,13 +100,23 @@ function App() {
           </div>
         }
       />
+      <Route
+        path="/thank"
+        element={
+          <div>
+            <Navbar />
+            <Thankyou />
+            <Footer />
+          </div>
+        }
+      />
 
       <Route
         path="/brand/name/:name"
         element={
           <div>
-            <Navbar/>
-            <BrandProduct/>
+            <Navbar />
+            <BrandProduct />
             <Footer />
           </div>
         }
@@ -182,7 +204,7 @@ function App() {
           </div>
         }
       /> */}
-      <Route
+      {/* <Route
         path="/order"
         element={
           <div>
@@ -190,7 +212,7 @@ function App() {
             <Order />
           </div>
         }
-      />
+      /> */}
       <Route
         path="/cart"
         element={

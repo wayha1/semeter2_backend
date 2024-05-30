@@ -1,7 +1,7 @@
 
 const config = {
-    // backendBaseURL: 'https://backend.skinme.site:8000',
-    backendBaseURL: 'http://127.0.0.1:8000',
+    backendBaseURL: 'https://backend.skinme.site:8000',
+    // backendBaseURL: 'http://127.0.0.1:8000',
     endpoints: {
       addBrand: '/api/brand',
       addCategory: '/api/category',

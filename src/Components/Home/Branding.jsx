@@ -1,6 +1,6 @@
+import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import axios from "../api/axios";
 
 function Branding() {
@@ -37,8 +37,8 @@ function Branding() {
       <div className="text-center pb-10">
         <h1 className="font-bold text-4xl pb-4">Favorites Brand</h1>
       </div>
-      <div className="flex space-x-4 md:space-x-20 overflow-hidden group pt-10 lg:pt-0 lg:m-16">
-        <div className="flex space-x-10 md:space-x-20 group-hover:paused">
+      <div className="flex space-x-4 md:space-x-16 overflow-hidden group pt-10">
+        <div className="flex space-x-4 md:space-x-16 animate-loop-scroll group-hover:paused">
           {brands.length > 0 ? (
             brands.map((brand) => (
               <div

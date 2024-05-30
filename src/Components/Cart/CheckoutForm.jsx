@@ -36,63 +36,14 @@ const CheckoutForm = ({ totalPayment }) => {
         throw new Error(error.message);
       }
 
-      const response = await fetch("http://127.0.0.1:8000/test", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productname: "Product Name", // Adjust as needed
-          total: totalPayment, // Adjust as needed
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create checkout session");
-      }
-
-      const responseData = await response.json();
-
-      // Redirect to Stripe checkout page
-      window.location.href = responseData.sessionId;
+      setSucceeded(true);
+      window.location.href = "/thank"; // Redirect to Thank You page on successful payment
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  // Function to calculate total amount from the cart
-  const calculateTotalAmount = () => {
-    // Implement your logic to calculate total amount from the cart
-    // For example:
-    const totalAmount = 100; // Placeholder value, replace with your logic
-    return totalAmount;
-  };
-
-  // Function to generate order summary
-  const generateOrderSummary = () => {
-    const totalAmount = calculateTotalAmount();
-    const { name, phone, address } = formData;
-    const date = new Date().toLocaleDateString(); // Current date
-
-    const summary = `
-      Order Summary
-      -----------------------------
-      Name: ${name}
-      Phone Number: ${phone}
-      Delivery Address: ${address}
-      Date: ${date}
-      Total Amount: $${totalAmount.toFixed(2)}
-      Delivery Company: XYZ address
-      -----------------------------
-    `;
-    setOrderSummary(summary);
-  };
-
-  useEffect(() => {
-    generateOrderSummary();
-  }, [formData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -101,6 +52,32 @@ const CheckoutForm = ({ totalPayment }) => {
       [name]: value,
     }));
   };
+
+  const calculateTotalAmount = () => {
+    const totalAmount = 100; // Placeholder value, replace with your logic
+    return totalAmount;
+  };
+
+  const generateOrderSummary = () => {
+    const totalAmount = calculateTotalAmount();
+    const { name, phone, address } = formData;
+    const date = new Date().toLocaleDateString();
+
+    const summary = `
+      Order Summary
+      -----------------------------
+      Name: ${name}
+      Phone Number: ${phone}
+      Delivery Address: ${address}
+      Date: ${date}
+      -----------------------------
+    `;
+    setOrderSummary(summary);
+  };
+
+  useEffect(() => {
+    generateOrderSummary();
+  }, [formData]);
 
   return (
     <div className="min-h-screen bg-pink-100 px-10 py-10">
@@ -111,10 +88,7 @@ const CheckoutForm = ({ totalPayment }) => {
         <div className="w-full max-w-lg p-8 bg-white shadow-md rounded-lg">
           <form onSubmit={handleSubmit} className="mt-4">
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                 Name
               </label>
               <input
@@ -129,10 +103,7 @@ const CheckoutForm = ({ totalPayment }) => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="phone"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="phone" className="block text-gray-700 font-bold mb-2">
                 Phone Number
               </label>
               <input
@@ -147,10 +118,7 @@ const CheckoutForm = ({ totalPayment }) => {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="address"
-                className="block text-gray-700 font-bold mb-2"
-              >
+              <label htmlFor="address" className="block text-gray-700 font-bold mb-2">
                 Delivery Address
               </label>
               <textarea

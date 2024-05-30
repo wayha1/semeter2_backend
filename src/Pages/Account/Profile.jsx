@@ -75,12 +75,9 @@ function Profile() {
                 )}
                 <hr className="my-6" />
                 <div className="flex flex-col">
-                  <span className="text-gray-800 uppercase font-bold tracking-wider mb-2 text-center hover:text-pink-400">
-                    <a href="/profile">General Profile</a>
-                  </span>
-                  <span className="text-gray-800 uppercase font-bold tracking-wider mb-2 text-center hover:text-pink-400">
-                    <a href="/order">Order History</a>
-                  </span>
+                  <div className="text-gray-800 uppercase font-bold tracking-wider mb-2 text-center">
+                    General Profile
+                  </div>
                 </div>
                 <vt className="my-6" />
               </div>
