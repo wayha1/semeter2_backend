@@ -38,7 +38,7 @@ export const Cart = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.request({
-        url: "/cart/usercart",
+        url: "/cart",
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ export const Cart = () => {
               <div className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                 {getProduct.map((item, index) => (
                   <div
-                    key={index}
+                    key={item.id}
                     className="w-64 bg-white shadow-lg p-4 m-4 rounded-lg"
                   >
                     <img
