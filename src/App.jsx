@@ -27,6 +27,7 @@ import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
 import Shop from "./Pages/Shoppage";
 import ProtectRoute from "./ProtectRoute";
+import BrandProduct from "./Components/Home/BrandProduct";
 
 const stripePromise = loadStripe("pk_test_51PH2vERvwUFIwe3TbN1v3XQaTAJ0pszrDD7S6ywzyNtnuqIDhTgjNFnYoMxzNdsfdzeHtf0VKaUk9doEeK7qwkAM00lKbVe9q2");
 
@@ -83,6 +84,17 @@ function App() {
           <div>
             <Navbar />
             <DataBranding />
+            <Footer />
+          </div>
+        }
+      />
+
+      <Route
+        path="/brand/name/:name"
+        element={
+          <div>
+            <Navbar/>
+            <BrandProduct/>
             <Footer />
           </div>
         }
