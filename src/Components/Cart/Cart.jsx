@@ -38,7 +38,7 @@ export const Cart = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.request({
-        url: "/cart",
+        url: "/cart/usercart",
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
