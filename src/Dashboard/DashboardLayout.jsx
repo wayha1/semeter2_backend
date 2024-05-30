@@ -12,7 +12,7 @@ import Skinme from "../asset/img.png";
 
 const DashboardLayout = ({ children, title }) => {
   const [open, setOpen] = useState(false);
-  const currYear = new Date().getFullYear();
+  // const currYear = new Date().getFullYear();
 
   return (
     <div className="flex">
@@ -83,14 +83,6 @@ const DashboardLayout = ({ children, title }) => {
               {/* user icon */}
               <FaCircleUser />
             </NavLink>
-            {/* Product */}
-            <NavLink
-              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
-              to={"/dashboard/dashboardProduct/"}
-            >
-              Products
-              <FaShoppingCart />
-            </NavLink>
             {/* Categories */}
             <NavLink
               className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
@@ -105,6 +97,14 @@ const DashboardLayout = ({ children, title }) => {
             >
               Brand
               <MdBrandingWatermark />
+            </NavLink>
+            {/* Product */}
+            <NavLink
+              className="flex justify-between items-center px-4 py-2 mt-2 text-lg text-gray-900 font-semibold hover:text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-blue-600 dark-mode:focus:bg-blue-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-white focus:text-white hover:bg-pink-500 focus:bg-pink-500 focus:outline-none focus:shadow-outline"
+              to={"/dashboard/dashboardProduct/"}
+            >
+              Products
+              <FaShoppingCart />
             </NavLink>
             {/* video  */}
             <NavLink
@@ -131,18 +131,8 @@ const DashboardLayout = ({ children, title }) => {
               <IoArrowBackCircle />
             </NavLink>
             {/* no show when small screen size  */}
-            {/* sign out btn menu */}
-            {/* <NavLink
-              to={"/login"}
-              // onClick={handleLogout}
-              className="flex justify-between items-center px-4 py-2 mt-2 text-lg font-semibold text-gray-900 bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 hover:text-white hover:bg-pink-500 focus:bg-pink-500  focus:outline-none focus:shadow-outline"
-            >
-              Sign out
-              <PiSignOutBold />
-            </NavLink> */}
           </nav>
 
-          {/* sign out menu  */}
         </div>
       </div>
 

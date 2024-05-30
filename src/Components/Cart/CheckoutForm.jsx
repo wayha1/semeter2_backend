@@ -36,19 +36,16 @@ const CheckoutForm = ({ totalPayment }) => {
         throw new Error(error.message);
       }
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/create-checkout-session",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            productname: "Product Name", // Adjust as needed
-            total: totalPayment, // Adjust as needed
-          }),
-        }
-      );
+      const response = await fetch("http://127.0.0.1:8000/test", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productname: "Product Name", // Adjust as needed
+          total: totalPayment, // Adjust as needed
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to create checkout session");
