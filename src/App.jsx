@@ -21,7 +21,7 @@ import User from "./Dashboard/DashboardUser";
 import DashboardVideo from "./Dashboard/DashboardVideo";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";
-import Billing from "./Pages/Account/Billing";
+// import Billing from "./Pages/Account/Billing";
 import Order from "./Pages/Account/Order";
 import Profile from "./Pages/Account/Profile";
 import HomePage from "./Pages/Homepage";
@@ -173,7 +173,7 @@ function App() {
           </div>
         }
       />
-      <Route
+      {/* <Route
         path="/billing"
         element={
           <div>
@@ -181,7 +181,7 @@ function App() {
             <Billing />
           </div>
         }
-      />
+      /> */}
       <Route
         path="/order"
         element={
